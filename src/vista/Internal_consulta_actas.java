@@ -14,19 +14,45 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
     
     
     private int id_consultas;
-
+    
     /**
      * Creates new form Internal_consulta_actas
      */
     public Internal_consulta_actas() {
-        initComponents();
-        this.setSize(new Dimension(757, 441));//Con esto le damos el tamaño que querramos.
+        initComponents();     
         
-        this.setTitle("Actas de partido");//Ttiulo de la ventana
+        this.setSize(new Dimension(864, 465));//Con esto le damos el tamaño que querramos.
+        this.setTitle("ÁRBITRO: CONSULTA DE ACTAS DEL PARTIDO");//Titulo de la ventana
         
         //this.cargar_tabla_consulta_actas();//Me carga la tabla en el table
         
     }
+    
+    
+/*
+private void initComponents() {
+    Tabla_actas_partidos = new javax.swing.Tabla_actas_partidos();
+
+
+Tabla_actas_partidos.setModel(new javax.swing.table.DefaultTableModel(
+    new Object [][] {
+        
+    },
+    new String [] {
+        "id_acta_partido", "hora_inicio_partido", "hora_fin_partido", "equipo_rival", 
+        * "equipo_local", "duracion_partido", "num_gole_equip_rival", "num_gole_equip_local", 
+        * "equipo_ganador", "arbitro_id_arbitro1"
+    }
+) {
+    boolean[] canEdit = new boolean [] {
+        false, false, false, false, false, false, false, false, false, false
+    };
+
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return canEdit [columnIndex];
+    }
+});}
+*/
 
     
     /**
@@ -48,7 +74,9 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
         setIconifiable(true);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Actas de partido");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda_acta.png"))); // NOI18N
+        jLabel1.setText("Consultar actas del partido");
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -57,30 +85,38 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
         Tabla_actas_partidos.setBackground(new java.awt.Color(204, 204, 204));
         Tabla_actas_partidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(Tabla_actas_partidos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
         );
 
-        boton_consulta.setBackground(new java.awt.Color(102, 102, 102));
-        boton_consulta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        boton_consulta.setBackground(new java.awt.Color(0, 153, 255));
+        boton_consulta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         boton_consulta.setForeground(new java.awt.Color(255, 255, 255));
         boton_consulta.setText("Consultar");
         boton_consulta.addActionListener(new java.awt.event.ActionListener() {
@@ -94,29 +130,28 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(277, 277, 277)
-                                .addComponent(boton_consulta)))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(358, 358, 358)
+                .addComponent(boton_consulta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(boton_consulta)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(13, 13, 13))
         );
 
         pack();

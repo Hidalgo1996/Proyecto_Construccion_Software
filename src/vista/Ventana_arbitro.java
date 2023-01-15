@@ -1,6 +1,7 @@
 
 package vista;
 
+import java.awt.Dimension;
 import javax.swing.JDesktopPane;
 
 
@@ -88,7 +89,8 @@ public class Ventana_arbitro extends javax.swing.JFrame {
         });
         actas_partido_menu.add(ingreso_acta_opcion);
 
-        consulta_acta_opcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        consulta_acta_opcion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        consulta_acta_opcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda_acta.png"))); // NOI18N
         consulta_acta_opcion.setText("Consulta");
         consulta_acta_opcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +188,7 @@ public class Ventana_arbitro extends javax.swing.JFrame {
         
         panel_principal_arbitro.add(consulta_actas);//Se agrega la ventana interna de consulta actas
                                                     //al panel principal.
-        
+             
         consulta_actas.setVisible(true);//Sirve para hacer visible la pantalla
         
         
