@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.sql.*;
+import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -15,7 +16,7 @@ import static vista.Ventana_arbitro.panel_principal_arbitro;
 public class Internal_consulta_actas extends javax.swing.JInternalFrame {
 
     Controlador_actas_partido controladorActas = new Controlador_actas_partido();
-    
+
     private int id_consultas;
 
     /**
@@ -171,7 +172,7 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
         Actas_partido actaPartido = new Actas_partido();
         controladorActas.actualizarActa(actaPartido);
          */
-        
+
         Inter_ingreso_actas ingresarAc = new Inter_ingreso_actas();
         /*
          * Captura del valor seleccionado en la celda
@@ -206,13 +207,18 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
 
     private void jbtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnActualizarActionPerformed
         // TODO add your handling code here:
-        if(Tabla_actas_partidos.getSelectedRow() > 0) {
-            
+        if (Tabla_actas_partidos.getSelectedRow() > 0) {
+
             int row = Tabla_actas_partidos.getSelectedRow();
             int id = Integer.parseInt(Tabla_actas_partidos.getModel().getValueAt(row, 0).toString());
-            
-            String mensaje = controladorActas.eliminarActa(WIDTH);
-            JOptionPane.showMessageDialog(null, mensaje, "PopUp Dialog", JOptionPane.INFORMATION_MESSAGE);
+
+            int confirmacion = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro?", "PopUp Dialog", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == 0) {
+                String mensaje = controladorActas.eliminarActa(id);
+                JOptionPane.showMessageDialog(null, mensaje, "PopUp Dialog", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+
+            }
         }
 
     }//GEN-LAST:event_jbtnActualizarActionPerformed
@@ -228,6 +234,40 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtnActualizar;
     // End of variables declaration//GEN-END:variables
 
+//    public void listar() {
+//        Controlador_actas_partido controller = new Controlador_actas_partido();
+//
+//        DefaultTableModel modelo = new DefaultTableModel() {
+//            @Override
+//            public boolean isCellEditable(int filas, int columnas) {
+//                return false;
+//            }
+//
+//        };
+//
+//        Internal_consulta_actas.Tabla_actas_partidos = new JTable(modelo);
+//        Internal_consulta_actas.jScrollPane1.setViewportView(Internal_consulta_actas.Tabla_actas_partidos);
+//        modelo.addColumn("id_acta_partido");
+//        modelo.addColumn("hora_inicio_partido");
+//        modelo.addColumn("hora_fin_partido");
+//        modelo.addColumn("equipo_rival");
+//        modelo.addColumn("equipo_local");
+//        modelo.addColumn("duracion_partido");
+//        modelo.addColumn("num_gole_equip_rival");
+//        modelo.addColumn("num_gole_equip_local");
+//        modelo.addColumn("equipo_ganador");
+//        modelo.addColumn("arbitro_id_arbitro1");
+//
+//        List<Actas_partido> actas = controller.listarActas();
+//
+//        for (Actas_partido acta : actas) {
+//            modelo.addRow( new Object[10]{ acta.getId_acta_partido(), acta.getHora_inicio_partido(),
+//                    acta.getHora_fin_partido(), acta.getNombre_equipo_rival(), acta.getNombre_equipo_local(),
+//                    acta.getDuracion_partido(), acta.getGoles_equipo_rival(), acta.getGoles_equipo_local(), acta.getEquipo_ganador(),
+//                    acta.getId_arbitro()});
+//        }
+//
+//    }
 
     /*
     *
@@ -248,9 +288,7 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
 
         };//Instancia
 
-        String sql = "select id_acta_partido, hora_inicio_partido, hora_fin_partido, equipo_rival,"
-                + "equipo_local, duracion_partido, num_gole_equip_rival, num_gole_equip_local,"
-                + "equipo_ganador, arbitro_id_arbitro1 from acta_partido;";//Guardara el script
+        String sql = "call listar_actas_partido();";//Guardara el script
 
         Statement declaracion;
 
