@@ -13,6 +13,9 @@ public class ListarActaTest {
     
     private Controlador_actas_partido controller = new Controlador_actas_partido();
 
+    /**
+     *  CP - 00
+     */
     @Test
     public void listar(){
 

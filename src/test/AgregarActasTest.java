@@ -7,11 +7,16 @@ import org.junit.Test;
 
 import controlador.Controlador_actas_partido;
 import modelo.Actas_partido;
-
+/**
+ * Test Agregar actas - Caso de Prueba
+ */
 public class AgregarActasTest {
     
     private Controlador_actas_partido controller = new Controlador_actas_partido();
 
+    /*
+     * CP002
+     */
     @Test
     public void guardarActa(){
         

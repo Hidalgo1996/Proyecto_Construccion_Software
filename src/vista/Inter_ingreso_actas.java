@@ -2,9 +2,7 @@
 package vista;
 
 import controlador.Controlador_actas_partido;
-import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import modelo.Actas_partido;
 
