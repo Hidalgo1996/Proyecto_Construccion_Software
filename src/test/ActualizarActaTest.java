@@ -8,13 +8,17 @@ import controlador.Controlador_actas_partido;
 import modelo.Actas_partido;
 
 /**
- * 
+ * Test Actualizar actas
+ * Actualizacion de acta id: 20
  */
 public class ActualizarActaTest {
 
     Controlador_actas_partido controller = new Controlador_actas_partido();
     Actas_partido acta;
 
+    /**
+     * CP - 00
+     */
     @Test
     public void eliminar(){
 

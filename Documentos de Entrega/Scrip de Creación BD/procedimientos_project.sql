@@ -10,8 +10,13 @@ DELIMITER //
 CREATE PROCEDURE GUARDAR_ACTAS_PARTIDO
  (
  IN id_acta int,
+<<<<<<< HEAD
  IN hora_inicio varchar(5),
  IN hora_fin varchar(5),
+=======
+ IN hora_inicio varchar(8),
+ IN hora_fin varchar(8),
+>>>>>>> 794fe1852dec06f197be1e520503dec07713015c
 IN equipo_rival varchar(100),
 IN equipo_local varchar(100),
 IN duracion_partido int,
@@ -52,8 +57,13 @@ delimiter //
 create procedure actualizar_actas_partido
 (
 IN id_acta int,
+<<<<<<< HEAD
 IN hora_inicio varchar(5),
  IN hora_fin varchar(5),
+=======
+IN hora_inicio varchar(8),
+IN hora_fin varchar(8),
+>>>>>>> 794fe1852dec06f197be1e520503dec07713015c
 IN equipo_rival varchar(100),
 IN equipo_local varchar(100),
 IN duracion_partido int,
@@ -67,6 +77,10 @@ begin
     hora_fin_partido = hora_fin, equipo_rival = equipo_rival,
     equipo_local = equipo_local, duracion_partido = duracion_partido,
     num_gole_equip_rival = num_goles_rival, num_gole_equip_local = num_goles_local,
+<<<<<<< HEAD
     equipo_ganador = equipo_ganador, arbtiro_id_arbitro1 = id_arbitro where id_acta_partido = id_acta ;
+=======
+    equipo_ganador = equipo_ganador, arbitro_id_arbitro1 = id_arbitro where id_acta_partido = id_acta ;
+>>>>>>> 794fe1852dec06f197be1e520503dec07713015c
 end //
 DELIMITER ;

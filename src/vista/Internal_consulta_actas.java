@@ -1,13 +1,11 @@
 package vista;
 
-import conexion.Conexion;
 import controlador.Controlador_actas_partido;
+import excepciones.ActasException;
+
 import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
-import java.sql.SQLException;
-import java.sql.*;
 import java.util.List;
-import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import modelo.Actas_partido;
@@ -16,18 +14,115 @@ import static vista.Ventana_arbitro.panel_principal_arbitro;
 public class Internal_consulta_actas extends javax.swing.JInternalFrame {
 
     Controlador_actas_partido controladorActas = new Controlador_actas_partido();
-
-    private int id_consultas;
-
     /**
      * Creates new form Internal_consulta_actas
      */
     public Internal_consulta_actas() {
         initComponents();
 
-        this.setSize(new Dimension(864, 465));//Con esto le damos el tamaño que querramos.
-        this.setTitle("ÁRBITRO: CONSULTA DE ACTAS DEL PARTIDO");//Titulo de la ventana
-        //this.cargar_tabla_consulta_actas();//Me carga la tabla en el table
+        this.setSize(new Dimension(864, 465));// Con esto le damos el tamaño que querramos.
+        this.setTitle("ÁRBITRO: CONSULTA DE ACTAS DEL PARTIDO");// Titulo de la ventana
+        // this.cargar_tabla_consulta_actas();//Me carga la tabla en el table
+    }
+
+    /**
+     * Eliminar
+     */
+    private void eliminarActa() {
+        if (Tabla_actas_partidos.getSelectedRow() >= 0) {
+
+            int row = Tabla_actas_partidos.getSelectedRow();
+            int id = Integer.parseInt(Tabla_actas_partidos.getModel().getValueAt(row, 0).toString());
+
+            int confirmacion = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro?", "Advertencia",
+                    JOptionPane.YES_NO_OPTION);
+            if (confirmacion == 0) {
+                try {
+                    String mensaje = controladorActas.eliminarActa(id);
+                    JOptionPane.showMessageDialog(null, mensaje, "Dialog", JOptionPane.INFORMATION_MESSAGE);
+                } catch (ActasException e) {
+                    System.out.println(e.getMessage());
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+
+            }
+        }
+    }
+
+    /**
+     * Listar
+     */
+    public void listarActas() {
+
+        DefaultTableModel modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int filas, int columnas) {
+                return false;
+            }
+
+        };
+
+        Internal_consulta_actas.Tabla_actas_partidos = new JTable(modelo);
+        Internal_consulta_actas.jScrollPane1.setViewportView(Internal_consulta_actas.Tabla_actas_partidos);
+        modelo.addColumn("id_acta_partido");
+        modelo.addColumn("hora_inicio_partido");
+        modelo.addColumn("hora_fin_partido");
+        modelo.addColumn("equipo_rival");
+        modelo.addColumn("equipo_local");
+        modelo.addColumn("duracion_partido");
+        modelo.addColumn("num_gole_equip_rival");
+        modelo.addColumn("num_gole_equip_local");
+        modelo.addColumn("equipo_ganador");
+        modelo.addColumn("arbitro_id_arbitro1");
+
+        List<Actas_partido> actas = controladorActas.listarActas();
+
+        for (Actas_partido acta : actas) {
+            modelo.addRow(new Object[] { acta.getId_acta_partido(),
+                    acta.getHora_inicio_partido(),
+                    acta.getHora_fin_partido(), acta.getNombre_equipo_rival(),
+                    acta.getNombre_equipo_local(),
+                    acta.getDuracion_partido(), acta.getGoles_equipo_rival(),
+                    acta.getGoles_equipo_local(), acta.getEquipo_ganador(),
+                    acta.getId_arbitro() });
+        }
+
+    }
+
+    /**
+     * Actualizar
+     */
+    public void actualizarActa() {
+
+        Inter_ingreso_actas ingresarAc = new Inter_ingreso_actas();
+        /*
+         * Captura del valor seleccionado en la celda
+         */
+        if (Tabla_actas_partidos.getSelectedRow() > 0) {
+
+            int row = Tabla_actas_partidos.getSelectedRow();
+
+            ingresarAc.id_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 0).toString());
+            ingresarAc.hora_inicio_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 1).toString());
+            ingresarAc.hora_fin_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 2).toString());
+            ingresarAc.equipo_rival_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 3).toString());
+            ingresarAc.equipo_local_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 4).toString());
+            ingresarAc.duracion_partido_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 5).toString());
+            ingresarAc.goles_rival_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 6).toString());
+            ingresarAc.goles_local_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 7).toString());
+            ingresarAc.equipo_ganador_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 8).toString());
+            ingresarAc.id_arbitro_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 9).toString());
+
+            ingresarAc.jbtActualizar2.setEnabled(true);
+            ingresarAc.Boton_ingresar_nueva_acta.setEnabled(false);
+
+            panel_principal_arbitro.add(ingresarAc);
+            ingresarAc.setVisible(true);
+            ingresarAc.show();
+
+        }
+
     }
 
     /**
@@ -36,7 +131,8 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
@@ -61,22 +157,21 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
 
         Tabla_actas_partidos.setBackground(new java.awt.Color(204, 204, 204));
         Tabla_actas_partidos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                new Object[][] {
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null }
+                },
+                new String[] {
+                        "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         Tabla_actas_partidos.setEnabled(false);
@@ -85,13 +180,11 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE)
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE));
 
         boton_consulta.setBackground(new java.awt.Color(0, 153, 255));
         boton_consulta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -124,105 +217,59 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(187, 187, 187)
-                .addComponent(boton_consulta)
-                .addGap(76, 76, 76)
-                .addComponent(jBtnActualizar)
-                .addGap(63, 63, 63)
-                .addComponent(jbtnActualizar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(187, 187, 187)
+                                .addComponent(boton_consulta)
+                                .addGap(76, 76, 76)
+                                .addComponent(jBtnActualizar)
+                                .addGap(63, 63, 63)
+                                .addComponent(jbtnActualizar)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(27, 27, 27)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(boton_consulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBtnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(13, 13, 13))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1)
+                                .addGap(27, 27, 27)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(boton_consulta, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jBtnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jbtnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(13, 13, 13)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void boton_consultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_consultaActionPerformed
+    private void boton_consultaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_boton_consultaActionPerformed
+        listarActas();
+    }// GEN-LAST:event_boton_consultaActionPerformed
 
-        this.cargar_tabla_consulta_actas();//Me carga la tabla en la ventana
-    }//GEN-LAST:event_boton_consultaActionPerformed
+    private void jBtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBtnActualizarActionPerformed
+        actualizarActa();
+    }// GEN-LAST:event_jBtnActualizarActionPerformed
 
-    private void jBtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnActualizarActionPerformed
-        // TODO add your handling code here:
-        /*
-        Actas_partido actaPartido = new Actas_partido();
-        controladorActas.actualizarActa(actaPartido);
-         */
+    private void jbtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbtnActualizarActionPerformed
+        eliminarActa();
 
-        Inter_ingreso_actas ingresarAc = new Inter_ingreso_actas();
-        /*
-         * Captura del valor seleccionado en la celda
-         */
-        if (Tabla_actas_partidos.getSelectedRow() > 0) {
-            //JOptionPane.showMessageDialog(null, "Actualizando", "PopUp Dialog", JOptionPane.INFORMATION_MESSAGE);
-
-            int row = Tabla_actas_partidos.getSelectedRow();
-
-            ingresarAc.id_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 0).toString());
-            ingresarAc.hora_inicio_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 1).toString());
-            ingresarAc.hora_fin_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 2).toString());
-            ingresarAc.equipo_rival_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 3).toString());
-            ingresarAc.equipo_local_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 4).toString());
-            ingresarAc.duracion_partido_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 5).toString());
-            ingresarAc.goles_rival_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 6).toString());
-            ingresarAc.goles_local_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 7).toString());
-            ingresarAc.equipo_ganador_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 8).toString());
-            ingresarAc.id_arbitro_text_box.setText(Tabla_actas_partidos.getModel().getValueAt(row, 9).toString());
-
-            ingresarAc.jbtActualizar2.setEnabled(true);
-            ingresarAc.Boton_ingresar_nueva_acta.setEnabled(false);
-
-            panel_principal_arbitro.add(ingresarAc);
-            ingresarAc.setVisible(true);
-            ingresarAc.show();
-
-        }
-
-
-    }//GEN-LAST:event_jBtnActualizarActionPerformed
-
-    private void jbtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnActualizarActionPerformed
-        // TODO add your handling code here:
-        if (Tabla_actas_partidos.getSelectedRow() > 0) {
-
-            int row = Tabla_actas_partidos.getSelectedRow();
-            int id = Integer.parseInt(Tabla_actas_partidos.getModel().getValueAt(row, 0).toString());
-
-            int confirmacion = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro?", "PopUp Dialog", JOptionPane.YES_NO_OPTION);
-            if (confirmacion == 0) {
-                String mensaje = controladorActas.eliminarActa(id);
-                JOptionPane.showMessageDialog(null, mensaje, "PopUp Dialog", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-
-            }
-        }
-
-    }//GEN-LAST:event_jbtnActualizarActionPerformed
-
+    }// GEN-LAST:event_jbtnActualizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable Tabla_actas_partidos;
@@ -232,111 +279,5 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnActualizar;
-    // End of variables declaration//GEN-END:variables
-
-//    public void listar() {
-//        Controlador_actas_partido controller = new Controlador_actas_partido();
-//
-//        DefaultTableModel modelo = new DefaultTableModel() {
-//            @Override
-//            public boolean isCellEditable(int filas, int columnas) {
-//                return false;
-//            }
-//
-//        };
-//
-//        Internal_consulta_actas.Tabla_actas_partidos = new JTable(modelo);
-//        Internal_consulta_actas.jScrollPane1.setViewportView(Internal_consulta_actas.Tabla_actas_partidos);
-//        modelo.addColumn("id_acta_partido");
-//        modelo.addColumn("hora_inicio_partido");
-//        modelo.addColumn("hora_fin_partido");
-//        modelo.addColumn("equipo_rival");
-//        modelo.addColumn("equipo_local");
-//        modelo.addColumn("duracion_partido");
-//        modelo.addColumn("num_gole_equip_rival");
-//        modelo.addColumn("num_gole_equip_local");
-//        modelo.addColumn("equipo_ganador");
-//        modelo.addColumn("arbitro_id_arbitro1");
-//
-//        List<Actas_partido> actas = controller.listarActas();
-//
-//        for (Actas_partido acta : actas) {
-//            modelo.addRow( new Object[10]{ acta.getId_acta_partido(), acta.getHora_inicio_partido(),
-//                    acta.getHora_fin_partido(), acta.getNombre_equipo_rival(), acta.getNombre_equipo_local(),
-//                    acta.getDuracion_partido(), acta.getGoles_equipo_rival(), acta.getGoles_equipo_local(), acta.getEquipo_ganador(),
-//                    acta.getId_arbitro()});
-//        }
-//
-//    }
-
-    /*
-    *
-    *Metodo para mostrar todas las categorias
-     */
-    private void cargar_tabla_consulta_actas() {
-
-        java.sql.Connection conex = Conexion.conectar();
-
-        /*
-         *  Sobreescribe el método por defecto para impedir las ediciones en JTable
-         */
-        DefaultTableModel modelo = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int filas, int columnas) {
-                return false;
-            }
-
-        };//Instancia
-
-        String sql = "call listar_actas_partido();";//Guardara el script
-
-        Statement declaracion;
-
-        try {
-
-            declaracion = (Statement) conex.createStatement();
-            ResultSet result = declaracion.executeQuery(sql);//Aqui se ejecuta el query que se paso
-            //como parametro sql.
-
-            //Aqui pasamos el modelo a la tabla de la ventana internal categorias
-            Internal_consulta_actas.Tabla_actas_partidos = new JTable(modelo);
-
-            Internal_consulta_actas.jScrollPane1.setViewportView(Internal_consulta_actas.Tabla_actas_partidos);
-
-            //Aqui agregamos las columnas de la tabla
-            modelo.addColumn("id_acta_partido");
-            modelo.addColumn("hora_inicio_partido");
-            modelo.addColumn("hora_fin_partido");
-            modelo.addColumn("equipo_rival");
-            modelo.addColumn("equipo_local");
-            modelo.addColumn("duracion_partido");
-            modelo.addColumn("num_gole_equip_rival");
-            modelo.addColumn("num_gole_equip_local");
-            modelo.addColumn("equipo_ganador");
-            modelo.addColumn("arbitro_id_arbitro1");
-
-            //Bucle while
-            while (result.next()) {
-
-                Object fila[] = new Object[10];//Esto me va llenando las columnas
-
-                //Bucle for para ir aumentando el numero de filas
-                for (int i = 0; i < 10; i++) {
-
-                    fila[i] = result.getObject(i + 1);
-                }
-
-                modelo.addRow(fila);//Anado los registros por fila
-            }
-
-            //cerrar conexion
-            conex.close();
-
-        } catch (SQLException e) {
-
-            System.out.println("Error al llenar la tabla de actas" + e);
-        }
-
-    }
 
 }

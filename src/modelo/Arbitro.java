@@ -23,7 +23,6 @@ public class Arbitro {
     private int id_presidente;
     
     
-    
     //Constructor de la clase
     public Arbitro() {
         
