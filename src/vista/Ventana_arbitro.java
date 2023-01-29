@@ -57,7 +57,6 @@ public class Ventana_arbitro extends javax.swing.JFrame {
         actas_partido_menu = new javax.swing.JMenu();
         ingreso_acta_opcion = new javax.swing.JMenuItem();
         consulta_acta_opcion = new javax.swing.JMenuItem();
-        actualizar_acta_opcion = new javax.swing.JMenuItem();
         hora_asistencia_menu = new javax.swing.JMenu();
         ingreso_hora_opcion = new javax.swing.JMenuItem();
         cerrar_sesion_menu = new javax.swing.JMenu();
@@ -91,24 +90,13 @@ public class Ventana_arbitro extends javax.swing.JFrame {
 
         consulta_acta_opcion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         consulta_acta_opcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda_acta.png"))); // NOI18N
-        consulta_acta_opcion.setText("Consulta");
+        consulta_acta_opcion.setText("Actualizar y eliminar");
         consulta_acta_opcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consulta_acta_opcionActionPerformed(evt);
             }
         });
         actas_partido_menu.add(consulta_acta_opcion);
-
-        actualizar_acta_opcion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        actualizar_acta_opcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizar_acta.png"))); // NOI18N
-        actualizar_acta_opcion.setText("Actualizar");
-        actualizar_acta_opcion.setPreferredSize(new java.awt.Dimension(180, 35));
-        actualizar_acta_opcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizar_acta_opcionActionPerformed(evt);
-            }
-        });
-        actas_partido_menu.add(actualizar_acta_opcion);
 
         jMenuBar1.add(actas_partido_menu);
 
@@ -169,10 +157,6 @@ public class Ventana_arbitro extends javax.swing.JFrame {
         categoria.setVisible(true);//Me sirve para mostrar la ventana categoria
            
     }//GEN-LAST:event_ingreso_acta_opcionActionPerformed
-
-    private void actualizar_acta_opcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizar_acta_opcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_actualizar_acta_opcionActionPerformed
 
     //Opcion salir del menu desplegable cerrar sesion
     private void salir_opcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir_opcionActionPerformed
@@ -243,7 +227,6 @@ public class Ventana_arbitro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu actas_partido_menu;
-    private javax.swing.JMenuItem actualizar_acta_opcion;
     private javax.swing.JMenu cerrar_sesion_menu;
     private javax.swing.JMenuItem consulta_acta_opcion;
     private javax.swing.JMenu hora_asistencia_menu;

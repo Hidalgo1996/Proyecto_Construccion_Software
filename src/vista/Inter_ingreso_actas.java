@@ -2,9 +2,7 @@
 package vista;
 
 import controlador.Controlador_actas_partido;
-import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import modelo.Actas_partido;
 
@@ -55,6 +53,7 @@ public class Inter_ingreso_actas extends javax.swing.JInternalFrame {
         equipo_ganador_text_box = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         id_arbitro_text_box = new javax.swing.JTextField();
+        jbtActualizar2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -74,6 +73,9 @@ public class Inter_ingreso_actas extends javax.swing.JInternalFrame {
                 Boton_ingresar_nueva_actaActionPerformed(evt);
             }
         });
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Id del acta:");
@@ -149,6 +151,9 @@ public class Inter_ingreso_actas extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22))
         );
 
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Duracion partido:");
 
@@ -221,36 +226,52 @@ public class Inter_ingreso_actas extends javax.swing.JInternalFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        jbtActualizar2.setBackground(new java.awt.Color(51, 255, 51));
+        jbtActualizar2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbtActualizar2.setText("Actualizar");
+        jbtActualizar2.setEnabled(false);
+        jbtActualizar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtActualizar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Boton_ingresar_nueva_acta)
-                .addGap(284, 284, 284))
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(190, 190, 190)
+                                .addComponent(Boton_ingresar_nueva_acta)
+                                .addGap(30, 30, 30)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtActualizar2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 19, Short.MAX_VALUE)
+                .addGap(0, 15, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Boton_ingresar_nueva_acta)
-                .addGap(12, 12, 12))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Boton_ingresar_nueva_acta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtActualizar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -260,6 +281,27 @@ public class Inter_ingreso_actas extends javax.swing.JInternalFrame {
         
         this.ingreso_acta();//Llamada de metodo
     }//GEN-LAST:event_Boton_ingresar_nueva_actaActionPerformed
+
+    private void jbtActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtActualizar2ActionPerformed
+        Controlador_actas_partido controller = new Controlador_actas_partido();
+        
+        Actas_partido acta = new Actas_partido();
+        acta.setId_acta_partido(Integer.parseInt(id_text_box.getText()));
+        acta.setDuracion_partido(Integer.parseInt(duracion_partido_text_box.getText()));
+        acta.setHora_inicio_partido(hora_inicio_text_box.getText());
+        acta.setHora_fin_partido(hora_fin_text_box.getText());
+        acta.setNombre_equipo_local(equipo_local_text_box.getText());
+        acta.setNombre_equipo_rival(equipo_rival_text_box.getText());
+        acta.setEquipo_ganador(equipo_ganador_text_box.getText());
+        acta.setGoles_equipo_rival(Integer.parseInt(goles_rival_text_box.getText()));
+        acta.setGoles_equipo_local(Integer.parseInt(goles_local_text_box.getText()));
+        acta.setId_arbitro(Integer.parseInt(id_arbitro_text_box.getText()));
+        
+        
+         String mensaje = controller.actualizarActa(acta);
+         JOptionPane.showMessageDialog(null, mensaje, "PopUp Dialog", JOptionPane.INFORMATION_MESSAGE);
+
+    }//GEN-LAST:event_jbtActualizar2ActionPerformed
 
     
     //Metodo para dar funcionalidad al boton ingreso de acta
@@ -323,17 +365,17 @@ public class Inter_ingreso_actas extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Boton_ingresar_nueva_acta;
-    private javax.swing.JTextField duracion_partido_text_box;
-    private javax.swing.JTextField equipo_ganador_text_box;
-    private javax.swing.JTextField equipo_local_text_box;
-    private javax.swing.JTextField equipo_rival_text_box;
-    private javax.swing.JTextField goles_local_text_box;
-    private javax.swing.JTextField goles_rival_text_box;
-    private javax.swing.JTextField hora_fin_text_box;
-    private javax.swing.JTextField hora_inicio_text_box;
-    private javax.swing.JTextField id_arbitro_text_box;
-    private javax.swing.JTextField id_text_box;
+    public javax.swing.JButton Boton_ingresar_nueva_acta;
+    public javax.swing.JTextField duracion_partido_text_box;
+    public javax.swing.JTextField equipo_ganador_text_box;
+    public javax.swing.JTextField equipo_local_text_box;
+    public javax.swing.JTextField equipo_rival_text_box;
+    public javax.swing.JTextField goles_local_text_box;
+    public javax.swing.JTextField goles_rival_text_box;
+    public javax.swing.JTextField hora_fin_text_box;
+    public javax.swing.JTextField hora_inicio_text_box;
+    public javax.swing.JTextField id_arbitro_text_box;
+    public javax.swing.JTextField id_text_box;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -347,5 +389,6 @@ public class Inter_ingreso_actas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    public javax.swing.JButton jbtActualizar2;
     // End of variables declaration//GEN-END:variables
 }
