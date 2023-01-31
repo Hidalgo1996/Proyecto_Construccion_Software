@@ -16,16 +16,6 @@ public class Actas_partido {
 
     //Constructor vacio
     public Actas_partido() {
-        this.id_acta_partido = 0;
-        this.hora_inicio_partido = "";
-        this.hora_fin_partido = "";
-        this.nombre_equipo_rival = "";
-        this.nombre_equipo_local = "";
-        this.duracion_partido = 0;
-        this.goles_equipo_local = 0;
-        this.goles_equipo_rival = 0;
-        this.equipo_ganador = "";
-        this.id_arbitro = 0;
     }
 
     //Constructor sobrecargado

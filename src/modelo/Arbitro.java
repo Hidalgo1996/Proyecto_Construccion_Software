@@ -18,9 +18,7 @@ public class Arbitro {
     private String nacionalidad;
     private String partidos;
     private String anio_debut;
-    private int id_administrador;
-    private int id_secretaria;
-    private int id_presidente;
+
     
     
     //Constructor de la clase
@@ -39,9 +37,6 @@ public class Arbitro {
         this.nacionalidad = "";
         this.partidos = "";
         this.anio_debut = "";
-        this.id_administrador = 0;
-        this.id_secretaria = 0;
-        this.id_presidente = 0;
     }
     
     
@@ -152,31 +147,7 @@ public class Arbitro {
     public void setAnio_debut(String anio_debut) {
         this.anio_debut = anio_debut;
     }
-
-    public int getId_administrador() {
-        return id_administrador;
-    }
-
-    public void setId_administrador(int id_administrador) {
-        this.id_administrador = id_administrador;
-    }
-
-    public int getId_secretaria() {
-        return id_secretaria;
-    }
-
-    public void setId_secretaria(int id_secretaria) {
-        this.id_secretaria = id_secretaria;
-    }
-
-    public int getId_presidente() {
-        return id_presidente;
-    }
-
-    public void setId_presidente(int id_presidente) {
-        this.id_presidente = id_presidente;
-    }
-    
+ 
     
     
     

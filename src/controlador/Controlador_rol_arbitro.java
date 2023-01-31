@@ -32,7 +32,7 @@ public class Controlador_rol_arbitro {
             
             declaracion= conexion_arbitro.prepareStatement(sql);
             declaracion.setString(1, usuario);
-            declaracion.setString(1, contrasenia);
+            declaracion.setString(2, contrasenia);
 
             ResultSet resultado = declaracion.executeQuery();//Aqui se ejecuta el query que se paso
                                                               //como parametro sql.
@@ -48,7 +48,7 @@ public class Controlador_rol_arbitro {
             
         } catch (SQLException e) {
             
-            System.out.println("Error al iniciar sesion"+e);
+            System.out.println("Error al iniciar sesion"+ e.getMessage());
             JOptionPane.showMessageDialog(null, "Error de inicio de sesion");
         }
         
