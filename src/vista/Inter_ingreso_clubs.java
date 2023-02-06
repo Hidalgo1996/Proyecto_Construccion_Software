@@ -54,6 +54,15 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
 
     }
 
+    
+    
+    /**
+     * Captura los datos dentro de los textbox y los guarda en 
+     * la tabla club de la base de datos.
+     * 
+     * @param void
+     * @return void
+     */
     public void guardarClub() {
 
         String mensaje = "";
@@ -82,11 +91,26 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
 
     }
 
+    
+    /**
+     * Limpia las cajas de texto una vez ingresado un nuevo club.
+     * 
+     * @param void
+     * @return void
+     */
     public void limpiarTexts() {
         text_field_nombre_club.setText("");
         text_field_email.setText("");
     }
 
+    
+    /**
+     * Edicion de algun registro en especifico de
+     * un club que ya ha sido ingresado en base de datos.
+     * 
+     * @param void
+     * @return void
+     */
     public void editarClub() {
 
         if (table_club.getSelectedRow() > -1) {
@@ -100,6 +124,14 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
 
     }
 
+    
+    /**
+     * Borrado logico de un club ingresado en la base de datos
+     * Lo pasa de activo a inactivo.
+     * 
+     * @param void
+     * @return void
+     */
     public void eliminarClub() {
 
         if (table_club.getSelectedRow() >= 0) {
@@ -124,6 +156,14 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    /**
+     * Carga todo el listado de los clubes de la base de datos
+     * y lo muestra en la ventana actual.
+     * 
+     * @param void
+     * @return void
+     */
     public void cargarListadoEquipos() {
         int i = 0;
         modelo.getDataVector().removeAllElements();
@@ -134,11 +174,27 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    /**
+     * Carga 2 titulos de columna de la tabla club especificada 
+     * en este metodo dentro de un comboBox.
+     * 
+     * @param void
+     * @return void
+     */
     public void cargarCombo() {
         combo_box_buscar.addItem("Nombre Club");
         combo_box_buscar.addItem("Director Club");
     }
 
+    
+    /**
+     *Filtra datos especificos de la tabla club
+     * en base al tipo de busqueda que se hace.
+     * 
+     * @param buscarPor, texto
+     * @return void
+     */
     public void flitrarTabla(String buscarPor, String texto) {
         List<Equipo_futbol> listaFiltrada = new ArrayList<Equipo_futbol>();
 

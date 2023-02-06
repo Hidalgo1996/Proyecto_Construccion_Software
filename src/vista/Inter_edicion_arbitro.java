@@ -62,6 +62,13 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         cargarListadoArbitros();
     }
 
+    
+    /**
+     * Ingreso de un nuevo arbitro a la base de datos
+     * 
+     * @param void
+     * @return void
+     */
     public void guardarArbitro() {
 
         String mensaje = "";
@@ -96,6 +103,13 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
 
     }
 
+    
+    /**
+     * Limpia las cajas de texto una vez ingresado un nuevo arbitro.
+     * 
+     * @param void
+     * @return void
+     */
     public void limpiarTexts() {
         text_field_nombre_arbitro.setText("");
         text_field_apellido_arbitro.setText("");
@@ -108,6 +122,15 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         combo_box_categoria_arbitro.setSelectedIndex(0);
     }
 
+    
+    
+    /**
+     * Edicion de algun registro en especifico de
+     * un arbitro que ya ha sido ingresado en base de datos.
+     * 
+     * @param void
+     * @return void
+     */
     public void editarArbitro() {
 
         if (table_arbitro.getSelectedRow() > -1) {
@@ -135,6 +158,15 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
 
     }
 
+    
+    
+    /**
+     * Borrado logico de un arbitro ingresado en la base de datos
+     * Lo pasa de activo a inactivo.
+     * 
+     * @param void
+     * @return void
+     */
     public void eliminarArbitro() {
 
         if (table_arbitro.getSelectedRow() >= 0) {
@@ -159,6 +191,15 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    
+    /**
+     * Carga todo el listado de arbitros de la base de datos
+     * y lo muestra en la ventana actual.
+     * 
+     * @param void
+     * @return void
+     */
     public void cargarListadoArbitros() {
 
         int i = 0;
@@ -173,12 +214,30 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    /**
+     * Carga 3 titulos de columna de la tabla
+     * arbitros especificada en este metodo dentro
+     * de un comboBox.
+     * 
+     * @param void
+     * @return void
+     */
     public void cargarComboBusqueda() {
         combo_box_buscar_arbitro.addItem("Nombre");
         combo_box_buscar_arbitro.addItem("Usuario");
         combo_box_buscar_arbitro.addItem("Categoria");
     }
 
+    
+    /**
+     * Carga 4 titulos de columna de la tabla
+     * arbitros especificada en este metodo dentro
+     * de un comboBox.
+     * 
+     * @param void
+     * @return void
+     */
     public void cargarComboCategoria() {
         combo_box_categoria_arbitro.addItem("<Selecione>");
         combo_box_categoria_arbitro.addItem("Profesional");
@@ -186,6 +245,15 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         combo_box_categoria_arbitro.addItem("Infantil");
     }
 
+    
+    
+    /**
+     *Filtra datos especificos de la tabla arbitros
+     * en base al tipo de busqueda que se hace.
+     * 
+     * @param buscarPor, texto
+     * @return void
+     */
     public void flitrarTabla(String buscarPor, String texto) {
         List<Arbitro> listaFiltrada = new ArrayList<Arbitro>();
 
@@ -477,6 +545,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void boton_editar_arbitroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editar_arbitroActionPerformed
       editarArbitro();
     }//GEN-LAST:event_boton_editar_arbitroActionPerformed

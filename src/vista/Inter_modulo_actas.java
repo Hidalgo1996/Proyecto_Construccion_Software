@@ -76,7 +76,11 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
     }
 
     /**
+     * Captura los datos dentro de los textbox y los guarda en 
+     * la tabla acta partido de la base de datos.
      * 
+     * @param void
+     * @return void
      */
     public void guardarActa() {
 
@@ -152,6 +156,13 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    /**
+     * Limpia las cajas de texto una vez ingresado una nueva acta de partido.
+     * 
+     * @param void
+     * @return void
+     */
     public void limpiarTexts() {
         hora_inicio_text_box.setText("");
         hora_fin_text_box.setText("");
@@ -162,6 +173,14 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
         equipo_ganador_text_box.setText("");
     }
 
+    
+    /**
+     * Edicion de algun registro en especifico de
+     * un acta de partidos que ya ha sido ingresada en base de datos.
+     * 
+     * @param void
+     * @return void
+     */
     public void editarActa() {
 
         if (table_actas.getSelectedRow() > -1) {
@@ -178,6 +197,14 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
 
     }
 
+    
+    /**
+     * Borrado logico de un acta ingresada en la base de datos
+     * Lo pasa de activo a inactivo.
+     * 
+     * @param void
+     * @return void
+     */
     public void eliminarActa() {
 
         if (table_actas.getSelectedRow() >= 0) {
@@ -202,6 +229,14 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    /**
+     * Carga todo el listado de las actas de la base de datos
+     * y lo muestra en la ventana actual.
+     * 
+     * @param void
+     * @return void
+     */
     public void cargarListadoActas() {
         int i = 0;
         modelo.getDataVector().removeAllElements();
@@ -216,7 +251,15 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                     e.getGoles_equipo_rival(), e.getEquipo_ganador() });
         }
     }
-    /** */
+    
+    
+    /**
+     *Filtra datos especificos de la tabla acta de partidos
+     * en base al tipo de busqueda que se hace.
+     * 
+     * @param buscarPor, texto
+     * @return void
+     */
     public void filtrarTabla(String buscarPor, String texto) {
 
         List<Actas_partido> listaFiltrada = new ArrayList<Actas_partido>();
@@ -269,7 +312,6 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -278,8 +320,6 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        id_text_box = new javax.swing.JTextField();
-        fecha_emision_txt = new javax.swing.JTextField();
         hora_inicio_text_box = new javax.swing.JTextField();
         hora_fin_text_box = new javax.swing.JTextField();
         duracion_partido_text_box = new javax.swing.JTextField();
@@ -289,6 +329,7 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
         equipo_ganador_text_box = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -312,8 +353,6 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Datos:");
 
-        jLabel3.setText("Código de acta:");
-
         jLabel4.setText("Fecha de emisión:");
 
         jLabel5.setText("Hora inicio partido:");
@@ -329,8 +368,6 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
         jLabel11.setText("Goles equipo rival:");
 
         jLabel12.setText("Equipo ganador:");
-
-        fecha_emision_txt.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
 
         goles_local_text_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -397,16 +434,6 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(id_text_box, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 155, Short.MAX_VALUE))
-                            .addComponent(fecha_emision_txt)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -424,21 +451,15 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(partido_combo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(hora_fin_text_box)
-                                    .addComponent(hora_inicio_text_box)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(goles_rival_text_box))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(equipo_ganador_text_box))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(23, 23, 23)
-                        .addComponent(duracion_partido_text_box))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(14, 14, 14)
-                        .addComponent(goles_local_text_box))
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hora_inicio_text_box))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(equipo_ganador_text_box, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(goles_rival_text_box)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -446,8 +467,17 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                                 .addGap(53, 53, 53)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(33, 33, 33)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4))
+                        .addGap(0, 96, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(goles_local_text_box)
+                            .addComponent(duracion_partido_text_box))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -456,21 +486,18 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(id_text_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(fecha_emision_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hora_inicio_text_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(hora_inicio_text_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(hora_fin_text_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(hora_fin_text_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -479,7 +506,7 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(duracion_partido_text_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(goles_local_text_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -491,11 +518,11 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(equipo_ganador_text_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 430));
@@ -625,11 +652,47 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void equipo_ganador_text_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipo_ganador_text_boxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_equipo_ganador_text_boxActionPerformed
+
+    private void goles_rival_text_boxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_goles_rival_text_boxKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_goles_rival_text_boxKeyTyped
+
+    private void goles_rival_text_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goles_rival_text_boxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_goles_rival_text_boxActionPerformed
+
+    private void partido_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_partido_comboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_partido_comboActionPerformed
+
+    private void partido_comboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_partido_comboItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_partido_comboItemStateChanged
+
+    private void goles_local_text_boxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_goles_local_text_boxKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_goles_local_text_boxKeyTyped
+
+    private void goles_local_text_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goles_local_text_boxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_goles_local_text_boxActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton5ActionPerformed
         eliminarActa();
@@ -710,17 +773,16 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> combo_buscar;
     private javax.swing.JTextField duracion_partido_text_box;
     private javax.swing.JTextField equipo_ganador_text_box;
-    private javax.swing.JTextField fecha_emision_txt;
     private javax.swing.JTextField goles_local_text_box;
     private javax.swing.JTextField goles_rival_text_box;
     private javax.swing.JTextField hora_fin_text_box;
     private javax.swing.JTextField hora_inicio_text_box;
-    private javax.swing.JTextField id_text_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -728,7 +790,6 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

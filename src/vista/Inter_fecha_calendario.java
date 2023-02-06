@@ -80,6 +80,8 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         cargarComboEquipos();
     }
 
+    
+    
     public void formatearText() {
         try {
             MaskFormatter maskHora = new MaskFormatter("##:##");
@@ -89,6 +91,14 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    /**
+     * Captura los datos dentro de los textbox y los guarda en 
+     * la tabla fecha calendario de la base de datos.
+     * 
+     * @param void
+     * @return void
+     */
     public void guardarCalendario() {
 
         String mensaje = "";
@@ -130,6 +140,14 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    /**
+     * Guarda un nuevo partido con los datos de los textbox 
+     * equipo rival y local
+     * 
+     * @param void
+     * @return mensaje
+     */
     public String guardarPartido() {
         Integer id_local = 0;
         Integer id_rival = 0;
@@ -157,14 +175,29 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         return mensaje;
     }
 
+    
+    /**
+     * Limpia las cajas de texto una vez ingresado un nuevo calendario
+     * de fechas.
+     * 
+     * @param void
+     * @return void
+     */
     public void limpiarTexts() {
-        text_box_fecha_partido.setText("");
         text_box_hora_partido.setText("");
         text_box_lugar_partido.setText("");
         combo_box_equipo_local.setSelectedIndex(0);
         combo_box_equipo_rival.setSelectedIndex(0);
     }
 
+    
+    /**
+     * Edicion de algun registro en especifico de
+     * una fecha de calendario que ya ha sido ingresada en base de datos.
+     * 
+     * @param void
+     * @return void
+     */
     public void editarCalendario() {
         if (table_calendario.getSelectedRow() > -1) {
             int fila = table_calendario.getSelectedRow();
@@ -191,6 +224,14 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    /**
+     * Borrado logico de una fecha de calendario ingresado en la base de datos
+     * Lo pasa de activo a inactivo.
+     * 
+     * @param void
+     * @return void
+     */
     public void eliminarCalendario() {
         if (table_calendario.getSelectedRow() >= 0) {
 
@@ -214,6 +255,14 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    /**
+     * Carga todo el listado de las fechas de calendario de la base de datos
+     * y lo muestra en la ventana actual.
+     * 
+     * @param void
+     * @return void
+     */
     public void cargarListadoAgendas() {
         int i = 0;
         modelo.getDataVector().removeAllElements();
@@ -227,11 +276,28 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    /**
+     * Carga 2 titulos de columna de la tabla
+     * fechas calendario especificada en este metodo dentro
+     * de un comboBox.
+     * 
+     * @param void
+     * @return void
+     */
     public void cargarCombo() {
         combo_box_buscar.addItem("Lugar partido");
         combo_box_buscar.addItem("Partido");
     }
 
+    
+    /**
+     *Filtra datos especificos de la tabla fecha de calendario
+     * en base al tipo de busqueda que se hace.
+     * 
+     * @param buscarPor, texto
+     * @return void
+     */
     public void flitrarTabla(String buscarPor, String texto) {
         List<Agenda> listaFiltrada = new ArrayList<Agenda>();
 
@@ -265,6 +331,14 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    
+    /**
+     * Carga los equipos que existen dentro de un comboBox.
+     * 
+     * @param void
+     * @return void
+     */
     public void cargarComboEquipos() {
         Controlador_equipo controlador_equipo = new Controlador_equipo();
         for (Equipo_futbol e : controlador_equipo.listarEquipos()) {
@@ -285,14 +359,11 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        text_field_id_calendario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         text_box_hora_partido = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        text_box_fecha_partido = new javax.swing.JFormattedTextField();
         combo_box_equipo_local = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         combo_box_equipo_rival = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -309,6 +380,7 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         combo_box_buscar = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_calendario = new javax.swing.JTable();
+        jDateChooser_fecha_partido = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -321,56 +393,39 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        text_field_id_calendario.setBackground(new java.awt.Color(255, 255, 255));
-        text_field_id_calendario.setEnabled(false);
-        text_field_id_calendario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                text_field_id_calendarioActionPerformed(evt);
-            }
-        });
-        jPanel1.add(text_field_id_calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 150, 20));
-
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Hora del partido:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
-        jPanel1.add(text_box_hora_partido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 150, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+
+        text_box_hora_partido.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_box_hora_partido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 160, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Ingreso");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, -1, -1));
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fecha del partido:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
-
-        try {
-            text_box_fecha_partido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jPanel1.add(text_box_fecha_partido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 150, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         combo_box_equipo_local.setBackground(new java.awt.Color(255, 255, 255));
         combo_box_equipo_local.setForeground(new java.awt.Color(0, 0, 0));
         combo_box_equipo_local.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
         }));
-        jPanel1.add(combo_box_equipo_local, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 161, -1));
-
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Id calendario:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jPanel1.add(combo_box_equipo_local, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 161, -1));
 
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Equipo Rival:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, 20));
 
+        combo_box_equipo_rival.setBackground(new java.awt.Color(255, 255, 255));
         combo_box_equipo_rival.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
-        jPanel1.add(combo_box_equipo_rival, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 160, -1));
+        jPanel1.add(combo_box_equipo_rival, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 160, -1));
 
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Lugar del partido:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         boton_guardar_calendario.setBackground(new java.awt.Color(0, 204, 204));
         boton_guardar_calendario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -381,7 +436,7 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
                 boton_guardar_calendarioActionPerformed(evt);
             }
         });
-        jPanel1.add(boton_guardar_calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 91, -1));
+        jPanel1.add(boton_guardar_calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 91, -1));
 
         text_box_lugar_partido.setBackground(new java.awt.Color(255, 255, 255));
         text_box_lugar_partido.addActionListener(new java.awt.event.ActionListener() {
@@ -389,11 +444,11 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
                 text_box_lugar_partidoActionPerformed(evt);
             }
         });
-        jPanel1.add(text_box_lugar_partido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 159, -1));
+        jPanel1.add(text_box_lugar_partido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 159, -1));
 
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Equipo Local:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
 
         boton_limpiar_calendario.setBackground(new java.awt.Color(0, 204, 0));
         boton_limpiar_calendario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -404,7 +459,7 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
                 boton_limpiar_calendarioActionPerformed(evt);
             }
         });
-        jPanel1.add(boton_limpiar_calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 88, -1));
+        jPanel1.add(boton_limpiar_calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 88, -1));
 
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("*Seleccione un registro para efectuar alguna accion de edicion o borrado* ");
@@ -472,11 +527,14 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 757, 281));
 
+        jDateChooser_fecha_partido.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(jDateChooser_fecha_partido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 160, -1));
+
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo blanco.jpg"))); // NOI18N
         jLabel13.setText("jLabel5");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 300, 380));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 300, 320));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -552,13 +610,13 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> combo_box_buscar;
     private javax.swing.JComboBox<String> combo_box_equipo_local;
     private javax.swing.JComboBox<String> combo_box_equipo_rival;
+    private com.toedter.calendar.JDateChooser jDateChooser_fecha_partido;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -567,10 +625,8 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_calendario;
-    private javax.swing.JFormattedTextField text_box_fecha_partido;
     private javax.swing.JFormattedTextField text_box_hora_partido;
     private javax.swing.JTextField text_box_lugar_partido;
     private javax.swing.JTextField text_field_buscar;
-    private javax.swing.JTextField text_field_id_calendario;
     // End of variables declaration//GEN-END:variables
 }
