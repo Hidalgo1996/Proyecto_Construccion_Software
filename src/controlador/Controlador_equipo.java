@@ -13,14 +13,12 @@ import modelo.Equipo_futbol;
 
 public class Controlador_equipo {
 
-    List<Equipo_futbol> listaEquipos = new ArrayList<Equipo_futbol>();
-
     /**
      * Guarda Equipo/club futbol
      * @param
      * @return Mensaje
      */
-    public String guardarequipo(Equipo_futbol equipo) {
+    public String guardarEquipo(Equipo_futbol equipo) {
         String message = "";
 
         Connection conexion = Conexion.conectar();
@@ -28,11 +26,10 @@ public class Controlador_equipo {
 
         try {
 
-            consulta = conexion.prepareStatement("call sp (?, ?, ?)");
-
+            consulta = conexion.prepareStatement("call PR_insertar_club(?, ?, ?)");
             consulta.setString(1, equipo.getNombre_equipo());
             consulta.setString(2, equipo.getDirector());
-            consulta.setString(3, equipo.getEstado());
+            consulta.setString(3, "A");
 
             if (consulta.executeUpdate() > 0) {
                 message = "equipo registrado";
@@ -54,17 +51,17 @@ public class Controlador_equipo {
      * @param equipo
      * @return Mensaje
      */
-    public String actualizarequipo(Equipo_futbol equipo) {
+    public String actualizarEquipo(Equipo_futbol equipo) {
 
         String mensaje = "";
 
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
         try {
-            consulta = conector.prepareStatement("call sp (?, ?, ?);");
-            consulta.setString(1, equipo.getNombre_equipo());
-            consulta.setString(2, equipo.getDirector());
-            consulta.setString(3, equipo.getEstado());
+            consulta = conector.prepareStatement("call PR_modificar_club (?, ?, ?);");
+            consulta.setInt(1,equipo.getId_equipo());
+            consulta.setString(2, equipo.getNombre_equipo());
+            consulta.setString(3, equipo.getDirector());
 
             if (consulta.executeUpdate() > 0) {
                 mensaje = "equipo actualizada correctamente";
@@ -82,12 +79,13 @@ public class Controlador_equipo {
      * 
      * @return Listado de equipos
      */
-    public List<Equipo_futbol> listarequipos() {
+    public List<Equipo_futbol> listarEquipos() {
 
+        List<Equipo_futbol> listaEquipos = new ArrayList<Equipo_futbol>();
         Connection conector = Conexion.conectar();
         try {
             Statement consulta = conector.createStatement();
-            ResultSet result = consulta.executeQuery("call sp();");
+            ResultSet result = consulta.executeQuery("call PR_consultar_club_();");
             // ResultSetMetaData metaData = result.getMetaData();
 
             while (result.next()) {
@@ -102,7 +100,6 @@ public class Controlador_equipo {
             }
 
             conector.close();
-
             return listaEquipos;
         } catch (SQLException e) {
             System.out.println("Error en listar las equipos:" + e.getMessage());
@@ -116,7 +113,7 @@ public class Controlador_equipo {
      * @param id
      * @return
      */
-    public String eliminarequipo(Integer id) {
+    public String eliminarEquipo(Integer id) {
         String mensaje = "";
 
         if (id <= 0) {
@@ -126,9 +123,8 @@ public class Controlador_equipo {
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
         try {
-            consulta = conector.prepareStatement("call sp (?, ?);");
+            consulta = conector.prepareStatement("call PR_eliminar_club(?);");
             consulta.setInt(1, id);
-            consulta.setString(2, "E");
 
             if (consulta.executeUpdate() > 0) {
                 mensaje = "equipo eliminado correctamente";
@@ -144,4 +140,5 @@ public class Controlador_equipo {
         }
     }
 
+    
 }

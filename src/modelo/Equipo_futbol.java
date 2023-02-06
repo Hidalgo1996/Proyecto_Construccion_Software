@@ -17,6 +17,16 @@ public class Equipo_futbol {
         this.estado = estado;
     }
 
+
+    public Equipo_futbol(Integer id_equipo, String nombre_equipo) {
+        this.id_equipo = id_equipo;
+        this.nombre_equipo = nombre_equipo;
+    }
+
+    public Equipo_futbol(Integer id_equipo) {
+        this.id_equipo = id_equipo;
+    }
+
     public Integer getId_equipo() {
         return id_equipo;
     }

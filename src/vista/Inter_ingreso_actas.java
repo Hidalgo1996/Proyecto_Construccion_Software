@@ -295,7 +295,7 @@ public class Inter_ingreso_actas extends javax.swing.JInternalFrame {
         acta.setEquipo_ganador(equipo_ganador_text_box.getText());
         acta.setGoles_equipo_rival(Integer.parseInt(goles_rival_text_box.getText()));
         acta.setGoles_equipo_local(Integer.parseInt(goles_local_text_box.getText()));
-        acta.setId_arbitro(Integer.parseInt(id_arbitro_text_box.getText()));
+        //acta.setId_arbitro(Integer.parseInt(id_arbitro_text_box.getText()));
         
         
          String mensaje = controller.actualizarActa(acta);
@@ -337,7 +337,7 @@ public class Inter_ingreso_actas extends javax.swing.JInternalFrame {
             acta_partido.setGoles_equipo_rival(Integer.parseInt(goles_rival_text_box.getText()));
             acta_partido.setGoles_equipo_local(Integer.parseInt(goles_local_text_box.getText()));
             acta_partido.setEquipo_ganador(equipo_ganador_text_box.getText().trim());
-            acta_partido.setId_arbitro(Integer.parseInt(id_arbitro_text_box.getText()));
+            //acta_partido.setId_arbitro(Integer.parseInt(id_arbitro_text_box.getText()));
             
             
             //Condicion que me indica si guardaron los cambios

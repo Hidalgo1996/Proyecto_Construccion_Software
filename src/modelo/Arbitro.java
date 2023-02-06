@@ -1,63 +1,47 @@
 
 package modelo;
 
+public class Arbitro extends Usuario {
 
-public class Arbitro {
-    
-    //Atributos de clase
-    private int id_arbitro;
-    private String peso;
-    private String categoria;
-    private String altura;
-    private String nombre;
-    private String apellido;
-    private String nombre_usuario;
-    private String contrasenia;
-    private String email;
-    private String fecha_nacimiento;
-    private String nacionalidad;
-    private String partidos;
-    private String anio_debut;
+    // Atributos de clase
+    protected String edad;
+    protected String categoria;
+    protected String nacionalidad;
+    protected String cantidad_partidos;
 
-    
-    
-    //Constructor de la clase
     public Arbitro() {
-        
-        this.id_arbitro = 0;
-        this.peso = "";
+        this.edad = "";
         this.categoria = "";
-        this.altura = "";
-        this.nombre = "";
-        this.apellido = "";
-        this.nombre_usuario = "";
-        this.contrasenia = "";
-        this.email = "";
-        this.fecha_nacimiento = "";
         this.nacionalidad = "";
-        this.partidos = "";
-        this.anio_debut = "";
-    }
-    
-    
-    
-    //Getter y setter
-    //Son metodoa para obtener y modificar las variables de clase
+        this.cantidad_partidos = "";
 
-    public int getId_arbitro() {
-        return id_arbitro;
     }
 
-    public void setId_arbitro(int id_arbitro) {
-        this.id_arbitro = id_arbitro;
+    public Arbitro(Integer id_usuario, String nombre, String apellido,
+            String nombre_usuario, String email, String contrasenia,
+            String estado, String edad, String categoria, String nacionalidad,
+            String cantidad_partidos) {
+        super(id_usuario, nombre, apellido, nombre_usuario, contrasenia, email, estado);
+        this.edad = edad;
+        this.categoria = categoria;
+        this.nacionalidad = nacionalidad;
+        this.cantidad_partidos = cantidad_partidos;
     }
 
-    public String getPeso() {
-        return peso;
+    public String getEdad() {
+        return edad;
     }
 
-    public void setPeso(String peso) {
-        this.peso = peso;
+    public void setEdad(String edad) {
+        this.edad = edad;
+    }
+
+    public String getCantidad_partidos() {
+        return cantidad_partidos;
+    }
+
+    public void setCantidad_partidos(String cantidad_partidos) {
+        this.cantidad_partidos = cantidad_partidos;
     }
 
     public String getCategoria() {
@@ -68,62 +52,6 @@ public class Arbitro {
         this.categoria = categoria;
     }
 
-    public String getAltura() {
-        return altura;
-    }
-
-    public void setAltura(String altura) {
-        this.altura = altura;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getNombre_usuario() {
-        return nombre_usuario;
-    }
-
-    public void setNombre_usuario(String nombre_usuario) {
-        this.nombre_usuario = nombre_usuario;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFecha_nacimiento() {
-        return fecha_nacimiento;
-    }
-
-    public void setFecha_nacimiento(String fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
-    }
-
     public String getNacionalidad() {
         return nacionalidad;
     }
@@ -132,24 +60,4 @@ public class Arbitro {
         this.nacionalidad = nacionalidad;
     }
 
-    public String getPartidos() {
-        return partidos;
-    }
-
-    public void setPartidos(String partidos) {
-        this.partidos = partidos;
-    }
-
-    public String getAnio_debut() {
-        return anio_debut;
-    }
-
-    public void setAnio_debut(String anio_debut) {
-        this.anio_debut = anio_debut;
-    }
- 
-    
-    
-    
-    
 }

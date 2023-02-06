@@ -1,7 +1,8 @@
 
 package vista;
 
-import controlador.Controlador_rol_arbitro;
+import controlador.Controlador_usuario;
+
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import modelo.Arbitro;
@@ -188,11 +189,9 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton_inicio_sesionActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_boton_inicio_sesionActionPerformed
-
         this.login();
     }// GEN-LAST:event_boton_inicio_sesionActionPerformed
 
-    // Metodo login
     // Metodo de login
     private void login() {
 
@@ -200,31 +199,20 @@ public class Login extends javax.swing.JFrame {
         // lleno o no.
         if (!texto_usuario.getText().isEmpty() && !texto_contrasenia.getText().isEmpty()) {
 
-            Controlador_rol_arbitro control_arbitro = new Controlador_rol_arbitro();
+            Controlador_usuario controlador = new Controlador_usuario();
 
             Arbitro arbitro = new Arbitro();// Objeto de tipo arbitro
 
-            arbitro.setNombre_usuario(texto_usuario.getText().trim());// Aqui obtenemos el valor
-                                                                      // de la caja de texto usuario
-                                                                      // y la pasamos al arbitro
-                                                                      // la funcion trim() es para
-            // eliminar espacios
-
-            arbitro.setContrasenia(texto_contrasenia.getText().trim());// Aqui obtenemos el valor
-                                                                       // de la caja de texto contrasenia
-                                                                       // y la pasamos al arbitro
-            // la funcion trim() es para
-            // eliminar espacios
+            // Seteo de datos
+            arbitro.setNombre_usuario(texto_usuario.getText().trim());
+            arbitro.setContrasenia(texto_contrasenia.getText().trim());
 
             // condicion en la que pasamos el arbitro para despues comparar
             // pesto que arbitro se recibe en la clase controlador
-            if (control_arbitro.login_arbitro(arbitro)) {
+            if (controlador.login(arbitro)) {
+                JFMenu_Principal prinicipalMenu = new JFMenu_Principal();// Instancia de tipo ventana arbitro
 
-                // JOptionPane.showMessageDialog(null, "Ingreso exitoso");
-
-                Ventana_arbitro menu_arbitro = new Ventana_arbitro();// Instancia de tipo ventana arbitro
-
-                menu_arbitro.setVisible(true);// Me permite ver la ventana del objeto creado
+                prinicipalMenu.setVisible(true);// Me permite ver la ventana del objeto creado
                 this.dispose();// Cierra la ventana automaticamente una vez que ingreso.
 
             } else {

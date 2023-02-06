@@ -27,11 +27,11 @@ public class Inter_ingreso_secretarias extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        text_field_id_secretaria = new javax.swing.JTextField();
         text_field_email_secretaria = new javax.swing.JTextField();
+        text_field_contrasena_secretaria = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         text_field_nombre_secretaria = new javax.swing.JTextField();
         text_field_apellido_secretaria = new javax.swing.JTextField();
@@ -39,11 +39,11 @@ public class Inter_ingreso_secretarias extends javax.swing.JInternalFrame {
         text_field_nomb_user_secretaria = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         boton_guardar_secretaria = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
         boton_limpiar_secretaria = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        text_field_id_secretaria = new javax.swing.JTextField();
-        text_field_contrasena_secretaria = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        boton_borrar_secretaria = new javax.swing.JButton();
+        combo_box_buscar_secretaria = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_secretaria = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
@@ -51,125 +51,92 @@ public class Inter_ingreso_secretarias extends javax.swing.JInternalFrame {
         text_field_buscar = new javax.swing.JTextField();
         boton_buscar_secretaria = new javax.swing.JButton();
         boton_editar_secretaria = new javax.swing.JButton();
-        boton_borrar_secretaria = new javax.swing.JButton();
-        combo_box_buscar_secretaria = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setTitle("Ingreso secretaria");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Id secretaria:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
-        jLabel21.setText("Apellido:");
-
-        jLabel22.setText("Nombre usuario:");
-
+        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("Contraseña:");
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
+        text_field_id_secretaria.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_field_id_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 193, -1));
+
+        text_field_email_secretaria.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_field_email_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 194, -1));
+
+        text_field_contrasena_secretaria.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_field_contrasena_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 194, -1));
+
+        jLabel27.setForeground(new java.awt.Color(0, 0, 0));
         jLabel27.setText("Email:");
+        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
+        text_field_nombre_secretaria.setBackground(new java.awt.Color(255, 255, 255));
         text_field_nombre_secretaria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 text_field_nombre_secretariaActionPerformed(evt);
             }
         });
+        jPanel1.add(text_field_nombre_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 193, -1));
 
-        jLabel1.setText("Edicion secretaria");
+        text_field_apellido_secretaria.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_field_apellido_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 194, -1));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Ingreso");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
+
+        text_field_nomb_user_secretaria.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_field_nomb_user_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 194, -1));
+
+        jLabel28.setForeground(new java.awt.Color(0, 0, 0));
         jLabel28.setText("Nombre :");
+        jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         boton_guardar_secretaria.setBackground(new java.awt.Color(0, 204, 204));
+        boton_guardar_secretaria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         boton_guardar_secretaria.setForeground(new java.awt.Color(0, 0, 0));
         boton_guardar_secretaria.setText("Guardar");
+        jPanel1.add(boton_guardar_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 92, -1));
+
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel21.setText("Apellido:");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         boton_limpiar_secretaria.setBackground(new java.awt.Color(0, 204, 0));
+        boton_limpiar_secretaria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         boton_limpiar_secretaria.setForeground(new java.awt.Color(0, 0, 0));
         boton_limpiar_secretaria.setText("Limpiar");
+        jPanel1.add(boton_limpiar_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 92, -1));
 
-        jLabel12.setText("Id secretaria:");
+        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel22.setText("Nombre usuario:");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(text_field_apellido_secretaria))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(text_field_email_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(text_field_contrasena_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(text_field_nomb_user_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(17, 17, 17))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(text_field_nombre_secretaria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                            .addComponent(text_field_id_secretaria, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(19, 19, 19))))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(boton_guardar_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(boton_limpiar_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(21, 21, 21)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(text_field_id_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(text_field_nombre_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel28))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(text_field_apellido_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(text_field_nomb_user_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23)
-                            .addComponent(text_field_contrasena_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(text_field_email_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel27))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boton_guardar_secretaria)
-                    .addComponent(boton_limpiar_secretaria))
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
+        boton_borrar_secretaria.setBackground(new java.awt.Color(204, 0, 0));
+        boton_borrar_secretaria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        boton_borrar_secretaria.setForeground(new java.awt.Color(0, 0, 0));
+        boton_borrar_secretaria.setText("Borrar");
+        jPanel1.add(boton_borrar_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 450, 80, -1));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        combo_box_buscar_secretaria.setBackground(new java.awt.Color(255, 255, 255));
+        combo_box_buscar_secretaria.setForeground(new java.awt.Color(0, 0, 0));
+        combo_box_buscar_secretaria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(combo_box_buscar_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 145, -1));
 
+        table_secretaria.setBackground(new java.awt.Color(255, 255, 255));
         table_secretaria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -183,111 +150,60 @@ public class Inter_ingreso_secretarias extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(table_secretaria);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 742, 320));
+
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("*Seleccione un registro para efectuar alguna accion de edicion o borrado* ");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
 
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Buscar por:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, -1, -1));
 
+        text_field_buscar.setBackground(new java.awt.Color(255, 255, 255));
         text_field_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 text_field_buscarActionPerformed(evt);
             }
         });
+        jPanel1.add(text_field_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 157, -1));
 
         boton_buscar_secretaria.setBackground(new java.awt.Color(0, 204, 204));
+        boton_buscar_secretaria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         boton_buscar_secretaria.setForeground(new java.awt.Color(0, 0, 0));
         boton_buscar_secretaria.setText("Buscar");
+        jPanel1.add(boton_buscar_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, -1, -1));
 
         boton_editar_secretaria.setBackground(new java.awt.Color(255, 255, 0));
+        boton_editar_secretaria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         boton_editar_secretaria.setForeground(new java.awt.Color(0, 0, 0));
         boton_editar_secretaria.setText("Editar");
+        jPanel1.add(boton_editar_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 450, 85, -1));
 
-        boton_borrar_secretaria.setBackground(new java.awt.Color(204, 0, 0));
-        boton_borrar_secretaria.setForeground(new java.awt.Color(0, 0, 0));
-        boton_borrar_secretaria.setText("Borrar");
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo blanco.jpg"))); // NOI18N
+        jLabel6.setText("jLabel5");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 320, 340));
 
-        combo_box_buscar_secretaria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo blanco.jpg"))); // NOI18N
+        jLabel5.setText("jLabel5");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 760, 470));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(314, 314, 314))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(combo_box_buscar_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(text_field_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(boton_buscar_secretaria))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(boton_editar_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(boton_borrar_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10)
-                .addGap(32, 32, 32)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(text_field_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boton_buscar_secretaria)
-                    .addComponent(combo_box_buscar_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boton_editar_secretaria)
-                    .addComponent(boton_borrar_secretaria))
-                .addGap(18, 18, 18))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)))
-                .addContainerGap(8, Short.MAX_VALUE))
-        );
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancha 2.0.jpg"))); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, 510));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -309,40 +225,20 @@ public class Inter_ingreso_secretarias extends javax.swing.JInternalFrame {
     private javax.swing.JButton boton_guardar_secretaria;
     private javax.swing.JButton boton_limpiar_secretaria;
     private javax.swing.JComboBox<String> combo_box_buscar_secretaria;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTable table_secretaria;
     private javax.swing.JTextField text_field_apellido_secretaria;
     private javax.swing.JTextField text_field_buscar;

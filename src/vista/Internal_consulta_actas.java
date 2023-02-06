@@ -85,7 +85,7 @@ public class Internal_consulta_actas extends javax.swing.JInternalFrame {
                     acta.getNombre_equipo_local(),
                     acta.getDuracion_partido(), acta.getGoles_equipo_rival(),
                     acta.getGoles_equipo_local(), acta.getEquipo_ganador(),
-                    acta.getId_arbitro() });
+                    acta.getPartido().getId_partido() });
         }
 
     }

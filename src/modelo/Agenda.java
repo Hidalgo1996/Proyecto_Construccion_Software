@@ -6,7 +6,7 @@ import java.sql.Time;
 public class Agenda {
 
     protected Integer id_agenda;
-    protected Integer partido_id;
+    protected Partido partido_id;
 
     protected Date fecha_partido;
     protected String lugar_partido;
@@ -16,7 +16,7 @@ public class Agenda {
     public Agenda() {
     }
 
-    public Agenda(Integer id_agenda, Integer partido_id, Date fecha_partido, String lugar_partido, Time hora_partido,
+    public Agenda(Integer id_agenda, Partido partido_id, Date fecha_partido, String lugar_partido, Time hora_partido,
             String estado) {
         this.id_agenda = id_agenda;
         this.partido_id = partido_id;
@@ -34,11 +34,11 @@ public class Agenda {
         this.id_agenda = id_agenda;
     }
 
-    public Integer getPartido_id() {
+    public Partido getPartido_id() {
         return partido_id;
     }
 
-    public void setPartido_id(Integer partido_id) {
+    public void setPartido_id(Partido partido_id) {
         this.partido_id = partido_id;
     }
 

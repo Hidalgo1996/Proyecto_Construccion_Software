@@ -10,10 +10,10 @@ import java.sql.Statement;
 
 import conexion.Conexion;
 import modelo.Agenda;
+import modelo.Equipo_futbol;
+import modelo.Partido;
 
 public class Controlador_agenda {
-
-    List<Agenda> listaAgenda = new ArrayList<Agenda>();
 
     /**
      * 
@@ -28,13 +28,12 @@ public class Controlador_agenda {
 
         try {
 
-            consulta = conexion.prepareStatement("call sp (?, ?, ?, ?, ?)");
-
+            consulta = conexion.prepareStatement("call PR_insertar_agenda (?, ?, ?, ?, ?)");
             consulta.setDate(1, agenda.getFecha_partido());
             consulta.setString(2, agenda.getLugar_partido());
             consulta.setTime(3, agenda.getHora_partido());
-            consulta.setString(4, agenda.getEstado());
-            consulta.setInt(5, agenda.getPartido_id());
+            consulta.setString(4, "A");
+            consulta.setInt(5, agenda.getPartido_id().getId_partido());
 
             if (consulta.executeUpdate() > 0) {
                 message = "Agenda registrada";
@@ -63,11 +62,12 @@ public class Controlador_agenda {
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
         try {
-            consulta = conector.prepareStatement("call sp (?, ?, ?, ?);");
-            consulta.setDate(1, agenda.getFecha_partido());
-            consulta.setString(2, agenda.getLugar_partido());
-            consulta.setTime(3, agenda.getHora_partido());
-            consulta.setInt(4, agenda.getPartido_id());
+            consulta = conector.prepareStatement("call PR_modificar_agenda(?, ?, ?, ?, ?);");
+            consulta.setInt(1, agenda.getId_agenda());
+            consulta.setDate(2, agenda.getFecha_partido());
+            consulta.setString(3, agenda.getLugar_partido());
+            consulta.setTime(4, agenda.getHora_partido());
+            consulta.setInt(5, agenda.getPartido_id().getId_partido());
 
             if (consulta.executeUpdate() > 0) {
                 mensaje = "Agenda actualizada correctamente";
@@ -85,21 +85,56 @@ public class Controlador_agenda {
      * 
      * @return Listado de Agendas
      */
-    public List<Agenda> listarAgendas() {
+    /*
+     * public List<Agenda> listarAgendas() {
+     * List<Agenda> listaAgenda = new ArrayList<Agenda>();
+     * Connection conector = Conexion.conectar();
+     * try {
+     * Statement consulta = conector.createStatement();
+     * ResultSet result = consulta.executeQuery("call PR_consultar_agenda_();");
+     * // ResultSetMetaData metaData = result.getMetaData();
+     * 
+     * while (result.next()) {
+     * Agenda tmp = new Agenda(
+     * result.getInt("id_agenda"),
+     * result.getInt("partido_id_partido"),
+     * result.getDate("fecha_partido"),
+     * result.getString("lugar_partido"),
+     * result.getTime("hora_partido"),
+     * result.getString("estado"));
+     * 
+     * listaAgenda.add(tmp);
+     * }
+     * 
+     * conector.close();
+     * 
+     * return listaAgenda;
+     * } catch (SQLException e) {
+     * System.out.println("Error en listar las actas partido :" + e.getMessage());
+     * return null;
+     * }
+     * }
+     */
 
+    public List<Agenda> listarAgendas() {
+        List<Agenda> listaAgenda = new ArrayList<Agenda>();
         Connection conector = Conexion.conectar();
         try {
             Statement consulta = conector.createStatement();
-            ResultSet result = consulta.executeQuery("call sp();");
+            ResultSet result = consulta.executeQuery("call PR_consultar_agenda_();");
             // ResultSetMetaData metaData = result.getMetaData();
 
             while (result.next()) {
                 Agenda tmp = new Agenda(
                         result.getInt("id_agenda"),
-                        result.getInt("partido_id"),
+                        new Partido(result.getInt("partido_id_partido"), new Equipo_futbol(
+                            result.getInt("club_id_local"), result.getString("nombre_local")
+                        ), new Equipo_futbol(
+                            result.getInt("club_id_rival"), result.getString("nombre_rival")
+                        )) ,
                         result.getDate("fecha_partido"),
-                        result.getString("equipo_local"),
-                        result.getTime("lugar_partido"),
+                        result.getString("lugar_partido"),
+                        result.getTime("hora_partido"),
                         result.getString("estado"));
 
                 listaAgenda.add(tmp);
@@ -109,13 +144,14 @@ public class Controlador_agenda {
 
             return listaAgenda;
         } catch (SQLException e) {
-            System.out.println("Error en listar las actas partido :" + e.getMessage());
+            System.out.println("Error en listar las agendas :" + e.getMessage());
             return null;
         }
     }
 
     /**
      * Eliminacion de agenda
+     * 
      * @param id
      * @return
      */
@@ -129,9 +165,8 @@ public class Controlador_agenda {
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
         try {
-            consulta = conector.prepareStatement("call sp (?, ?);");
+            consulta = conector.prepareStatement("call  PR_eliminar_agenda(?);");
             consulta.setInt(1, id);
-            consulta.setString(2, "E");
 
             if (consulta.executeUpdate() > 0) {
                 mensaje = "Agenda eliminada correctamente";

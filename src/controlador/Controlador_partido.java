@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexion.Conexion;
+import modelo.Equipo_futbol;
 import modelo.Partido;
 
 public class Controlador_partido {
@@ -28,14 +29,15 @@ public class Controlador_partido {
 
         try {
 
-            consulta = conexion.prepareStatement("call sp (?, ?, ?)");
+            consulta = conexion.prepareStatement("call PR_insertar_partido (?, ?, ?);");
+            consulta.setInt(1, partido.getClub_local().getId_equipo());
+            consulta.setInt(2, partido.getClub_rival().getId_equipo());
+            consulta.setString(3, "A");
 
-            consulta.setInt(1, partido.getId_club_local());
-            consulta.setInt(2, partido.getId_club_rival());
-            consulta.setString(3, partido.getEstado());
+            ResultSet resultSet = consulta.executeQuery();
 
-            if (consulta.executeUpdate() > 0) {
-                message = "Partido registrada";
+            while(resultSet.next()){
+                message = resultSet.getString("id_partido").toString();
             }
             conexion.close();
 
@@ -61,10 +63,10 @@ public class Controlador_partido {
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
         try {
-            consulta = conector.prepareStatement("call sp (?, ?, ?);");
-            consulta.setInt(1, partido.getId_club_local());
-            consulta.setInt(2, partido.getId_club_rival());
-            consulta.setString(3, partido.getEstado());
+            consulta = conector.prepareStatement("call PR_modificar_partido (?, ?, ?);");
+            consulta.setInt(1, partido.getId_partido());
+            consulta.setInt(2, partido.getClub_local().getId_equipo());
+            consulta.setInt(3, partido.getClub_rival().getId_equipo());
 
             if (consulta.executeUpdate() > 0) {
                 mensaje = "Partido actualizada correctamente";
@@ -87,15 +89,15 @@ public class Controlador_partido {
         Connection conector = Conexion.conectar();
         try {
             Statement consulta = conector.createStatement();
-            ResultSet result = consulta.executeQuery("call sp();");
+            ResultSet result = consulta.executeQuery("call PR_consultar_partido_();");
             // ResultSetMetaData metaData = result.getMetaData();
 
             while (result.next()) {
                 Partido tmp = new Partido(
                         result.getInt("id_Partido"),
-                        result.getInt("club_id_local"),
-                        result.getInt("club_id_rival"),
-                        result.getString("estado"));
+                        new Equipo_futbol(result.getInt("club_id_local")),
+                        new Equipo_futbol(result.getInt("club_id_rival"))
+                        );
 
                 listaPartido.add(tmp);
             }
@@ -125,9 +127,8 @@ public class Controlador_partido {
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
         try {
-            consulta = conector.prepareStatement("call eliminar_acta_partido (?, ?);");
+            consulta = conector.prepareStatement("call PR_eliminar_partido (?);");
             consulta.setInt(1, id);
-            consulta.setString(2, "E");
 
             if (consulta.executeUpdate() > 0) {
                 mensaje = "Partido eliminada correctamente";
