@@ -179,6 +179,7 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         text_box_lugar_partido.setText("");
         combo_box_equipo_local.setSelectedIndex(0);
         combo_box_equipo_rival.setSelectedIndex(0);
+        fecha_partido.setCalendar(null);
     }
 
     

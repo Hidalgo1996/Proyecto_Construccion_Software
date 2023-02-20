@@ -119,7 +119,7 @@ public class Inter_asistencia extends javax.swing.JInternalFrame {
     }
 
     private void guardarAsistencia() {
-        if (table_asistencia.getRowCount() > -1) {
+        if (table_asistencia.getRowCount() > 0) {
 
             int confirmacion = JOptionPane.showConfirmDialog(null, "Esta seguro de guardar sus asistencias?",
                     "Advertencia",
@@ -151,7 +151,7 @@ public class Inter_asistencia extends javax.swing.JInternalFrame {
         table_asistencia.updateUI();
         try {
             if (Controlador_sorteo.listarAsistenciasPartidos(UsuarioCache.getUsuarioCache().getId_usuario())
-                    .size() > -1) {
+                    .size() > 0) {
                 for (Sorteo s : Controlador_sorteo
                         .listarAsistenciasPartidos(UsuarioCache.getUsuarioCache().getId_usuario())) {
                     i = i + 1;
@@ -179,7 +179,7 @@ public class Inter_asistencia extends javax.swing.JInternalFrame {
         modeloAsistida.getDataVector().removeAllElements();
         table_asistencia_guardas.updateUI();
         try {
-            if (Controlador_asistencia.listarAsistencias(UsuarioCache.getUsuarioCache().getId_usuario()).size() > -1) {
+            if (Controlador_asistencia.listarAsistencias(UsuarioCache.getUsuarioCache().getId_usuario()).size() > 0) {
                 for (Asistencia a : Controlador_asistencia
                         .listarAsistencias(UsuarioCache.getUsuarioCache().getId_usuario())) {
                     i = i + 1;

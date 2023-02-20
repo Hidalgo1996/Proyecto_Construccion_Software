@@ -32,7 +32,7 @@ public class Controlador_equipo {
             consulta.setString(3, "A");
 
             if (consulta.executeUpdate() > 0) {
-                message = "equipo registrado";
+                message = "Equipo registrado correctamente!";
             }
             conexion.close();
 
@@ -49,7 +49,7 @@ public class Controlador_equipo {
      * Actualizacion de registro equipo
      * 
      * @param equipo
-     * @return Mensaje
+     * @return String mensaje
      */
     public String actualizarEquipo(Equipo_futbol equipo) {
 
@@ -64,7 +64,7 @@ public class Controlador_equipo {
             consulta.setString(3, equipo.getDirector());
 
             if (consulta.executeUpdate() > 0) {
-                mensaje = "equipo actualizada correctamente";
+                mensaje = "Equipo actualizado correctamente";
             }
             conector.close();
             return mensaje;
@@ -111,7 +111,7 @@ public class Controlador_equipo {
      * Eliminacion de equipo
      * 
      * @param id
-     * @return
+     * @return String mensaje
      */
     public String eliminarEquipo(Integer id) {
         String mensaje = "";
@@ -127,7 +127,7 @@ public class Controlador_equipo {
             consulta.setInt(1, id);
 
             if (consulta.executeUpdate() > 0) {
-                mensaje = "equipo eliminado correctamente";
+                mensaje = "Equipo eliminado correctamente";
             }
 
             conector.close();

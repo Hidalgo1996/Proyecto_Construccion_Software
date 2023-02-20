@@ -100,6 +100,11 @@ IF NOT EXISTS arbitro
 
 ALTER TABLE arbitro AUTO_INCREMENT = 300;
 
+ALTER TABLE ARBITRO ADD COLUMN ROL_ID_ROL INT;
+
+SET SQL_SAFE_UPDATES = 0;
+update arbitro set rol_id_rol = 1 where rol_id_rol is null;
+SET SQL_SAFE_UPDATES = 1;
 -- -----------------------------------------------------
 -- TABLA CLUB
 -- VALORES DE ID PREDETERMINADOS EN 400
@@ -497,10 +502,10 @@ CREATE PROCEDURE PR_insertar_arbitro(
 BEGIN
     INSERT INTO arbitro
         (categoria, nombre, apellido, email, nombre_usuario, contrasenia, edad, nacionalidad, cantidad_partidos,
-        create_at, delete_at, updated_at, estado)
+        create_at, delete_at, updated_at, estado, rol_id_rol)
     VALUES
         (xCategoria, xNombre, xApellido, xEmail, xNombre_usuario, xContrasenia, xEdad, xNacionalidad, xCantidad_partidos,
-            curdate(), NULL, NULL, xEstado);
+            curdate(), NULL, NULL, xEstado, 1);
 END
 $$
 DELIMITER ;
@@ -1284,9 +1289,9 @@ BEGIN
     
     if not exists (select * from usuario where nombre_usuario = xUsuario and contrasenia = xContrasenia)
     then
-		select id_arbitro as id, nombre_usuario, email from arbitro where nombre_usuario = xUsuario and contrasenia = xContrasenia;
+		select a.id_arbitro as id, a.nombre_usuario, a.email, a.rol_id_rol as id_rol, r.nombre_rol from arbitro a inner join rol r on r.id_rol = a.rol_id_rol where nombre_usuario = xUsuario and contrasenia = xContrasenia;
     else
-		select id_usuario as id, nombre_usuario, email from usuario where nombre_usuario = xUsuario and contrasenia = xContrasenia;
+		select u.id_usuario as id, u.nombre_usuario, u.email, u.rol_id_rol as id_rol, r.nombre_rol from usuario u inner join rol r on r.id_rol = u.rol_id_rol where nombre_usuario = xUsuario and contrasenia = xContrasenia;
     end if;
     
 END

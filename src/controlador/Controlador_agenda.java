@@ -36,7 +36,7 @@ public class Controlador_agenda {
             consulta.setInt(5, agenda.getPartido_id().getId_partido());
 
             if (consulta.executeUpdate() > 0) {
-                message = "Agenda registrada";
+                message = "Agenda registrada correctamente";
             }
             conexion.close();
 
@@ -118,7 +118,7 @@ public class Controlador_agenda {
      * Eliminacion de agenda
      * 
      * @param id
-     * @return
+     * @return String mensaje
      */
     public String eliminarAgenda(Integer id) {
         String mensaje = "";

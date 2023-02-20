@@ -51,6 +51,7 @@ public class Controlador_usuario {
                 UsuarioCache.getUsuarioCache().setId_usuario(resultado.getInt("id"));
                 UsuarioCache.getUsuarioCache().setNombre_usuario(resultado.getString("nombre_usuario"));
                 UsuarioCache.getUsuarioCache().setEmail(resultado.getString("email"));
+                UsuarioCache.getUsuarioCache().setId_rol(resultado.getInt("id_rol"));
                 respuesta = true;
             }
 
