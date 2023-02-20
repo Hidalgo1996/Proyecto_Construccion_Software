@@ -48,8 +48,7 @@ public class Controlador_usuario {
             // la variable nombre_usuario y contraseña coinciden, entonces
             // la variable respuesta cambia a true.
             while (resultado.next()) {
-                /* usuario.setNombre_usuario(resultado.getString("nombre_usuario"));
-                usuario.setEmail(resultado.getString("email")); */
+                UsuarioCache.getUsuarioCache().setId_usuario(resultado.getInt("id"));
                 UsuarioCache.getUsuarioCache().setNombre_usuario(resultado.getString("nombre_usuario"));
                 UsuarioCache.getUsuarioCache().setEmail(resultado.getString("email"));
                 respuesta = true;

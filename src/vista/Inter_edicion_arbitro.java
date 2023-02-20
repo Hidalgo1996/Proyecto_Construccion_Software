@@ -62,10 +62,9 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         cargarListadoArbitros();
     }
 
-    
     /**
      * Ingreso de un nuevo arbitro a la base de datos
-     * 
+     *
      * @param void
      * @return void
      */
@@ -88,25 +87,23 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
             nuevoArbitro.setCategoria(combo_box_categoria_arbitro.getSelectedItem().toString());
             if (id == 0) {
                 mensaje = controlador_arbitro.guardarArbitro(nuevoArbitro);
-
+                limpiarTexts();
             } else {
                 nuevoArbitro.setId_usuario(id);
                 mensaje = controlador_arbitro.actualizarArbitro(nuevoArbitro);
                 id = 0;
+                limpiarTexts();
             }
 
             JOptionPane.showMessageDialog(null, mensaje, "Info", JOptionPane.INFORMATION_MESSAGE);
-
             cargarListadoArbitros();
-            limpiarTexts();
         }
 
     }
 
-    
     /**
      * Limpia las cajas de texto una vez ingresado un nuevo arbitro.
-     * 
+     *
      * @param void
      * @return void
      */
@@ -122,12 +119,10 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         combo_box_categoria_arbitro.setSelectedIndex(0);
     }
 
-    
-    
     /**
-     * Edicion de algun registro en especifico de
-     * un arbitro que ya ha sido ingresado en base de datos.
-     * 
+     * Edicion de algun registro en especifico de un arbitro que ya ha sido
+     * ingresado en base de datos.
+     *
      * @param void
      * @return void
      */
@@ -149,7 +144,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
 
             for (int i = 0; i <= combo_box_categoria_arbitro.getItemCount(); i++) {
                 String item = combo_box_categoria_arbitro.getItemAt(i);
-                if ( table_arbitro.getModel().getValueAt(fila, 9).toString().equals(item) ) {
+                if (table_arbitro.getModel().getValueAt(fila, 9).toString().equals(item)) {
                     combo_box_categoria_arbitro.setSelectedIndex(i);
                     break;
                 }
@@ -158,12 +153,10 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
 
     }
 
-    
-    
     /**
-     * Borrado logico de un arbitro ingresado en la base de datos
-     * Lo pasa de activo a inactivo.
-     * 
+     * Borrado logico de un arbitro ingresado en la base de datos Lo pasa de
+     * activo a inactivo.
+     *
      * @param void
      * @return void
      */
@@ -191,12 +184,10 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         }
     }
 
-    
-    
     /**
-     * Carga todo el listado de arbitros de la base de datos
-     * y lo muestra en la ventana actual.
-     * 
+     * Carga todo el listado de arbitros de la base de datos y lo muestra en la
+     * ventana actual.
+     *
      * @param void
      * @return void
      */
@@ -207,19 +198,17 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         table_arbitro.updateUI();
         for (Arbitro e : controlador_arbitro.listarArbitros()) {
             i = i + 1;
-            modelo.addRow(new Object[] { i,
-                    e.getId_usuario(), e.getNombre(), e.getApellido(),
-                    e.getNombre_usuario(), e.getEmail(), e.getContrasenia(),
-                    e.getEdad(), e.getCantidad_partidos(), e.getCategoria() });
+            modelo.addRow(new Object[]{i,
+                e.getId_usuario(), e.getNombre(), e.getApellido(),
+                e.getNombre_usuario(), e.getEmail(), e.getContrasenia(),
+                e.getEdad(), e.getCantidad_partidos(), e.getCategoria()});
         }
     }
 
-    
     /**
-     * Carga 3 titulos de columna de la tabla
-     * arbitros especificada en este metodo dentro
-     * de un comboBox.
-     * 
+     * Carga 3 titulos de columna de la tabla arbitros especificada en este
+     * metodo dentro de un comboBox.
+     *
      * @param void
      * @return void
      */
@@ -229,12 +218,10 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         combo_box_buscar_arbitro.addItem("Categoria");
     }
 
-    
     /**
-     * Carga 4 titulos de columna de la tabla
-     * arbitros especificada en este metodo dentro
-     * de un comboBox.
-     * 
+     * Carga 4 titulos de columna de la tabla arbitros especificada en este
+     * metodo dentro de un comboBox.
+     *
      * @param void
      * @return void
      */
@@ -245,12 +232,10 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         combo_box_categoria_arbitro.addItem("Infantil");
     }
 
-    
-    
     /**
-     *Filtra datos especificos de la tabla arbitros
-     * en base al tipo de busqueda que se hace.
-     * 
+     * Filtra datos especificos de la tabla arbitros en base al tipo de busqueda
+     * que se hace.
+     *
      * @param buscarPor, texto
      * @return void
      */
@@ -293,10 +278,10 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         table_arbitro.updateUI();
         for (Arbitro e : listaFiltrada) {
             i = i + 1;
-            modelo.addRow(new Object[] { i,
-                    e.getId_usuario(), e.getNombre(), e.getApellido(),
-                    e.getNombre_usuario(), e.getEmail(), e.getContrasenia(),
-                    e.getEdad(), e.getCantidad_partidos(), e.getCategoria() });
+            modelo.addRow(new Object[]{i,
+                e.getId_usuario(), e.getNombre(), e.getApellido(),
+                e.getNombre_usuario(), e.getEmail(), e.getContrasenia(),
+                e.getEdad(), e.getCantidad_partidos(), e.getCategoria()});
         }
     }
 
@@ -545,9 +530,9 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void boton_editar_arbitroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editar_arbitroActionPerformed
-      editarArbitro();
+        editarArbitro();
     }//GEN-LAST:event_boton_editar_arbitroActionPerformed
 
     private void boton_borrar_arbitroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_borrar_arbitroActionPerformed
@@ -555,7 +540,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_boton_borrar_arbitroActionPerformed
 
     private void boton_guardar_arbitroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_guardar_arbitroActionPerformed
-       guardarArbitro();
+        guardarArbitro();
     }//GEN-LAST:event_boton_guardar_arbitroActionPerformed
 
     private void boton_limpiar_arbitroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_limpiar_arbitroActionPerformed
@@ -563,13 +548,13 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_boton_limpiar_arbitroActionPerformed
 
     private void boton_buscar_arbitroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_buscar_arbitroActionPerformed
-       if(text_field_buscar_arbitro.getText().isEmpty()){
-           cargarListadoArbitros();
-       }else{
-           String buscarPor = combo_box_buscar_arbitro.getSelectedItem().toString();
-           String texto = text_field_buscar_arbitro.getText().trim();
-           flitrarTabla(buscarPor, texto);
-       }
+        if (text_field_buscar_arbitro.getText().isEmpty()) {
+            cargarListadoArbitros();
+        } else {
+            String buscarPor = combo_box_buscar_arbitro.getSelectedItem().toString();
+            String texto = text_field_buscar_arbitro.getText().trim();
+            flitrarTabla(buscarPor, texto);
+        }
     }//GEN-LAST:event_boton_buscar_arbitroActionPerformed
 
     private void text_field_nombre_arbitroActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_text_field_nombre_arbitroActionPerformed

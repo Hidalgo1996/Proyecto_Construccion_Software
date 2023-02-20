@@ -41,7 +41,7 @@ public class Controlador_rol_arbitro {
 
             return message;
         } catch (SQLException e) {
-            message = "Error en registro arbitro";
+            message = "Error en registro arbitro " + e.getMessage();
             System.out.println("Error en registro arbitro: " + e.getMessage());
             return message;
         }
@@ -89,7 +89,7 @@ public class Controlador_rol_arbitro {
      * 
      * @return Listado de arbitros
      */
-    public List<Arbitro> listarArbitros() {
+    public static List<Arbitro> listarArbitros() {
 
         List<Arbitro> listaArbitros = new ArrayList<Arbitro>();
         Connection conector = Conexion.conectar();
@@ -156,8 +156,5 @@ public class Controlador_rol_arbitro {
             return mensaje;
         }
     }
-
-    
-    
     
 }

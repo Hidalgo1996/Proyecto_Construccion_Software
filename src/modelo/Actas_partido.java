@@ -12,7 +12,8 @@ public class Actas_partido {
     private String hora_fin_partido;
     private String nombre_equipo_rival;
     private String nombre_equipo_local;
-    private Time duracion_partido;
+    //private Time duracion_partido;
+    private String duracion_partido;
     private int goles_equipo_local;
     private int goles_equipo_rival;
     protected Partido partido;
@@ -23,7 +24,7 @@ public class Actas_partido {
     }
 
     public Actas_partido(int id_acta_partido, Date fecha_emision, String hora_inicio_partido, String hora_fin_partido,
-            String nombre_equipo_rival, String nombre_equipo_local, Time duracion_partido, int goles_equipo_local,
+            String nombre_equipo_rival, String nombre_equipo_local, String duracion_partido, int goles_equipo_local,
             int goles_equipo_rival, Partido partido, String equipo_ganador) {
         this.id_acta_partido = id_acta_partido;
         this.fecha_emision = fecha_emision;
@@ -78,11 +79,11 @@ public class Actas_partido {
         this.nombre_equipo_local = nombre_equipo_local;
     }
 
-    public Time getDuracion_partido() {
+    public String getDuracion_partido() {
         return duracion_partido;
     }
 
-    public void setDuracion_partido(Time duracion_partido) {
+    public void setDuracion_partido(String duracion_partido) {
         this.duracion_partido = duracion_partido;
     }
 

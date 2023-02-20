@@ -11,6 +11,7 @@ import java.util.List;
 import conexion.Conexion;
 import modelo.Equipo_futbol;
 import modelo.Partido;
+import modelo.TipoBusqueda;
 
 public class Controlador_partido {
 
@@ -36,7 +37,7 @@ public class Controlador_partido {
 
             ResultSet resultSet = consulta.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 message = resultSet.getString("id_partido").toString();
             }
             conexion.close();
@@ -96,8 +97,7 @@ public class Controlador_partido {
                 Partido tmp = new Partido(
                         result.getInt("id_Partido"),
                         new Equipo_futbol(result.getInt("club_id_local")),
-                        new Equipo_futbol(result.getInt("club_id_rival"))
-                        );
+                        new Equipo_futbol(result.getInt("club_id_rival")));
 
                 listaPartido.add(tmp);
             }
@@ -144,4 +144,36 @@ public class Controlador_partido {
         }
     }
 
+    public static List<Partido> cargarComboPartido(TipoBusqueda tipo) {
+
+        List<Partido> listaComboPartido = new ArrayList<Partido>();
+
+        Connection conector = Conexion.conectar();
+
+        try {
+            Statement consulta = conector.createStatement();
+            ResultSet result = null;
+            if (tipo.equals(TipoBusqueda.ACTA)) {
+                result = consulta.executeQuery("call pr_combo_partidos_acta();");
+            } else if (tipo.equals(TipoBusqueda.SORTEO)) {
+                result = consulta.executeQuery("call pr_combo_partidos_sorteo();");
+            }
+
+            while (result.next()) {
+
+                listaComboPartido.add(new Partido(
+                        result.getInt("partido_id_partido"),
+                        new Equipo_futbol(result.getInt("club_id_local"), result.getString("equipo_local")),
+                        new Equipo_futbol(result.getInt("club_id_rival"), result.getString("equipo_rival"))));
+            }
+
+            conector.close();
+
+            return listaComboPartido;
+        } catch (SQLException e) {
+
+            System.out.println("Error en listar combo partidos ");
+            return null;
+        }
+    }
 }

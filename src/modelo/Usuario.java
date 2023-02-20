@@ -13,6 +13,15 @@ public class Usuario {
 
     public Usuario() {
     }
+    
+
+    public Usuario(Integer id_usuario, String nombre, String apellido) {
+        this.id_usuario = id_usuario;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+
+
 
     public Usuario(Integer id_usuario, String nombre, String apellido, String nombre_usuario, String contrasenia,
             String email, String estado, Integer id_rol) {

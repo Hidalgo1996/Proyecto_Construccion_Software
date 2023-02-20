@@ -148,7 +148,7 @@ ALTER TABLE partido ADD CONSTRAINT fk_partido_club1
 ALTER TABLE partido ADD CONSTRAINT fk_partido_club2
     FOREIGN KEY (club_id_rival)
     REFERENCES club (id_club);
-
+ALTER TABLE PARTIDO ADD COLUMN PARTIDO_DESCRIPCION VARCHAR(100);
 -- -----------------------------------------------------
 -- TABLA SORTEO
 -- VALORES DE ID PREDETERMINADOS EN 600
@@ -212,6 +212,8 @@ ALTER TABLE agenda ADD CONSTRAINT fk_agenda_partido1
     FOREIGN KEY (partido_id_partido)
     REFERENCES partido (id_partido);
 
+ALTER TABLE AGENDA ADD COLUMN SORTEADO VARCHAR(2);
+
 -- -----------------------------------------------------
 -- TABLA ACTA_PARTIDO
 -- VALORES DE ID PREDETERMINADOS EN 800
@@ -225,9 +227,9 @@ IF NOT EXISTS acta_partido
   hora_inicio_partido TIME NOT NULL,
   hora_fin_partido TIME NOT NULL,
   equipo_local VARCHAR
-(45) NOT NULL,   -- tal vez deberia omitirse ¿?
+(45)  NULL,   -- tal vez deberia omitirse ¿?
   equipo_rival VARCHAR
-(45) NOT NULL,   -- tal vez deberia omitirse ¿?
+(45)  NULL,   -- tal vez deberia omitirse ¿?
   duracion_partido TIME NOT NULL,
   num_gol_equipo_local INT NOT NULL,
   num_gol_equipo_rival INT NOT NULL,
@@ -683,11 +685,14 @@ CREATE PROCEDURE PR_insertar_partido(
 BEGIN
 ## Modificado por Flavio
 ## Se agrega selec para retorno de id
-    INSERT INTO partido
-        (club_id_local, club_id_rival, ESTADO)
-    VALUES
-        (xClub_id_local, xClub_id_rival, xESTADO);
-
+    declare nombre_local varchar(50);
+    declare nombre_rival varchar(50);
+    set nombre_local := (select nombre from club where id_club = xClub_id_local and estado <> 'E');
+    set nombre_rival := (select nombre from club where id_club = xClub_id_rival and estado <> 'E');
+    
+    INSERT INTO partido (club_id_local, club_id_rival, ESTADO, partido_descripcion)
+    VALUES (xClub_id_local, xClub_id_rival, xESTADO , concat(nombre_local , ' VS ' , nombre_rival));
+    
     select max(id_partido) as id_partido from partido;
 END
 $$
@@ -758,20 +763,22 @@ DROP PROCEDURE IF EXISTS PR_insertar_sorteo;
 DELIMITER $$
 CREATE PROCEDURE PR_insertar_sorteo(
     IN xFecha_sorteo DATE,
-    IN xEstado VARCHAR
-(2),
-    IN xArbitro_id_arbitro INT,
     IN xPartido_id_partido INT,
-    IN xArbitro_id_sustituto INT
+    IN xArbitro_id_arbitro INT,
+    IN xArbitro_id_sustituto INT,
+    IN xEstado VARCHAR(2)
     )
 BEGIN
     INSERT INTO sorteo
         (fecha_sorteo, create_at, delete_at, update_at, estado, arbitro_id_arbitro, partido_id_partido, arbitro_id_sustituto)
     VALUES
         (xFecha_sorteo, curdate(), NULL, NULL, xEstado, xArbitro_id_arbitro, xPartido_id_partido, xArbitro_id_sustituto);
+
+    UPDATE AGENDA SET SORTEADO ='S' WHERE PARTIDO_ID_PARTIDO = xPartido_id_partido;
 END
 $$
 DELIMITER ;
+
 CALL PR_insertar_sorteo
 ('2023-01-10', 'A', 300, 500, 301);
 -- 600
@@ -807,9 +814,9 @@ DELIMITER $$
 CREATE PROCEDURE PR_modificar_sorteo(
     IN xId_sorteo INT,
     IN xFecha_sorteo DATE,
+    IN xPartido_id_partido INT,
     IN xArbitro_id_arbitro INT,
-    IN xArbitro_id_sustituto INT,
-    IN xPartido_id_partido INT
+    IN xArbitro_id_sustituto INT
     )
 BEGIN
     UPDATE sorteo SET fecha_sorteo = xFecha_sorteo, update_at = curdate(), arbitro_id_arbitro = xArbitro_id_arbitro, 
@@ -933,7 +940,6 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS PR_insertar_acta_partido;
 DELIMITER $$
 CREATE PROCEDURE PR_insertar_acta_partido(
-    IN xCodigo_acta INT,
     IN xFecha_emision_acta DATE,
     IN xHora_inicio_partido TIME,
     IN xHora_fin_partido TIME,
@@ -951,6 +957,14 @@ CREATE PROCEDURE PR_insertar_acta_partido(
     IN xPartido_id_partido INT
     )
 BEGIN
+	declare xCodigo_acta int;
+    set xCodigo_acta := (select codigo_acta from acta_partido);
+    if xCodigo_acta is null or xCodigo_acta = 0 
+    then
+		set xCodigo_acta := 1;
+    else
+		set xCodigo_acta := (select (max(codigo_acta)+1) from acta_partido);
+    end if;
     INSERT INTO acta_partido
         (codigo_acta, fecha_emision_acta, hora_inicio_partido, hora_fin_partido, equipo_local, equipo_rival, duracion_partido,
         num_gol_equipo_local, num_gol_equipo_rival, equipo_ganador, create_at, delete_at, update_at, estado, partido_id_partido)
@@ -998,7 +1012,6 @@ DROP PROCEDURE IF EXISTS PR_modificar_acta_partido;
 DELIMITER $$
 CREATE PROCEDURE PR_modificar_acta_partido(
     IN xId_acta_partido INT,
-    IN xCodigo_acta INT,
     IN xFecha_emision_acta DATE,
     IN xHora_inicio_partido TIME,
     IN xHora_fin_partido TIME,
@@ -1010,14 +1023,13 @@ CREATE PROCEDURE PR_modificar_acta_partido(
     IN xNum_gol_equipo_local INT,
     IN xNum_gol_equipo_rival INT,
     IN xEquipo_ganador VARCHAR
-(45),
-    IN xPartido_id_partido INT
+(45)
     )
 BEGIN
     UPDATE acta_partido SET codigo_acta = xCodigo_acta, fecha_emision_acta = xFecha_emision_acta, hora_inicio_partido = xHora_inicio_partido, 
     hora_fin_partido = xHora_fin_partido, equipo_local = xEquipo_local, equipo_rival = xEquipo_rival, duracion_partido = xDuracion_partido, 
     num_gol_equipo_local = xNum_gol_equipo_local, num_gol_equipo_rival = xNum_gol_equipo_rival, equipo_ganador = xEquipo_ganador, 
-    update_at = curdate(), partido_id_partido = xPartido_id_partido
+    update_at = curdate()
     WHERE id_acta_partido = xId_acta_partido;
 END
 $$
@@ -1138,13 +1150,13 @@ END
 $$
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS pr_combo_partidos_2;
+DROP PROCEDURE IF EXISTS pr_combo_partidos_acta;
 DELIMITER $$
-CREATE PROCEDURE pr_combo_partidos_2()
+CREATE PROCEDURE pr_combo_partidos_acta()
 BEGIN
 ## Modificado por Flavio
 ## Se cambia seleccion para que ni incluya partidos que ya tienen acta 
-    SELECT 
+   SELECT 
     p.id_partido,
     p.club_id_local,
     p.club_id_rival,
@@ -1156,18 +1168,49 @@ FROM
     club l ON p.club_id_local = l.id_club
         INNER JOIN
     club r ON p.club_id_rival = r.id_club
-    left join acta_partido ac on 
-    ac.partido_id_partido = p.id_partido where ac.id_acta_partido is null and p.estado <> 'E';
+		INNER JOIN
+	SORTEO S ON S.partido_id_partido = P.ID_PARTIDO
+		left join 
+	acta_partido ac on ac.partido_id_partido = p.id_partido 
+    where ac.id_acta_partido is null and p.estado <> 'E' AND S.PARTIDO_ID_PARTIDO <> P.ID_PARTIDO;
 END
 $$
 DELIMITER ;
 
--- pr loginh
-DROP PROCEDURE IF EXISTS pr_login;
+
+DROP PROCEDURE IF EXISTS pr_combo_partidos_sorteo;
 DELIMITER $$
-CREATE PROCEDURE pr_login(
-in xUsuario varchar(50),
-in xContrasenia varchar(50)
+CREATE PROCEDURE pr_combo_partidos_sorteo()
+BEGIN
+##
+## Enlista los partidos que no tienen sorteo N = no tienen , S = si tienen
+    SELECT 
+    a.partido_id_partido,
+    p.club_id_local,
+    p.club_id_rival,
+    l.nombre AS equipo_local,
+    r.nombre AS equipo_rival
+FROM
+	PARTIDO P
+		INNER JOIN 
+    agenda a 
+		ON
+	A.partido_id_partido = P.ID_PARTIDO
+        INNER JOIN
+    club l ON p.club_id_local = l.id_club
+        INNER JOIN
+    club r ON p.club_id_rival = r.id_club
+    where A.sorteado <> 'S' or a.sorteado is null AND A.ESTADO <> 'E';
+END
+$$
+DELIMITER ;
+
+
+-- pr loginh
+DROP PROCEDURE IF EXISTS pr_consultar_arbitros_partidos;
+DELIMITER $$
+CREATE PROCEDURE pr_consultar_arbitros_partidos(
+IN xUsuario varchar(50)
 )
 BEGIN
     
@@ -1181,3 +1224,74 @@ BEGIN
 END
 $$
 DELIMITER ;
+-- consulta los partidos a los que pertenece un arbitro
+DROP PROCEDURE IF EXISTS pr_consultar_arbitros_partidos;
+DELIMITER $$
+CREATE PROCEDURE pr_consultar_arbitros_partidos(
+IN xId_arbitro INT
+)
+BEGIN
+	SELECT
+	A.PARTIDO_ID_PARTIDO as id_partido,
+    A.LUGAR_PARTIDO,
+    A.FECHA_PARTIDO,
+    A.HORA_PARTIDO,
+    p.partido_descripcion AS PARTIDO,
+    S.id_sorteo,
+    S.ARBITRO_ID_ARBITRO AS ID_ARBITRO,
+    S.ARBITRO_ID_SUSTITUTO AS ID_ARBITRO_SUSTITUTO
+FROM
+	PARTIDO P
+		INNER JOIN
+	SORTEO S ON
+    S.PARTIDO_ID_PARTIDO = P.ID_PARTIDO
+		INNER JOIN 
+	AGENDA A ON
+	A.PARTIDO_ID_PARTIDO = s.PARTIDO_ID_PARTIDO
+    WHERE A.SORTEADO = 'S' AND  (S.ARBITRO_ID_ARBITRO = xId_arbitro) AND A.ESTADO <> 'E';    
+    
+END
+$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_consultar_asistencia_arbitro;
+DELIMITER $$
+CREATE PROCEDURE pr_consultar_asistencia_arbitro(
+IN xId_arbitro INT
+)
+BEGIN
+	SELECT
+    A.ID_ASISTENCIA,
+    A.PARTIDO,
+    A.LUGAR,
+    A.FECHA_ENCUENTRO AS FECHA,
+    A.ASISTENCIA
+	FROM
+	ASISTENCIA A
+    WHERE A.ARBITRO_ID_ARBITRO = xId_arbitro;
+END
+$$
+DELIMITER ;
+
+-- pr login
+DROP PROCEDURE IF EXISTS pr_login;
+DELIMITER $$
+CREATE PROCEDURE pr_login(
+in xUsuario varchar(50),
+in xContrasenia varchar(50)
+)
+BEGIN
+    
+    if not exists (select * from usuario where nombre_usuario = xUsuario and contrasenia = xContrasenia)
+    then
+		select id_arbitro as id, nombre_usuario, email from arbitro where nombre_usuario = xUsuario and contrasenia = xContrasenia;
+    else
+		select id_usuario as id, nombre_usuario, email from usuario where nombre_usuario = xUsuario and contrasenia = xContrasenia;
+    end if;
+    
+END
+$$
+DELIMITER ;
+
+
+

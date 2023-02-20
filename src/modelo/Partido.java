@@ -1,13 +1,25 @@
 package modelo;
-
+/**
+ * Clase Partido
+ */
 public class Partido {
     
     protected Integer id_partido;
     protected Equipo_futbol club_local;
     protected Equipo_futbol club_rival;
     protected String estado;
+    protected String partido_descripcion;
 
     public Partido() {
+    }
+
+    public Partido(Integer id_partido) {
+        this.id_partido = id_partido;
+    }
+
+    public Partido(Integer id_partido, String partido_descripcion) {
+        this.id_partido = id_partido;
+        this.partido_descripcion = partido_descripcion;
     }
 
     public Partido(Integer id_partido, Equipo_futbol club_local, Equipo_futbol club_rival) {
@@ -52,6 +64,14 @@ public class Partido {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getPartido_descripcion() {
+        return partido_descripcion;
+    }
+
+    public void setPartido_descripcion(String partido_descripcion) {
+        this.partido_descripcion = partido_descripcion;
     }
 
     

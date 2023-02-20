@@ -4,6 +4,7 @@
  */
 package vista;
 
+import java.awt.Dimension;
 import javax.swing.JDesktopPane;
 import modelo.UsuarioCache;
 
@@ -12,30 +13,35 @@ import modelo.UsuarioCache;
  * @author Hidalgo
  */
 public class JFMenu_Principal extends javax.swing.JFrame {
+
+    public Dimension dimension;
     public static JDesktopPane JFmenu_principal;
-    
+
     /**
      * Creates new form JFMenu_Principal
      */
     public JFMenu_Principal() {
         initComponents();
-          
-        this.setLocationRelativeTo(null);//centra la ventana
+
+        //this.setLocationRelativeTo();//centra la ventana
         this.setTitle("MENÚ PRINCIPAL - SISTEMA DE GESTIÓN DE ARBITROS");//Me [ermite modificar el titulo de la ventana
-        this.setExtendedState(this.MAXIMIZED_BOTH);//Me muestra la ventana en pantalla completa desde el inicio del programa
+        //this.setExtendedState(this.MAXIMIZED_BOTH);//Me muestra la ventana en pantalla completa desde el inicio del programa
         this.setLayout(null);
-        
+
         // Instancia de JDesktoPane
         JFmenu_principal = new JDesktopPane();
-        int ancho= java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;//Se usa para el alto del panel
-        int alto= java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;//Se usa para el ancho del panel
-        
+        //int ancho= java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;//Se usa para el alto del panel
+        //int alto= java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;//Se usa para el ancho del panel
+
         //Es para indicar al panel donde empieza y donde termina
         //El -110 es el tamano de la barra de tareas.
-        this.JFmenu_principal.setBounds(0, 0, ancho,(alto-60));
-        
+        //this.JFmenu_principal.setBounds(0, 0, ancho, (alto - 60));
+        dimension = super.getToolkit().getScreenSize();
+        super.setSize(dimension);
+        JFmenu_principal.setSize(dimension);
         this.add(JFmenu_principal);//Anado el JDesktopPane al panel principal.
-        
+
+        //
         lblUsuario.setText(UsuarioCache.getUsuarioCache().getNombre_usuario());
     }
 
@@ -48,9 +54,6 @@ public class JFMenu_Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
         lblUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -66,12 +69,6 @@ public class JFMenu_Principal extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-
-        jMenu3.setText("File");
-        jMenuBar2.add(jMenu3);
-
-        jMenu4.setText("Edit");
-        jMenuBar2.add(jMenu4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -212,16 +209,16 @@ public class JFMenu_Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(673, Short.MAX_VALUE)
-                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(756, Short.MAX_VALUE)
+                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(386, Short.MAX_VALUE))
+                .addContainerGap(468, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,16 +237,16 @@ public class JFMenu_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-      Inter_fecha_calendario ventanaCalendario = new Inter_fecha_calendario();
-      JFmenu_principal.add(ventanaCalendario);
-      ventanaCalendario.setVisible(true);
+        Inter_fecha_calendario ventanaCalendario = new Inter_fecha_calendario();
+        JFmenu_principal.add(ventanaCalendario);
+        ventanaCalendario.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       Inter_asistencia ventanaAsistencia = new Inter_asistencia();
+        Inter_asistencia ventanaAsistencia = new Inter_asistencia();
         JFmenu_principal.add(ventanaAsistencia);
         ventanaAsistencia.setVisible(true);
-       
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -259,13 +256,15 @@ public class JFMenu_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-     Inter_ingreso_clubs ventanaClub = new Inter_ingreso_clubs();
-     JFmenu_principal.add(ventanaClub);
-     ventanaClub.setVisible(true);
+        Inter_ingreso_clubs ventanaClub = new Inter_ingreso_clubs();
+        JFmenu_principal.add(ventanaClub);
+        ventanaClub.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
+        Inter_sorteo_arbitros ventanaSorteo = new Inter_sorteo_arbitros();
+        JFmenu_principal.add(ventanaSorteo);
+        ventanaSorteo.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -312,13 +311,10 @@ public class JFMenu_Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;

@@ -11,18 +11,26 @@ public class Sorteo {
     protected Integer arbitro_id_sustituto;
     protected Integer partido_id;
     protected String estado;
+
+    protected Agenda agenda;
     
     public Sorteo() {
     }
     
-    public Sorteo(Integer id_sorteo, Date fecha_sorteo, Integer arbitro_id, Integer arbitro_id_sustituto,
-            Integer partido_id, String estado) {
+    public Sorteo(Integer id_sorteo, Date fecha_sorteo, Integer partido_id, Integer arbitro_id, Integer arbitro_id_sustituto, String estado) {
         this.id_sorteo = id_sorteo;
         this.fecha_sorteo = fecha_sorteo;
+        this.partido_id = partido_id;
         this.arbitro_id = arbitro_id;
         this.arbitro_id_sustituto = arbitro_id_sustituto;
-        this.partido_id = partido_id;
         this.estado = estado;
+    }
+
+    public Sorteo(Integer id_sorteo, Agenda agenda, Integer arbitro_id, Integer arbitro_id_sustituto) {
+        this.id_sorteo = id_sorteo;
+        this.agenda = agenda;
+        this.arbitro_id = arbitro_id;
+        this.arbitro_id_sustituto = arbitro_id_sustituto;
     }
 
     public Integer getId_sorteo() {
@@ -60,6 +68,14 @@ public class Sorteo {
     }
     public void setPartido_id(Integer partido_id) {
         this.partido_id = partido_id;
+    }
+
+    public Agenda getAgenda() {
+        return agenda;
+    }
+
+    public void setAgenda(Agenda agenda) {
+        this.agenda = agenda;
     }
 
     

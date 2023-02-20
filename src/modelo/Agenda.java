@@ -26,6 +26,13 @@ public class Agenda {
         this.estado = estado;
     }
 
+    public Agenda(Partido partido_id, Date fecha_partido, String lugar_partido, Time hora_partido) {
+        this.partido_id = partido_id;
+        this.fecha_partido = fecha_partido;
+        this.lugar_partido = lugar_partido;
+        this.hora_partido = hora_partido;
+    }
+
     public Integer getId_agenda() {
         return id_agenda;
     }

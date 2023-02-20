@@ -81,41 +81,6 @@ public class Controlador_agenda {
         }
     }
 
-    /**
-     * 
-     * @return Listado de Agendas
-     */
-    /*
-     * public List<Agenda> listarAgendas() {
-     * List<Agenda> listaAgenda = new ArrayList<Agenda>();
-     * Connection conector = Conexion.conectar();
-     * try {
-     * Statement consulta = conector.createStatement();
-     * ResultSet result = consulta.executeQuery("call PR_consultar_agenda_();");
-     * // ResultSetMetaData metaData = result.getMetaData();
-     * 
-     * while (result.next()) {
-     * Agenda tmp = new Agenda(
-     * result.getInt("id_agenda"),
-     * result.getInt("partido_id_partido"),
-     * result.getDate("fecha_partido"),
-     * result.getString("lugar_partido"),
-     * result.getTime("hora_partido"),
-     * result.getString("estado"));
-     * 
-     * listaAgenda.add(tmp);
-     * }
-     * 
-     * conector.close();
-     * 
-     * return listaAgenda;
-     * } catch (SQLException e) {
-     * System.out.println("Error en listar las actas partido :" + e.getMessage());
-     * return null;
-     * }
-     * }
-     */
-
     public List<Agenda> listarAgendas() {
         List<Agenda> listaAgenda = new ArrayList<Agenda>();
         Connection conector = Conexion.conectar();

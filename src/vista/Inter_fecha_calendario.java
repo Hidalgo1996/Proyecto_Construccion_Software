@@ -16,12 +16,11 @@ import javax.swing.table.DefaultTableModel;
 import controlador.Controlador_agenda;
 import controlador.Controlador_equipo;
 import controlador.Controlador_partido;
-
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import javax.swing.JFormattedTextField;
-import javax.swing.text.DateFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import modelo.Agenda;
@@ -34,6 +33,7 @@ import modelo.Partido;
  */
 public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
 
+    SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
     Controlador_agenda controlador_agenda = new Controlador_agenda();
     DefaultTableModel modelo;
     Integer id = 0;
@@ -43,12 +43,6 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
      */
     public Inter_fecha_calendario() {
         initComponents();
-
-        /*
-         * DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-         * DateFormatter dateFormatter = new DateFormatter(dateFormat);
-         * text_box_fecha_partido.setValue(dateFormatter);
-         */
         formatearText();
 
         modelo = new DefaultTableModel() {
@@ -67,7 +61,6 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         modelo.addColumn("Equipo local");
         modelo.addColumn("Equipo rival");
         table_calendario = new JTable(modelo);
-        // table_calendario.setModel(modelo);
         jScrollPane1.setViewportView(table_calendario);
 
         table_calendario.getColumnModel().getColumn(0).setMaxWidth(20);
@@ -110,9 +103,8 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         } else {
 
             Agenda nuevaAgenda = new Agenda();
-            // ...
             nuevaAgenda.setHora_partido(Time.valueOf(text_box_hora_partido.getValue().toString() + ":00"));
-            nuevaAgenda.setFecha_partido(Date.valueOf(text_box_fecha_partido.getValue().toString()));
+            nuevaAgenda.setFecha_partido(new Date(fecha_partido.getDate().getTime()));
             nuevaAgenda.setLugar_partido(text_box_lugar_partido.getText().trim());
 
             try {
@@ -126,7 +118,6 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
 
             if (id == 0) {
                 mensaje = controlador_agenda.guardarAgenda(nuevaAgenda);
-
             } else {
                 nuevaAgenda.setId_agenda(id);
                 mensaje = controlador_agenda.actualizarAgenda(nuevaAgenda);
@@ -200,26 +191,32 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
      */
     public void editarCalendario() {
         if (table_calendario.getSelectedRow() > -1) {
-            int fila = table_calendario.getSelectedRow();
-            id = (int) (table_calendario.getModel().getValueAt(fila, 1));
-            System.out.println(id);
-            text_box_hora_partido.setValue(table_calendario.getModel().getValueAt(fila, 2).toString());
-            text_box_fecha_partido.setValue(table_calendario.getModel().getValueAt(fila, 3).toString());
-            text_box_lugar_partido.setText(table_calendario.getModel().getValueAt(fila, 4).toString());
-            //
-            for (int i = 0; i <= combo_box_equipo_local.getItemCount(); i++) {
-                String item = combo_box_equipo_local.getItemAt(i);
-                if ( table_calendario.getModel().getValueAt(fila, 5).toString().equals(item) ) {
-                    combo_box_equipo_local.setSelectedIndex(i);
-                    break;
+            try {
+                int fila = table_calendario.getSelectedRow();
+                id = (int) (table_calendario.getModel().getValueAt(fila, 1));
+                System.out.println(id);
+                text_box_hora_partido.setValue(table_calendario.getModel().getValueAt(fila, 2).toString());
+                fecha_partido.setDate(fechaFormato.parse(table_calendario.getModel().getValueAt(fila, 3).toString()));
+                text_box_lugar_partido.setText(table_calendario.getModel().getValueAt(fila, 4).toString());
+                // Obtener id local
+                for (int i = 0; i <= combo_box_equipo_local.getItemCount(); i++) {
+                    String item = combo_box_equipo_local.getItemAt(i);
+                    if ( table_calendario.getModel().getValueAt(fila, 5).toString().equals(item) ) {
+                        combo_box_equipo_local.setSelectedIndex(i);
+                        break;
+                    }
                 }
-            }
-            for (int i = 0; i <= combo_box_equipo_rival.getItemCount(); i++) {
-                String item = combo_box_equipo_rival.getItemAt(i);
-                if ( table_calendario.getModel().getValueAt(fila, 6).toString().equals(item) ) {
-                    combo_box_equipo_rival.setSelectedIndex(i);
-                    break;
+                //Obtener id rival
+                for (int i = 0; i <= combo_box_equipo_rival.getItemCount(); i++) {
+                    String item = combo_box_equipo_rival.getItemAt(i);
+                    if ( table_calendario.getModel().getValueAt(fila, 6).toString().equals(item) ) {
+                        combo_box_equipo_rival.setSelectedIndex(i);
+                        break;
+                    }
                 }
+            } catch (ParseException ex) {
+                Logger.getLogger(Inter_fecha_calendario.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Error en parseo date");
             }
         }
     }
@@ -295,7 +292,8 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
      *Filtra datos especificos de la tabla fecha de calendario
      * en base al tipo de busqueda que se hace.
      * 
-     * @param buscarPor, texto
+     * @param buscarPor
+     * @param texto
      * @return void
      */
     public void flitrarTabla(String buscarPor, String texto) {
@@ -336,7 +334,6 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
     /**
      * Carga los equipos que existen dentro de un comboBox.
      * 
-     * @param void
      * @return void
      */
     public void cargarComboEquipos() {
@@ -380,7 +377,7 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         combo_box_buscar = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_calendario = new javax.swing.JTable();
-        jDateChooser_fecha_partido = new com.toedter.calendar.JDateChooser();
+        fecha_partido = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -527,8 +524,8 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 757, 281));
 
-        jDateChooser_fecha_partido.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jDateChooser_fecha_partido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 160, -1));
+        fecha_partido.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(fecha_partido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 160, -1));
 
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -610,7 +607,7 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> combo_box_buscar;
     private javax.swing.JComboBox<String> combo_box_equipo_local;
     private javax.swing.JComboBox<String> combo_box_equipo_rival;
-    private com.toedter.calendar.JDateChooser jDateChooser_fecha_partido;
+    private com.toedter.calendar.JDateChooser fecha_partido;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
