@@ -26,13 +26,17 @@ public class Controlador_actas_partido {
      * @param object_acta
      * @return True or False
      */
-    public boolean guardar(Actas_partido object_acta) {
+    public String guardarActa(Actas_partido object_acta) throws ActasException {
 
-        boolean respuesta = false;
+        String mensaje = "";
 
+        if(object_acta == null){
+            throw new ActasException("Acta no puede ser nula");
+        }
+        
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
-
+        
         try {
 
             // Aqui se guardara la sentencia sql de ingresos
@@ -54,16 +58,17 @@ public class Controlador_actas_partido {
 
             // Cambia el estado de la variable respuesta.
             if (consulta.executeUpdate() > 0) {
-                respuesta = true;
+                mensaje = "Acta registrada correctamente!";
             }
 
             conector.close();// Sirve para cerrar la conexion.
 
         } catch (SQLException e) {
+            mensaje = "Error en registrar acta : " + e.getMessage();
             System.out.println("Error de ingreso en la base: " + e.getMessage());
         }
 
-        return respuesta;
+        return mensaje;
     }
 
     /**
@@ -71,13 +76,17 @@ public class Controlador_actas_partido {
      * @param object_acta
      * @return Mensaje
      */
-    public String actualizarActa(Actas_partido object_acta) {
+    public String actualizarActa(Actas_partido object_acta) throws ActasException{
         String mensaje = "";
+
+        if(object_acta.getId_acta_partido() == 0){
+            throw new ActasException("Codigo de acta no puede ser nulo");
+        }
 
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
         try {
-            consulta = conector.prepareStatement("call actualizar_actas_partido (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            consulta = conector.prepareStatement("call PR_modificar_acta_partido(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
             consulta.setInt(1, object_acta.getId_acta_partido());
             consulta.setDate(2, object_acta.getFecha_emision());
             consulta.setString(3, object_acta.getHora_inicio_partido());

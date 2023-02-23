@@ -26,6 +26,7 @@ import javax.swing.text.MaskFormatter;
 import modelo.Agenda;
 import modelo.Equipo_futbol;
 import modelo.Partido;
+import modelo.TipoBusquedaCombo;
 
 /**
  *
@@ -66,15 +67,13 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         table_calendario.getColumnModel().getColumn(0).setMaxWidth(20);
         table_calendario.getColumnModel().getColumn(0).setPreferredWidth(20);
         table_calendario.removeColumn(table_calendario.getColumnModel().getColumn(1));
-        cargarCombo();
+        cargarComboFiltro();
         cargarListadoAgendas();
         combo_box_equipo_local.addItem("<Seleccione>");
         combo_box_equipo_rival.addItem("<Seleccione>");
         cargarComboEquipos();
     }
 
-    
-    
     public void formatearText() {
         try {
             MaskFormatter maskHora = new MaskFormatter("##:##");
@@ -84,9 +83,8 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
-    
     /**
-     * Captura los datos dentro de los textbox y los guarda en 
+     * Captura los datos dentro de los textbox y los guarda en
      * la tabla fecha calendario de la base de datos.
      * 
      * @param void
@@ -131,9 +129,8 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
-    
     /**
-     * Guarda un nuevo partido con los datos de los textbox 
+     * Guarda un nuevo partido con los datos de los textbox
      * equipo rival y local
      * 
      * @param void
@@ -146,13 +143,15 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
 
         Controlador_equipo controlador_equipo = new Controlador_equipo();
         for (Equipo_futbol e : controlador_equipo.listarEquipos()) {
-            if (e.getNombre_equipo().toLowerCase().equals(combo_box_equipo_local.getSelectedItem().toString().toLowerCase())) {
+            if (e.getNombre_equipo().toLowerCase()
+                    .equals(combo_box_equipo_local.getSelectedItem().toString().toLowerCase())) {
                 id_local = e.getId_equipo();
                 break;
             }
         }
         for (Equipo_futbol e : controlador_equipo.listarEquipos()) {
-            if (e.getNombre_equipo().toLowerCase().equals(combo_box_equipo_rival.getSelectedItem().toString().toLowerCase())) {
+            if (e.getNombre_equipo().toLowerCase()
+                    .equals(combo_box_equipo_rival.getSelectedItem().toString().toLowerCase())) {
                 id_rival = e.getId_equipo();
                 break;
             }
@@ -166,7 +165,6 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         return mensaje;
     }
 
-    
     /**
      * Limpia las cajas de texto una vez ingresado un nuevo calendario
      * de fechas.
@@ -182,7 +180,6 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         fecha_partido.setCalendar(null);
     }
 
-    
     /**
      * Edicion de algun registro en especifico de
      * una fecha de calendario que ya ha sido ingresada en base de datos.
@@ -202,15 +199,15 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
                 // Obtener id local
                 for (int i = 0; i <= combo_box_equipo_local.getItemCount(); i++) {
                     String item = combo_box_equipo_local.getItemAt(i);
-                    if ( table_calendario.getModel().getValueAt(fila, 5).toString().equals(item) ) {
+                    if (table_calendario.getModel().getValueAt(fila, 5).toString().equals(item)) {
                         combo_box_equipo_local.setSelectedIndex(i);
                         break;
                     }
                 }
-                //Obtener id rival
+                // Obtener id rival
                 for (int i = 0; i <= combo_box_equipo_rival.getItemCount(); i++) {
                     String item = combo_box_equipo_rival.getItemAt(i);
-                    if ( table_calendario.getModel().getValueAt(fila, 6).toString().equals(item) ) {
+                    if (table_calendario.getModel().getValueAt(fila, 6).toString().equals(item)) {
                         combo_box_equipo_rival.setSelectedIndex(i);
                         break;
                     }
@@ -222,7 +219,6 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
-    
     /**
      * Borrado logico de una fecha de calendario ingresado en la base de datos
      * Lo pasa de activo a inactivo.
@@ -253,7 +249,6 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
-    
     /**
      * Carga todo el listado de las fechas de calendario de la base de datos
      * y lo muestra en la ventana actual.
@@ -274,7 +269,6 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
-    
     /**
      * Carga 2 titulos de columna de la tabla
      * fechas calendario especificada en este metodo dentro
@@ -283,14 +277,14 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
      * @param void
      * @return void
      */
-    public void cargarCombo() {
-        combo_box_buscar.addItem("Lugar partido");
-        combo_box_buscar.addItem("Partido");
+    public void cargarComboFiltro() {
+        combo_box_buscar.addItem(TipoBusquedaCombo.LUGAR_PARTIDO);
+        combo_box_buscar.addItem(TipoBusquedaCombo.EQUIPO_LOCAL);
+        combo_box_buscar.addItem(TipoBusquedaCombo.EQUIPO_RIVAL);
     }
 
-    
     /**
-     *Filtra datos especificos de la tabla fecha de calendario
+     * Filtra datos especificos de la tabla fecha de calendario
      * en base al tipo de busqueda que se hace.
      * 
      * @param buscarPor
@@ -299,25 +293,40 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
      */
     public void flitrarTabla(String buscarPor, String texto) {
         List<Agenda> listaFiltrada = new ArrayList<Agenda>();
+        /*
+         * System.out.println("Filtro" + "\n");
+         * System.out.println(buscarPor + "\n");
+         * System.out.println(texto + "\n");
+         */
 
-        System.out.println("Filtro" + "\n");
-        System.out.println(buscarPor + "\n");
-        System.out.println(texto + "\n");
-
-        if (buscarPor.equalsIgnoreCase("lugar partido")) {
-            for (Agenda e : controlador_agenda.listarAgendas()) {
-                if (e.getLugar_partido().toLowerCase().contains(texto.toLowerCase())) {
-                    listaFiltrada.add(e);
-                }
-            }
-        } else {
-            // Cambiar ...
-            controlador_agenda.listarAgendas().forEach((e) -> {
-                if (e.getEstado().toLowerCase().contains(texto.toLowerCase())) {
-                    listaFiltrada.add(e);
-                }
-            });
+        switch (buscarPor) {
+            case TipoBusquedaCombo.LUGAR_PARTIDO:
+                controlador_agenda.listarAgendas().forEach(e -> {
+                    if (e.getLugar_partido().toLowerCase().contains(texto.toLowerCase())) {
+                        listaFiltrada.add(e);
+                    }
+                });
+                break;
+            case TipoBusquedaCombo.EQUIPO_LOCAL:
+                controlador_agenda.listarAgendas().forEach((e) -> {
+                    if (e.getPartido_id().getClub_local().getNombre_equipo().toLowerCase()
+                            .contains(texto.toLowerCase())) {
+                        listaFiltrada.add(e);
+                    }
+                });
+                break;
+            case TipoBusquedaCombo.EQUIPO_RIVAL:
+                controlador_agenda.listarAgendas().forEach((e) -> {
+                    if (e.getPartido_id().getClub_rival().getNombre_equipo().toLowerCase()
+                            .contains(texto.toLowerCase())) {
+                        listaFiltrada.add(e);
+                    }
+                });
+                break;
+            default:
+                break;
         }
+
         int i = 0;
         modelo.getDataVector().removeAllElements();
         table_calendario.updateUI();
@@ -330,8 +339,6 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         }
     }
 
-    
-    
     /**
      * Carga los equipos que existen dentro de un comboBox.
      * 
@@ -353,7 +360,8 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -418,7 +426,7 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, 20));
 
         combo_box_equipo_rival.setBackground(new java.awt.Color(255, 255, 255));
-        combo_box_equipo_rival.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
+        combo_box_equipo_rival.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         jPanel1.add(combo_box_equipo_rival, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 160, -1));
 
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -510,17 +518,16 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
 
         combo_box_buscar.setBackground(new java.awt.Color(255, 255, 255));
         combo_box_buscar.setForeground(new java.awt.Color(0, 0, 0));
-        combo_box_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+        combo_box_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         jPanel1.add(combo_box_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 145, -1));
 
         table_calendario.setBackground(new java.awt.Color(255, 255, 255));
         table_calendario.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][] {
 
-            },
-            new String [] {
-            }
-        ));
+                },
+                new String[] {
+                }));
         jScrollPane1.setViewportView(table_calendario);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 757, 281));
@@ -546,17 +553,17 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1105, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1105,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 515,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -1031,7 +1031,7 @@ CREATE PROCEDURE PR_modificar_acta_partido(
 (45)
     )
 BEGIN
-    UPDATE acta_partido SET codigo_acta = xCodigo_acta, fecha_emision_acta = xFecha_emision_acta, hora_inicio_partido = xHora_inicio_partido, 
+    UPDATE acta_partido SET id_acta_partido = xId_acta_partido, fecha_emision_acta = xFecha_emision_acta, hora_inicio_partido = xHora_inicio_partido, 
     hora_fin_partido = xHora_fin_partido, equipo_local = xEquipo_local, equipo_rival = xEquipo_rival, duracion_partido = xDuracion_partido, 
     num_gol_equipo_local = xNum_gol_equipo_local, num_gol_equipo_rival = xNum_gol_equipo_rival, equipo_ganador = xEquipo_ganador, 
     update_at = curdate()

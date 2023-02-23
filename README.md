@@ -29,8 +29,7 @@ Descargar o clonar repositorio en directorio
 <img src="Documentos de Entrega\ImagenesREADME\crud-acta.png"></img>
 
 #### Modulo Registro Asistencia
-<img src=""></img>
-
+<img src="Documentos de Entrega\ImagenesREADME\cr-asistencia.png"></img>
 
 ### Menu Secretaria
 <img src="Documentos de Entrega\ImagenesREADME\menuSecretaria.png"></img>
