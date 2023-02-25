@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.Test;
 
 import controlador.Controlador_agenda;
+import excepciones.AgendaException;
 import modelo.Agenda;
 import modelo.Partido;
 
@@ -45,8 +46,14 @@ public class AgendaTest {
         agenda.setLugar_partido("El Cairo");
         agenda.setHora_partido(Time.valueOf(LocalTime.now()));
 
-        String mensaje = controlador_agenda.actualizarAgenda(agenda);
-        assertEquals("Agenda actualizada correctamente", mensaje);
+        String mensaje;
+        try {
+            mensaje = controlador_agenda.actualizarAgenda(agenda);
+            assertEquals("Agenda actualizada correctamente", mensaje);
+        } catch (AgendaException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -66,7 +73,12 @@ public class AgendaTest {
     @Test
     public void eliminarAgenda() {
 
-        String mensaje = controlador_agenda.eliminarAgenda(712);
-        assertEquals("Agenda eliminada correctamente", mensaje);
+        String mensaje;
+        try {
+            mensaje = controlador_agenda.eliminarAgenda(712);
+            assertEquals("Agenda eliminada correctamente", mensaje);
+        } catch (AgendaException e) {
+            e.printStackTrace();
+        }
     }
 }

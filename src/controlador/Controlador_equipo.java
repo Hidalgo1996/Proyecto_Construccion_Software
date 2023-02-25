@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexion.Conexion;
+import excepciones.EquipoException;
 import modelo.Equipo_futbol;
 
 public class Controlador_equipo {
 
     /**
      * Guarda Equipo/club futbol
+     * 
      * @param
      * @return Mensaje
      */
@@ -51,15 +53,19 @@ public class Controlador_equipo {
      * @param equipo
      * @return String mensaje
      */
-    public String actualizarEquipo(Equipo_futbol equipo) {
+    public String actualizarEquipo(Equipo_futbol equipo) throws EquipoException {
 
         String mensaje = "";
+
+        if (equipo.getId_equipo() == 0 || equipo.getId_equipo() == null) {
+            throw new EquipoException("Id no puede ser menor o igual a cero");
+        }
 
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
         try {
             consulta = conector.prepareStatement("call PR_modificar_club (?, ?, ?);");
-            consulta.setInt(1,equipo.getId_equipo());
+            consulta.setInt(1, equipo.getId_equipo());
             consulta.setString(2, equipo.getNombre_equipo());
             consulta.setString(3, equipo.getDirector());
 
@@ -93,10 +99,9 @@ public class Controlador_equipo {
                         result.getInt("id_club"),
                         result.getString("nombre"),
                         result.getString("director"),
-                        result.getString("estado")
-                       );
+                        result.getString("estado"));
 
-                        listaEquipos.add(tmp);
+                listaEquipos.add(tmp);
             }
 
             conector.close();
@@ -113,11 +118,11 @@ public class Controlador_equipo {
      * @param id
      * @return String mensaje
      */
-    public String eliminarEquipo(Integer id) {
+    public String eliminarEquipo(Integer id) throws EquipoException {
         String mensaje = "";
 
         if (id <= 0) {
-            // throw new equipoException("Id no puede ser menor o igual a cero");
+            throw new EquipoException("Id no puede ser menor o igual a cero");
         }
 
         Connection conector = Conexion.conectar();
@@ -140,5 +145,4 @@ public class Controlador_equipo {
         }
     }
 
-    
 }

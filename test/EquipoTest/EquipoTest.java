@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import controlador.Controlador_equipo;
+import excepciones.EquipoException;
 import modelo.Equipo_futbol;
 
 public class EquipoTest {
@@ -40,9 +41,14 @@ public class EquipoTest {
         equipo_futbol.setNombre_equipo("Manchester United");
         equipo_futbol.setDirector("Diego");
 
-        String mensaje = controlador_equipo.actualizarEquipo(equipo_futbol);
+        String mensaje;
+        try {
+            mensaje = controlador_equipo.actualizarEquipo(equipo_futbol);
+            assertEquals("Equipo actualizado correctamente", mensaje);
+        } catch (EquipoException e) {
+            e.printStackTrace();
+        }
 
-        assertEquals("Equipo actualizado correctamente", mensaje);
     }
 
     /**
@@ -51,8 +57,13 @@ public class EquipoTest {
     @Test
     public void eliminarEquipo() {
 
-        String mensaje = controlador_equipo.eliminarEquipo(407);
-        assertEquals("Equipo eliminado correctamente", mensaje);
+        String mensaje;
+        try {
+            mensaje = controlador_equipo.eliminarEquipo(407);
+            assertEquals("Equipo eliminado correctamente", mensaje);
+        } catch (EquipoException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

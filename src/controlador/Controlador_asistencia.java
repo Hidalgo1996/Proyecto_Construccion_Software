@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Statement;
 import conexion.Conexion;
+import excepciones.AsistenciaException;
 import modelo.Asistencia;
 
 public class Controlador_asistencia {
@@ -73,9 +74,13 @@ public class Controlador_asistencia {
      * @param asistencia
      * @return Mensaje
      */
-    public String actualizarAsistencia(Asistencia asistencia) {
+    public String actualizarAsistencia(Asistencia asistencia) throws AsistenciaException{
 
         String mensaje = "";
+
+        if(asistencia.getId_asistencia() == null || asistencia.getId_asistencia() == 0){
+            throw new AsistenciaException("Id asistencia no puede ser nulo o cero");
+        }
 
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
@@ -129,11 +134,11 @@ public class Controlador_asistencia {
      * @param id
      * @return
      */
-    public String eliminarAsistencia(Integer id) {
+    public String eliminarAsistencia(Integer id) throws AsistenciaException {
         String mensaje = "";
 
         if (id <= 0) {
-            // throw new AsistenciaException("Id no puede ser menor o igual a cero");
+            throw new AsistenciaException("Id no puede ser menor o igual a cero");
         }
 
         Connection conector = Conexion.conectar();

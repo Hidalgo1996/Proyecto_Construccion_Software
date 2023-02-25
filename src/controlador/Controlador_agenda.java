@@ -9,6 +9,7 @@ import java.util.List;
 import java.sql.Statement;
 
 import conexion.Conexion;
+import excepciones.AgendaException;
 import modelo.Agenda;
 import modelo.Equipo_futbol;
 import modelo.Partido;
@@ -55,9 +56,13 @@ public class Controlador_agenda {
      * @param agenda
      * @return Mensaje
      */
-    public String actualizarAgenda(Agenda agenda) {
+    public String actualizarAgenda(Agenda agenda) throws AgendaException{
 
         String mensaje = "";
+
+        if(agenda.getId_agenda() == null || agenda.getId_agenda() == 0){
+            throw new AgendaException("Id agenda no puede ser nulo o 0");
+        }
 
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
@@ -120,11 +125,11 @@ public class Controlador_agenda {
      * @param id
      * @return String mensaje
      */
-    public String eliminarAgenda(Integer id) {
+    public String eliminarAgenda(Integer id) throws AgendaException {
         String mensaje = "";
 
         if (id <= 0) {
-            // throw new AgendaException("Id no puede ser menor o igual a cero");
+            throw new AgendaException("Id no puede ser menor o igual a cero");
         }
 
         Connection conector = Conexion.conectar();

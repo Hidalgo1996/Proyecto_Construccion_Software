@@ -128,11 +128,11 @@ public class Controlador_sorteo {
      * @param id
      * @return
      */
-    public String eliminarSorteo(Integer id) {
+    public String eliminarSorteo(Integer id) throws SorteoException{
         String mensaje = "";
 
         if (id <= 0) {
-            // throw new SorteoException("Id no puede ser menor o igual a cero");
+            throw new SorteoException("Id no puede ser menor o igual a cero");
         }
 
         Connection conector = Conexion.conectar();

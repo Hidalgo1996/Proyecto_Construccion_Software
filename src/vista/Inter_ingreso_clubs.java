@@ -12,7 +12,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador_equipo;
+import excepciones.EquipoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Equipo_futbol;
+import modelo.TipoBusquedaCombo;
 
 /**
  *
@@ -29,6 +33,16 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
      */
     public Inter_ingreso_clubs() {
         initComponents();
+        setearTabla();
+        cargarComboFiltro();
+        cargarListadoEquipos();
+
+    }
+
+    /**
+     *
+     */
+    private void setearTabla() {
 
         modelo = new DefaultTableModel() {
             @Override
@@ -45,122 +59,126 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
         table_club = new JTable(modelo);
         // table_club.setModel(modelo);
         jScrollPane1.setViewportView(table_club);
-
         table_club.getColumnModel().getColumn(0).setMaxWidth(20);
         table_club.getColumnModel().getColumn(0).setPreferredWidth(20);
         table_club.removeColumn(table_club.getColumnModel().getColumn(1));
-        cargarCombo();
-        cargarListadoEquipos();
-
     }
 
-    
-    
+    private boolean camposNoValidos() {
+        return (text_field_nombre_club.getText().isEmpty() || text_director.getText().isEmpty());
+    }
+
     /**
-     * Captura los datos dentro de los textbox y los guarda en 
-     * la tabla club de la base de datos.
-     * 
+     * Captura los datos dentro de los textbox y los guarda en la tabla club de
+     * la base de datos.
+     *
      * @param void
      * @return void
      */
     public void guardarClub() {
 
         String mensaje = "";
-        if (text_field_nombre_club.getText().isEmpty() || text_field_email.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor ingrese llene los datos", "Info",
-                    JOptionPane.INFORMATION_MESSAGE);
+        if (camposNoValidos()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese los datos", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        Equipo_futbol nuevoEquipo = new Equipo_futbol();
+        nuevoEquipo.setNombre_equipo(text_field_nombre_club.getText().trim());
+        nuevoEquipo.setDirector(text_director.getText().trim());
+        if (id == 0) {
+            mensaje = controlador_equipo.guardarEquipo(nuevoEquipo);
+
         } else {
-
-            Equipo_futbol nuevoEquipo = new Equipo_futbol();
-            nuevoEquipo.setNombre_equipo(text_field_nombre_club.getText().trim());
-            nuevoEquipo.setDirector(text_field_email.getText().trim());
-            if (id == 0) {
-                mensaje = controlador_equipo.guardarEquipo(nuevoEquipo);
-
-            } else {
+            try {
                 nuevoEquipo.setId_equipo(id);
                 mensaje = controlador_equipo.actualizarEquipo(nuevoEquipo);
                 id = 0;
+            } catch (EquipoException ex) {
+                JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-            JOptionPane.showMessageDialog(null, mensaje, "Info", JOptionPane.INFORMATION_MESSAGE);
-
-            cargarListadoEquipos();
-            limpiarTexts();
         }
+
+        JOptionPane.showMessageDialog(null, mensaje, "Info", JOptionPane.INFORMATION_MESSAGE);
+        cargarListadoEquipos();
+        limpiarTexts();
 
     }
 
-    
     /**
      * Limpia las cajas de texto una vez ingresado un nuevo club.
-     * 
+     *
      * @param void
      * @return void
      */
     public void limpiarTexts() {
         text_field_nombre_club.setText("");
-        text_field_email.setText("");
+        text_director.setText("");
     }
 
-    
+    private boolean filaSeleccionada() {
+        return table_club.getSelectedRow() > -1;
+    }
+
     /**
-     * Edicion de algun registro en especifico de
-     * un club que ya ha sido ingresado en base de datos.
-     * 
+     * Edicion de algun registro en especifico de un club que ya ha sido
+     * ingresado en base de datos.
+     *
      * @param void
      * @return void
      */
     public void editarClub() {
 
-        if (table_club.getSelectedRow() > -1) {
-            int fila = table_club.getSelectedRow();
-            id = (int) (table_club.getModel().getValueAt(fila, 1));
-            System.out.println(id);
-            text_field_nombre_club.setText(table_club.getModel().getValueAt(fila, 2).toString());
-            text_field_email.setText(table_club.getModel().getValueAt(fila, 3).toString());
-
+        if (!filaSeleccionada()) {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione una fila para realizar esta acción", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
+        int fila = table_club.getSelectedRow();
+        id = (int) (table_club.getModel().getValueAt(fila, 1));
+        System.out.println(id);
+        text_field_nombre_club.setText(table_club.getModel().getValueAt(fila, 2).toString());
+        text_director.setText(table_club.getModel().getValueAt(fila, 3).toString());
 
     }
 
-    
     /**
-     * Borrado logico de un club ingresado en la base de datos
-     * Lo pasa de activo a inactivo.
-     * 
+     * Borrado logico de un club ingresado en la base de datos Lo pasa de activo
+     * a inactivo.
+     *
      * @param void
      * @return void
      */
     public void eliminarClub() {
 
-        if (table_club.getSelectedRow() >= 0) {
-
-            int row = table_club.getSelectedRow();
-            int id = Integer.parseInt(table_club.getModel().getValueAt(row, 1).toString());
-
-            int confirmacion = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro?", "Advertencia",
-                    JOptionPane.YES_NO_OPTION);
-            if (confirmacion == 0) {
-                try {
-                    String mensaje = controlador_equipo.eliminarEquipo(id);
-                    JOptionPane.showMessageDialog(null, mensaje, "Info", JOptionPane.INFORMATION_MESSAGE);
-                    cargarListadoEquipos();
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-
-            }
+        if (!filaSeleccionada()) {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione una fila para realizar esta acción", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
+
+        int row = table_club.getSelectedRow();
+        int id = Integer.parseInt(table_club.getModel().getValueAt(row, 1).toString());
+
+        int confirmacion = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro?", "Advertencia",
+                JOptionPane.YES_NO_OPTION);
+        if (confirmacion == 0) {
+            try {
+                String mensaje = controlador_equipo.eliminarEquipo(id);
+                JOptionPane.showMessageDialog(null, mensaje, "Info", JOptionPane.INFORMATION_MESSAGE);
+                cargarListadoEquipos();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+
+        }
+
     }
 
-    
     /**
-     * Carga todo el listado de los clubes de la base de datos
-     * y lo muestra en la ventana actual.
-     * 
+     * Carga todo el listado de los clubes de la base de datos y lo muestra en
+     * la ventana actual.
+     *
      * @param void
      * @return void
      */
@@ -170,28 +188,26 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
         table_club.updateUI();
         for (Equipo_futbol e : controlador_equipo.listarEquipos()) {
             i = i + 1;
-            modelo.addRow(new Object[] { i, e.getId_equipo(), e.getNombre_equipo(), e.getDirector() });
+            modelo.addRow(new Object[]{i, e.getId_equipo(), e.getNombre_equipo(), e.getDirector()});
         }
     }
 
-    
     /**
-     * Carga 2 titulos de columna de la tabla club especificada 
-     * en este metodo dentro de un comboBox.
-     * 
+     * Carga 2 titulos de columna de la tabla club especificada en este metodo
+     * dentro de un comboBox.
+     *
      * @param void
      * @return void
      */
-    public void cargarCombo() {
-        combo_box_buscar.addItem("Nombre Club");
-        combo_box_buscar.addItem("Director Club");
+    public void cargarComboFiltro() {
+        combo_box_buscar.addItem(TipoBusquedaCombo.NOMBRE_EQUIPO);
+        combo_box_buscar.addItem(TipoBusquedaCombo.DIRECTOR);
     }
 
-    
     /**
-     *Filtra datos especificos de la tabla club
-     * en base al tipo de busqueda que se hace.
-     * 
+     * Filtra datos especificos de la tabla club en base al tipo de busqueda que
+     * se hace.
+     *
      * @param buscarPor, texto
      * @return void
      */
@@ -202,21 +218,26 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
         System.out.println(buscarPor + "\n");
         System.out.println(texto + "\n");
 
-        if (buscarPor.equalsIgnoreCase("nombre club")) {
-            for (Equipo_futbol e : controlador_equipo.listarEquipos()) {
-                if (e.getNombre_equipo().toLowerCase().contains(texto.toLowerCase())) {
-                    System.out.println(e.getNombre_equipo() + "\n");
-                    listaFiltrada.add(e);
+        switch (buscarPor) {
+            case TipoBusquedaCombo.NOMBRE_EQUIPO:
+                for (Equipo_futbol e : controlador_equipo.listarEquipos()) {
+                    if (e.getNombre_equipo().toLowerCase().contains(texto.toLowerCase())) {
+                        System.out.println(e.getNombre_equipo() + "\n");
+                        listaFiltrada.add(e);
+                    }
                 }
-            }
-        } else {
-            controlador_equipo.listarEquipos().forEach((e) -> {
-                if (e.getDirector().toLowerCase().contains(texto.toLowerCase())) {
-                    listaFiltrada.add(e);
-                }
-            });
+                break;
+            case TipoBusquedaCombo.DIRECTOR:
+                controlador_equipo.listarEquipos().forEach((e) -> {
+                    if (e.getDirector().toLowerCase().contains(texto.toLowerCase())) {
+                        listaFiltrada.add(e);
+                    }
+                });
+                break;
+            default:
+                break;
         }
-
+        
         for (Equipo_futbol eq : listaFiltrada) {
             System.out.println(eq.getNombre_equipo() + "\n");
         }
@@ -226,7 +247,7 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
         table_club.updateUI();
         for (Equipo_futbol e : listaFiltrada) {
             i = i + 1;
-            modelo.addRow(new Object[] { i, e.getId_equipo(), e.getNombre_equipo(), e.getDirector() });
+            modelo.addRow(new Object[]{i, e.getId_equipo(), e.getNombre_equipo(), e.getDirector()});
         }
     }
 
@@ -250,11 +271,9 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
         boton_limpiar_club = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        text_field_id_club = new javax.swing.JTextField();
         text_field_nombre_club = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        text_field_email = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        text_director = new javax.swing.JTextField();
         combo_box_buscar = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_club = new javax.swing.JTable();
@@ -284,7 +303,7 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
                 boton_guardar_clubActionPerformed(evt);
             }
         });
-        jPanel1.add(boton_guardar_club, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 89, -1));
+        jPanel1.add(boton_guardar_club, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 89, -1));
 
         boton_limpiar_club.setBackground(new java.awt.Color(0, 204, 0));
         boton_limpiar_club.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -295,38 +314,26 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
                 boton_limpiar_clubActionPerformed(evt);
             }
         });
-        jPanel1.add(boton_limpiar_club, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 94, -1));
+        jPanel1.add(boton_limpiar_club, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 94, -1));
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nombre club:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Correo club:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
-
-        text_field_id_club.setBackground(new java.awt.Color(255, 255, 255));
-        text_field_id_club.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                text_field_id_clubActionPerformed(evt);
-            }
-        });
-        jPanel1.add(text_field_id_club, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 171, -1));
+        jLabel4.setText("Director:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 60, -1));
 
         text_field_nombre_club.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(text_field_nombre_club, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 171, -1));
+        jPanel1.add(text_field_nombre_club, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 171, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Ingreso");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
-        text_field_email.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(text_field_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 171, -1));
-
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Id club:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        text_director.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_director, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 170, -1));
 
         combo_box_buscar.setBackground(new java.awt.Color(255, 255, 255));
         combo_box_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
@@ -404,7 +411,7 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo blanco.jpg"))); // NOI18N
         jLabel6.setText("jLabel5");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 300, 260));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 300, 230));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancha 2.0.jpg"))); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 440));
@@ -467,7 +474,6 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -476,9 +482,8 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_club;
+    private javax.swing.JTextField text_director;
     private javax.swing.JTextField text_field_buscar_club;
-    private javax.swing.JTextField text_field_email;
-    private javax.swing.JTextField text_field_id_club;
     private javax.swing.JTextField text_field_nombre_club;
     // End of variables declaration//GEN-END:variables
 }

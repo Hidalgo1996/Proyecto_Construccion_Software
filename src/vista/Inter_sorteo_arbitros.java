@@ -168,7 +168,7 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
 
     private void guardarSorteo() {
         String mensaje = "";
-        if (!camposValidos()) {
+        if (!camposNoValidos()) {
             int confirmacion = JOptionPane.showConfirmDialog(null, "Desea guardar este sorteo?", "Advertencia",
                     JOptionPane.YES_NO_OPTION);
             if (confirmacion == 0) {
@@ -215,7 +215,7 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
         }
     }
 
-    private boolean camposValidos() {
+    private boolean camposNoValidos() {
         return (text_arbitro_principal.getText().isEmpty()
                 || text_arbitro_sustituto.getText().isEmpty() && partido_combo.getSelectedIndex() > 0);
     }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexion.Conexion;
+import excepciones.PartidoException;
 import modelo.Equipo_futbol;
 import modelo.Partido;
 import modelo.TipoBusqueda;
@@ -57,9 +58,13 @@ public class Controlador_partido {
      * @param Partido
      * @return Mensaje
      */
-    public String actualizarPartido(Partido partido) {
+    public String actualizarPartido(Partido partido) throws PartidoException {
 
         String mensaje = "";
+
+        if (partido.getId_partido() == null || partido.getId_partido() == 0) {
+            throw new PartidoException("Id no puede ser menor o igual a cero");
+        }
 
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
@@ -117,11 +122,11 @@ public class Controlador_partido {
      * @param id
      * @return
      */
-    public String eliminarPartido(Integer id) {
+    public String eliminarPartido(Integer id) throws PartidoException {
         String mensaje = "";
 
         if (id <= 0) {
-            // throw new PartidoException("Id no puede ser menor o igual a cero");
+            throw new PartidoException("Id no puede ser menor o igual a cero");
         }
 
         Connection conector = Conexion.conectar();

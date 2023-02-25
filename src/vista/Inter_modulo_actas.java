@@ -143,56 +143,55 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
 
         String mensaje = "";
         if (camposVacios()) {
-            JOptionPane.showMessageDialog(null, "Llena todos los campos");
-        } else {
+            JOptionPane.showMessageDialog(null, "Por favor llene todos los campos", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
 
-            // Esto me permite capturar lo que hay en las cajas de texto y guardar en los
-            // atributos de clase de actas_partido
-            acta_partido.setFecha_emision(new java.sql.Date(fecha_emision.getDate().getTime()));
-            acta_partido.setHora_inicio_partido(hora_inicio_text_box.getText());
-            acta_partido.setHora_fin_partido(hora_fin_text_box.getText());
-            acta_partido.setNombre_equipo_local("");
-            acta_partido.setNombre_equipo_rival("");
-            acta_partido.setDuracion_partido((duracion_partido_text.getText()));
-            acta_partido.setGoles_equipo_rival(Integer.parseInt(goles_rival_text_box.getText()));
-            acta_partido.setGoles_equipo_local(Integer.parseInt(goles_local_text_box.getText()));
-            acta_partido.setEquipo_ganador(equipo_ganador_text.getText().trim());
+        // Esto me permite capturar lo que hay en las cajas de texto y guardar en los
+        // atributos de clase de actas_partido
+        acta_partido.setFecha_emision(new java.sql.Date(fecha_emision.getDate().getTime()));
+        acta_partido.setHora_inicio_partido(hora_inicio_text_box.getText());
+        acta_partido.setHora_fin_partido(hora_fin_text_box.getText());
+        acta_partido.setNombre_equipo_local("");
+        acta_partido.setNombre_equipo_rival("");
+        acta_partido.setDuracion_partido((duracion_partido_text.getText()));
+        acta_partido.setGoles_equipo_rival(Integer.parseInt(goles_rival_text_box.getText()));
+        acta_partido.setGoles_equipo_local(Integer.parseInt(goles_local_text_box.getText()));
+        acta_partido.setEquipo_ganador(equipo_ganador_text.getText().trim());
 
-            if (id_acta == 0) {
-                try {
-                    Controlador_partido.cargarComboPartido(TipoBusqueda.ACTA).forEach((p) -> {
-                        String partido = p.getClub_local().getNombre_equipo() + " VS "
-                                + p.getClub_rival().getNombre_equipo();
+        if (id_acta == 0) {
+            try {
+                Controlador_partido.cargarComboPartido(TipoBusqueda.ACTA).forEach((p) -> {
+                    String partido = p.getClub_local().getNombre_equipo() + " VS "
+                            + p.getClub_rival().getNombre_equipo();
 
-                        if (partido.equalsIgnoreCase(partido_combo.getSelectedItem().toString())) {
-                            acta_partido.setPartido(new Partido(p.getId_partido()));
-                        }
+                    if (partido.equalsIgnoreCase(partido_combo.getSelectedItem().toString())) {
+                        acta_partido.setPartido(new Partido(p.getId_partido()));
                         return;
-                    });
+                    }
 
-                    mensaje = controladorActas.guardarActa(acta_partido);
-                    JOptionPane.showMessageDialog(null, mensaje);
-                    limpiarTexts();
+                });
 
-                } catch (ActasException ex) {
-                    JOptionPane.showMessageDialog(null, mensaje + " " + ex.getMessage());
-                }
-            } else {
-                System.out.println("Actualizando " + id_acta);
-                try {
-                    acta_partido.setId_acta_partido(id_acta);
-                    mensaje = controladorActas.actualizarActa(acta_partido);
-                    JOptionPane.showMessageDialog(null, mensaje);
-                    id_acta = 0;
-                    limpiarTexts();
-                } catch (ActasException ex) {
-                    JOptionPane.showMessageDialog(null, mensaje + " " + ex.getMessage());
-                }
+                mensaje = controladorActas.guardarActa(acta_partido);
+                JOptionPane.showMessageDialog(null, mensaje);
+                limpiarTexts();
 
+            } catch (ActasException ex) {
+                JOptionPane.showMessageDialog(null, mensaje + " " + ex.getMessage());
+            }
+        } else {
+            System.out.println("Actualizando " + id_acta);
+            try {
+                acta_partido.setId_acta_partido(id_acta);
+                mensaje = controladorActas.actualizarActa(acta_partido);
+                JOptionPane.showMessageDialog(null, mensaje);
+                id_acta = 0;
+                limpiarTexts();
+            } catch (ActasException ex) {
+                JOptionPane.showMessageDialog(null, mensaje + " " + ex.getMessage());
             }
 
         }
-
         cargarListadoActas();
     }
 
@@ -239,28 +238,29 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
      */
     public void editarActa() {
 
-        if (filaSelecionada()) {
-            int fila = table_actas.getSelectedRow();
-            id_acta = (int) (table_actas.getModel().getValueAt(fila, 1));
-            /* System.out.println(id_acta); */
-            try {
-                String _partido = table_actas.getModel().getValueAt(fila, 5).toString();
-                fecha_emision.setDate(formatoFecha.parse(table_actas.getModel().getValueAt(fila, 2).toString()));
-                hora_inicio_text_box.setValue(table_actas.getModel().getValueAt(fila, 3).toString());
-                hora_fin_text_box.setValue(table_actas.getModel().getValueAt(fila, 4).toString());
-                duracion_partido_text.setText(table_actas.getModel().getValueAt(fila, 6).toString());
-                goles_local_text_box.setText(table_actas.getModel().getValueAt(fila, 7).toString());
-                goles_rival_text_box.setText(table_actas.getModel().getValueAt(fila, 8).toString());
-                equipo_ganador_text.setText(table_actas.getModel().getValueAt(fila, 9).toString());
-                partido_combo.addItem(_partido);
-                partido_combo.setSelectedItem(_partido);
-                partido_combo.setEnabled(false);
-            } catch (ParseException ex) {
-                Logger.getLogger(Inter_modulo_actas.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Error parseo formato fecha");
-            }
+        if (!filaSelecionada()) {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione una fila para realizar esta acción", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
-
+        int fila = table_actas.getSelectedRow();
+        id_acta = (int) (table_actas.getModel().getValueAt(fila, 1));
+        /* System.out.println(id_acta); */
+        try {
+            String _partido = table_actas.getModel().getValueAt(fila, 5).toString();
+            fecha_emision.setDate(formatoFecha.parse(table_actas.getModel().getValueAt(fila, 2).toString()));
+            hora_inicio_text_box.setValue(table_actas.getModel().getValueAt(fila, 3).toString());
+            hora_fin_text_box.setValue(table_actas.getModel().getValueAt(fila, 4).toString());
+            duracion_partido_text.setText(table_actas.getModel().getValueAt(fila, 6).toString());
+            goles_local_text_box.setText(table_actas.getModel().getValueAt(fila, 7).toString());
+            goles_rival_text_box.setText(table_actas.getModel().getValueAt(fila, 8).toString());
+            equipo_ganador_text.setText(table_actas.getModel().getValueAt(fila, 9).toString());
+            partido_combo.addItem(_partido);
+            partido_combo.setSelectedItem(_partido);
+            partido_combo.setEnabled(false);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Error parseo formato fecha: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error parseo formato fecha: " + ex.getMessage());
+        }
     }
 
     /**
@@ -272,25 +272,27 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
      */
     public void eliminarActa() {
 
-        if (filaSelecionada()) {
+        if (!filaSelecionada()) {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione una fila para realizar esta acción", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
 
-            int fila = table_actas.getSelectedRow();
-            int id = Integer.parseInt(table_actas.getModel().getValueAt(fila, 1).toString());
+        int fila = table_actas.getSelectedRow();
+        int id = Integer.parseInt(table_actas.getModel().getValueAt(fila, 1).toString());
 
-            int confirmacion = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro?", "Advertencia",
-                    JOptionPane.YES_NO_OPTION);
-            if (confirmacion == 0) {
-                try {
-                    String mensaje = controladorActas.eliminarActa(id);
-                    JOptionPane.showMessageDialog(null, mensaje, "Info", JOptionPane.INFORMATION_MESSAGE);
-                    cargarListadoActas();
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-
+        int confirmacion = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro?", "Advertencia",
+                JOptionPane.YES_NO_OPTION);
+        if (confirmacion == 0) {
+            try {
+                String mensaje = controladorActas.eliminarActa(id);
+                JOptionPane.showMessageDialog(null, mensaje, "Info", JOptionPane.INFORMATION_MESSAGE);
+                cargarListadoActas();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } else {
+
         }
     }
 
@@ -401,14 +403,14 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
+// <editor-fold defaultstate="collapsed" desc="Generated
+// <editor-fold defaultstate="collapsed" desc="Generated
+// <editor-fold defaultstate="collapsed" desc="Generated
+// <editor-fold defaultstate="collapsed" desc="Generated
+// <editor-fold defaultstate="collapsed" desc="Generated
+// <editor-fold defaultstate="collapsed" desc="Generated
+// <editor-fold defaultstate="collapsed" desc="Generated
+// <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -765,8 +767,10 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                 localTime = localTime.minusHours(Integer.parseInt(hour[0]));
                 localTime = localTime.minusMinutes(Integer.parseInt(hour[1]));
                 duracion_partido_text.setText(localTime.toString());
+
             } catch (ParseException ex) {
-                Logger.getLogger(Inter_modulo_actas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Inter_modulo_actas.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
     }// GEN-LAST:event_hora_fin_text_boxKeyReleased
