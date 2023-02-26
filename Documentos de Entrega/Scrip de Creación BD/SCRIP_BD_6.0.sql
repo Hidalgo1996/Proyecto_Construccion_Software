@@ -1211,24 +1211,6 @@ $$
 DELIMITER ;
 
 
--- pr loginh
-DROP PROCEDURE IF EXISTS pr_consultar_arbitros_partidos;
-DELIMITER $$
-CREATE PROCEDURE pr_consultar_arbitros_partidos(
-IN xUsuario varchar(50)
-)
-BEGIN
-    
-    if not exists (select * from usuario where nombre_usuario = xUsuario and contrasenia = xContrasenia)
-    then
-		select * from arbitro where usuario = xUsuario and contrasenia = xContrasenia;
-    else
-		select * from usuario where nombre_usuario = xUsuario and contrasenia = xContrasenia;
-    end if;
-    
-END
-$$
-DELIMITER ;
 -- consulta los partidos a los que pertenece un arbitro
 DROP PROCEDURE IF EXISTS pr_consultar_arbitros_partidos;
 DELIMITER $$

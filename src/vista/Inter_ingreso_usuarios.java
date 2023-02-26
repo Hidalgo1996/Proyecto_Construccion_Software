@@ -15,6 +15,49 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
      */
     public Inter_ingreso_usuarios() {
         initComponents();
+        setearTabla();
+        cargarComboFiltro();
+    }
+
+    private void setearTabla(){
+        
+    }
+    
+    private void cargarComboFiltro(){
+        
+    }
+    
+    private void guardarUsuario(){
+        
+    }
+    
+    private void eliminarUsuario(){
+        
+    }
+    
+    private void editarUsuario(){
+        
+    }
+    
+    private void limpiarTexts(){
+        
+    }
+    
+    private void filtrarTabla(){
+        
+    }
+
+    private void cargarListadoUsuarios(){
+
+    }
+
+    private boolean filaSeleccionada(){
+        return (false);
+    }
+
+
+    private boolean camposNoValidos(){
+        return false;
     }
 
     /**
@@ -41,7 +84,7 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         boton_limpiar_secretaria = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         boton_borrar_secretaria = new javax.swing.JButton();
-        combo_box_buscar_secretaria = new javax.swing.JComboBox<>();
+        combo_box_buscar = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_secretaria = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
@@ -50,7 +93,7 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         boton_buscar_secretaria = new javax.swing.JButton();
         boton_editar_secretaria = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1_rol = new javax.swing.JComboBox<>();
+        combo_box_rol = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -122,24 +165,16 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         boton_borrar_secretaria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         boton_borrar_secretaria.setForeground(new java.awt.Color(0, 0, 0));
         boton_borrar_secretaria.setText("Borrar");
-        jPanel1.add(boton_borrar_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 450, 80, -1));
+        jPanel1.add(boton_borrar_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, 80, -1));
 
-        combo_box_buscar_secretaria.setBackground(new java.awt.Color(255, 255, 255));
-        combo_box_buscar_secretaria.setForeground(new java.awt.Color(0, 0, 0));
-        combo_box_buscar_secretaria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(combo_box_buscar_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 145, -1));
+        combo_box_buscar.setBackground(new java.awt.Color(255, 255, 255));
+        combo_box_buscar.setForeground(new java.awt.Color(0, 0, 0));
+        combo_box_buscar.setModel(new javax.swing.DefaultComboBoxModel<>());
+        jPanel1.add(combo_box_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 145, -1));
 
         table_secretaria.setBackground(new java.awt.Color(255, 255, 255));
         table_secretaria.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+
         ));
         jScrollPane1.setViewportView(table_secretaria);
 
@@ -171,15 +206,15 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         boton_editar_secretaria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         boton_editar_secretaria.setForeground(new java.awt.Color(0, 0, 0));
         boton_editar_secretaria.setText("Editar");
-        jPanel1.add(boton_editar_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 450, 85, -1));
+        jPanel1.add(boton_editar_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 85, -1));
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Rol:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, 30));
 
-        jComboBox1_rol.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1_rol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1_rol, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 190, -1));
+        combo_box_rol.setBackground(new java.awt.Color(255, 255, 255));
+        combo_box_rol.setModel(new javax.swing.DefaultComboBoxModel<>());
+        jPanel1.add(combo_box_rol, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 190, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -229,8 +264,8 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JButton boton_editar_secretaria;
     private javax.swing.JButton boton_guardar_secretaria;
     private javax.swing.JButton boton_limpiar_secretaria;
-    private javax.swing.JComboBox<String> combo_box_buscar_secretaria;
-    private javax.swing.JComboBox<String> jComboBox1_rol;
+    private javax.swing.JComboBox<String> combo_box_buscar;
+    private javax.swing.JComboBox<String> combo_box_rol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
