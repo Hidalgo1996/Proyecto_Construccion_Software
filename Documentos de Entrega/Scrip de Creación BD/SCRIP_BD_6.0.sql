@@ -785,7 +785,7 @@ $$
 DELIMITER ;
 
 CALL PR_insertar_sorteo
-('2023-01-10', 'A', 300, 500, 301);
+('2023-01-10', 500, 300, 301, 'A');
 -- 600
 -- CALL PR_insertar_sorteo(?, ?, ?, ?, ?, ?, ?, ?);           -> llamada en Java
 

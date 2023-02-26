@@ -86,7 +86,7 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         boton_borrar_secretaria = new javax.swing.JButton();
         combo_box_buscar = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table_secretaria = new javax.swing.JTable();
+        table_usuarios = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         text_field_buscar = new javax.swing.JTextField();
@@ -172,11 +172,11 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         combo_box_buscar.setModel(new javax.swing.DefaultComboBoxModel<>());
         jPanel1.add(combo_box_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 145, -1));
 
-        table_secretaria.setBackground(new java.awt.Color(255, 255, 255));
-        table_secretaria.setModel(new javax.swing.table.DefaultTableModel(
+        table_usuarios.setBackground(new java.awt.Color(255, 255, 255));
+        table_usuarios.setModel(new javax.swing.table.DefaultTableModel(
 
         ));
-        jScrollPane1.setViewportView(table_secretaria);
+        jScrollPane1.setViewportView(table_usuarios);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 742, 320));
 
@@ -280,7 +280,7 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable table_secretaria;
+    private javax.swing.JTable table_usuarios;
     private javax.swing.JTextField text_field_apellido_secretaria;
     private javax.swing.JTextField text_field_buscar;
     private javax.swing.JTextField text_field_contrasena_secretaria;
