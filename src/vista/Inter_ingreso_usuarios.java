@@ -71,13 +71,13 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        text_field_email_secretaria = new javax.swing.JTextField();
-        text_field_contrasena_secretaria = new javax.swing.JTextField();
+        text_email = new javax.swing.JTextField();
+        text_contrasenia = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
-        text_field_nombre_secretaria = new javax.swing.JTextField();
-        text_field_apellido_secretaria = new javax.swing.JTextField();
+        text_nombre = new javax.swing.JTextField();
+        text_apellido = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        text_field_nomb_user_secretaria = new javax.swing.JTextField();
+        text_nombre_user = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         boton_guardar_secretaria = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
@@ -108,34 +108,34 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         jLabel23.setText("Contraseña:");
         jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
 
-        text_field_email_secretaria.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(text_field_email_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 190, -1));
+        text_email.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 190, -1));
 
-        text_field_contrasena_secretaria.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(text_field_contrasena_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 190, -1));
+        text_contrasenia.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 190, -1));
 
         jLabel27.setForeground(new java.awt.Color(0, 0, 0));
         jLabel27.setText("Email:");
         jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, 30));
 
-        text_field_nombre_secretaria.setBackground(new java.awt.Color(255, 255, 255));
-        text_field_nombre_secretaria.addActionListener(new java.awt.event.ActionListener() {
+        text_nombre.setBackground(new java.awt.Color(255, 255, 255));
+        text_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                text_field_nombre_secretariaActionPerformed(evt);
+                text_nombreActionPerformed(evt);
             }
         });
-        jPanel1.add(text_field_nombre_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 190, -1));
+        jPanel1.add(text_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 190, -1));
 
-        text_field_apellido_secretaria.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(text_field_apellido_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 190, -1));
+        text_apellido.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 190, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Ingreso");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
 
-        text_field_nomb_user_secretaria.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(text_field_nomb_user_secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 190, -1));
+        text_nombre_user.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_nombre_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 190, -1));
 
         jLabel28.setForeground(new java.awt.Color(0, 0, 0));
         jLabel28.setText("Nombre :");
@@ -249,9 +249,9 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void text_field_nombre_secretariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_field_nombre_secretariaActionPerformed
+    private void text_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_nombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_text_field_nombre_secretariaActionPerformed
+    }//GEN-LAST:event_text_nombreActionPerformed
 
     private void text_field_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_field_buscarActionPerformed
         // TODO add your handling code here:
@@ -281,11 +281,11 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_usuarios;
-    private javax.swing.JTextField text_field_apellido_secretaria;
+    private javax.swing.JTextField text_apellido;
+    private javax.swing.JTextField text_contrasenia;
+    private javax.swing.JTextField text_email;
     private javax.swing.JTextField text_field_buscar;
-    private javax.swing.JTextField text_field_contrasena_secretaria;
-    private javax.swing.JTextField text_field_email_secretaria;
-    private javax.swing.JTextField text_field_nomb_user_secretaria;
-    private javax.swing.JTextField text_field_nombre_secretaria;
+    private javax.swing.JTextField text_nombre;
+    private javax.swing.JTextField text_nombre_user;
     // End of variables declaration//GEN-END:variables
 }
