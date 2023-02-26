@@ -832,7 +832,7 @@ $$
 DELIMITER ;
 CALL PR_modificar_sorteo
 (600, curdate
-(),300, 301,500);
+(), 500,300, 301);
 -- CALL PR_modificar_sorteo(?, ?, ?, ?, ?, ?, ?, ?, ?);           -> llamada en Java
 
 DROP PROCEDURE IF EXISTS PR_eliminar_sorteo;
