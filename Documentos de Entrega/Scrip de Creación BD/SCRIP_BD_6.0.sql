@@ -831,8 +831,7 @@ END
 $$
 DELIMITER ;
 CALL PR_modificar_sorteo
-(600, curdate
-(), 500,300, 301);
+(600, curdate(), 500,300, 301);
 -- CALL PR_modificar_sorteo(?, ?, ?, ?, ?, ?, ?, ?, ?);           -> llamada en Java
 
 DROP PROCEDURE IF EXISTS PR_eliminar_sorteo;
@@ -923,8 +922,7 @@ END
 $$
 DELIMITER ;
 CALL PR_modificar_agenda
-(700, '2023-01-11', 'BRASIL', CURTIME
-(),500);
+(700, '2023-01-11', 'BRASIL', CURTIME(),500);
 -- CALL PR_modificar_agenda(?, ?, ?, ?, ?, ?, ?, ?, ?);           -> llamada en Java
 
 DROP PROCEDURE IF EXISTS PR_eliminar_agenda;
