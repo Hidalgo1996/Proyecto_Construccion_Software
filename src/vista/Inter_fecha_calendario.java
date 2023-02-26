@@ -193,6 +193,7 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
      * @return void
      */
     public void limpiarTexts() {
+        id = 0;
         text_box_hora_partido.setText("");
         text_box_lugar_partido.setText("");
         combo_box_equipo_local.setSelectedIndex(0);

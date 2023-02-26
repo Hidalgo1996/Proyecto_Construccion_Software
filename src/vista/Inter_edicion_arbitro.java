@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador_rol_arbitro;
 import modelo.Arbitro;
+import modelo.TipoBusquedaCombo;
 
 /**
  *
@@ -108,6 +109,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
      * @return void
      */
     public void limpiarTexts() {
+        id = 0;
         text_field_nombre_arbitro.setText("");
         text_field_apellido_arbitro.setText("");
         text_field_email_arbitro.setText("");
@@ -213,9 +215,9 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
      * @return void
      */
     public void cargarComboBusqueda() {
-        combo_box_buscar_arbitro.addItem("Nombre");
-        combo_box_buscar_arbitro.addItem("Usuario");
-        combo_box_buscar_arbitro.addItem("Categoria");
+        combo_box_buscar_arbitro.addItem(TipoBusquedaCombo.NOMBRE);
+        combo_box_buscar_arbitro.addItem(TipoBusquedaCombo.USUARIO);
+        combo_box_buscar_arbitro.addItem(TipoBusquedaCombo.CATEGORIA);
     }
 
     /**
@@ -239,38 +241,45 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
      * @param buscarPor, texto
      * @return void
      */
-    public void flitrarTabla(String buscarPor, String texto) {
+    public void filtrarTabla(String buscarPor, String texto) {
         List<Arbitro> listaFiltrada = new ArrayList<Arbitro>();
 
-        System.out.println("Filtro" + "\n");
-        System.out.println(buscarPor + "\n");
-        System.out.println(texto + "\n");
+//        System.out.println("Filtro" + "\n");
+//        System.out.println(buscarPor + "\n");
+//        System.out.println(texto + "\n");
+        switch (buscarPor) {
+            case TipoBusquedaCombo.NOMBRE:
+                for (Arbitro e : controlador_arbitro.listarArbitros()) {
+                    if (e.getNombre().toLowerCase().contains(texto.toLowerCase())) {
+                        System.out.println(e.getNombre() + "\n");
+                        listaFiltrada.add(e);
+                    }
+                }
+                break;
+            case TipoBusquedaCombo.APELLIDO:
+                controlador_arbitro.listarArbitros().forEach((e) -> {
+                    if (e.getApellido().toLowerCase().contains(texto.toLowerCase())) {
+                        listaFiltrada.add(e);
+                    }
+                });
+                break;
+            case TipoBusquedaCombo.USUARIO:
+                controlador_arbitro.listarArbitros().forEach((e) -> {
+                    if (e.getNombre_usuario().toLowerCase().contains(texto.toLowerCase())) {
+                        listaFiltrada.add(e);
+                    }
+                });
+                break;
+            case TipoBusquedaCombo.CATEGORIA:
+                controlador_arbitro.listarArbitros().forEach((e) -> {
+                    if (e.getCategoria().toLowerCase().contains(texto.toLowerCase())) {
+                        listaFiltrada.add(e);
+                    }
+                });
+                break;
 
-        if (buscarPor.equalsIgnoreCase("nombre")) {
-            for (Arbitro e : controlador_arbitro.listarArbitros()) {
-                if (e.getNombre().toLowerCase().contains(texto.toLowerCase())) {
-                    System.out.println(e.getNombre() + "\n");
-                    listaFiltrada.add(e);
-                }
-            }
-        } else if (buscarPor.equalsIgnoreCase("apellido")) {
-            controlador_arbitro.listarArbitros().forEach((e) -> {
-                if (e.getApellido().toLowerCase().contains(texto.toLowerCase())) {
-                    listaFiltrada.add(e);
-                }
-            });
-        } else if (buscarPor.equalsIgnoreCase("usuario")) {
-            controlador_arbitro.listarArbitros().forEach((e) -> {
-                if (e.getNombre_usuario().toLowerCase().contains(texto.toLowerCase())) {
-                    listaFiltrada.add(e);
-                }
-            });
-        } else if (buscarPor.equalsIgnoreCase("categoria")) {
-            controlador_arbitro.listarArbitros().forEach((e) -> {
-                if (e.getCategoria().toLowerCase().contains(texto.toLowerCase())) {
-                    listaFiltrada.add(e);
-                }
-            });
+            default:
+                throw new AssertionError();
         }
 
         int i = 0;
@@ -446,6 +455,11 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
                 text_field_buscar_arbitroActionPerformed(evt);
             }
         });
+        text_field_buscar_arbitro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                text_field_buscar_arbitroKeyPressed(evt);
+            }
+        });
         jPanel1.add(text_field_buscar_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 157, -1));
 
         boton_buscar_arbitro.setBackground(new java.awt.Color(0, 204, 204));
@@ -553,9 +567,17 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         } else {
             String buscarPor = combo_box_buscar_arbitro.getSelectedItem().toString();
             String texto = text_field_buscar_arbitro.getText().trim();
-            flitrarTabla(buscarPor, texto);
+            filtrarTabla(buscarPor, texto);
         }
     }//GEN-LAST:event_boton_buscar_arbitroActionPerformed
+
+    private void text_field_buscar_arbitroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_field_buscar_arbitroKeyPressed
+        if (evt.getKeyCode() == 10) {
+            String buscarPor = combo_box_buscar_arbitro.getSelectedItem().toString();
+            String texto = text_field_buscar_arbitro.getText().trim();
+            filtrarTabla(buscarPor, texto);
+        }
+    }//GEN-LAST:event_text_field_buscar_arbitroKeyPressed
 
     private void text_field_nombre_arbitroActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_text_field_nombre_arbitroActionPerformed
         // TODO add your handling code here:

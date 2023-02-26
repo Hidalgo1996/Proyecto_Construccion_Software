@@ -427,9 +427,19 @@ DROP PROCEDURE IF EXISTS PR_consultar_usuario_;
 DELIMITER $$
 CREATE PROCEDURE PR_consultar_usuario_()
 BEGIN
-    SELECT *
-    FROM usuario
-    WHERE ESTADO <> 'E';
+    select 
+    u.id_usuario as id,
+    u.nombre,
+    u.apellido,
+    u.nombre_usuario,
+    u.email,
+    u.contrasenia,
+    u.rol_id_rol as id_rol,
+    r.nombre_rol 
+    from 
+    usuario u 
+    inner join rol r on r.id_rol = u.rol_id_rol
+    where u.estado <> 'E';
 END
 $$
 DELIMITER ;YO

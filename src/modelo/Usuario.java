@@ -10,18 +10,16 @@ public class Usuario {
     protected String email;
     protected String estado;
     protected Integer id_rol;
+    protected String nombre_rol;
 
     public Usuario() {
     }
-    
 
     public Usuario(Integer id_usuario, String nombre, String apellido) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.apellido = apellido;
     }
-
-
 
     public Usuario(Integer id_usuario, String nombre, String apellido, String nombre_usuario, String contrasenia,
             String email, String estado, Integer id_rol) {
@@ -33,6 +31,18 @@ public class Usuario {
         this.email = email;
         this.estado = estado;
         this.id_rol = id_rol;
+    }
+
+    public Usuario(Integer id_usuario, String nombre, String apellido, String nombre_usuario, String contrasenia,
+            String email, Integer id_rol, String nombre_rol) {
+        this.id_usuario = id_usuario;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.nombre_usuario = nombre_usuario;
+        this.contrasenia = contrasenia;
+        this.email = email;
+        this.id_rol = id_rol;
+        this.nombre_rol = nombre_rol;
     }
 
     public Usuario(Integer id_usuario, String nombre, String apellido, String nombre_usuario, String contrasenia,
@@ -108,5 +118,13 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNombre_rol() {
+        return nombre_rol;
+    }
+
+    public void setNombre_rol(String nombre_rol) {
+        this.nombre_rol = nombre_rol;
     }
 }

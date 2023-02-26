@@ -112,6 +112,7 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
      * @return void
      */
     public void limpiarTexts() {
+        id = 0;
         text_field_nombre_club.setText("");
         text_director.setText("");
     }
