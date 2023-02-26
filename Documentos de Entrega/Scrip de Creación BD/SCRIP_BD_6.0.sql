@@ -978,8 +978,7 @@ BEGIN
 END
 $$
 DELIMITER ;
-CALL PR_insertar_acta_partido
-(121, '2023-01-11', '12:22:00', '15:44:55', 'Ecuador', 'Venzuela', '01:33:33', 2, 4, 'Venezuela', 'A', 500);
+CALL PR_insertar_acta_partido('2023-01-11', '12:22:00', '15:44:55', 'Ecuador', 'Venzuela', '01:33:33', 2, 4, 'Venezuela', 'A', 500);
 -- 800
 -- CALL PR_insertar_acta_partido(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);           -> llamada en Java
 
