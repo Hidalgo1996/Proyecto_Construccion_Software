@@ -1037,7 +1037,7 @@ END
 $$
 DELIMITER ;
 CALL PR_modificar_acta_partido
-(800, 121, '2023-01-11', '12:22:00', '15:44:55', 'Ecuador', 'Venzuela', '01:33:33', 2, 4, 'Venezuela', 500);
+(800,'2023-01-11', '12:22:00', '15:44:55', 'Ecuador', 'Venzuela', '01:33:33', 2, 4, 'Venezuela');
 -- CALL PR_modificar_acta_partido(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);           -> llamada en Java
 
 DROP PROCEDURE IF EXISTS PR_eliminar_acta_partido;
