@@ -19,8 +19,10 @@ public class AgendaTest {
 
     Controlador_agenda controlador_agenda = new Controlador_agenda();
 
-    /**
-     * 
+    /*
+     *  CASO DE PRUEBA - 005 : SE EVALUA EL BLOQUE DE CODIGO
+     *  QUE ESTA ENCARGADO DE REGISTRAR LA INFORMACION DE LOS PROXIMOS
+     *  ENCUENTROS DE FUTBOL, A CARGO DE LA SECRETARIA.
      */
     @Test
     public void agregarAgenda() {
@@ -34,8 +36,10 @@ public class AgendaTest {
         assertEquals("Agenda registrada correctamente", mensaje);
     }
 
-    /**
-     * 
+    /*
+     *  CASO DE PRUEBA - 006 : SE EVALUA EL BLOQUE DE CODIGO
+     *  QUE ESTA ENCARGADO DE ACTUALIZAR LA INFORMACION DE LOS PROXIMOS
+     *  ENCUENTROS DE FUTBOL, A CARGO DE LA SECRETARIA.
      */
     @Test
     public void actualizarAgenda() {
@@ -56,8 +60,10 @@ public class AgendaTest {
         }
     }
 
-    /**
-     * 
+    /*
+     *  CASO DE PRUEBA - 007 : SE EVALUA EL BLOQUE DE CODIGO
+     *  QUE ESTA ENCARGADO DE CONSULTAR LA INFORMACION DE LOS PROXIMOS
+     *  ENCUENTROS DE FUTBOL, A CARGO DE LA SECRETARIA.
      */
     @Test
     public void listarAgendas() {
@@ -67,8 +73,10 @@ public class AgendaTest {
         assertEquals("Machala", tmp.get(4).getLugar_partido());
     }
 
-    /**
-     * 
+    /*
+     *  CASO DE PRUEBA - 008 : SE EVALUA EL BLOQUE DE CODIGO
+     *  QUE ESTA ENCARGADO DE ELIMINAR LA INFORMACION DE LOS PROXIMOS
+     *  ENCUENTROS DE FUTBOL, A CARGO DE LA SECRETARIA.
      */
     @Test
     public void eliminarAgenda() {

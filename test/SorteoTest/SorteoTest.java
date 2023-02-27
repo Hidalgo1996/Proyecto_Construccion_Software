@@ -10,8 +10,11 @@ public class SorteoTest {
     
     Controlador_sorteo controlador_sorteo = new Controlador_sorteo();
 
-    /**
-     * 
+    /*
+     *  CASO DE PRUEBA - 016 SE EVALUA EL BLOQUE DE CODIGO
+     *  QUE ESTA ENCARGADO DE REALIZAR EL SORTEO DE ÁRBITROS 
+     *  DE ENTRE LOS PARTIDOS REGISTRADOS, ESTE PROCESO ESTA
+     *  A CARGO DEL PRESIDENTE DE LA FEDERACION
      */
     @Test
     public void agregarSorteo(){

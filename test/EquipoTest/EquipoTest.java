@@ -14,8 +14,10 @@ public class EquipoTest {
 
     Controlador_equipo controlador_equipo = new Controlador_equipo();
 
-    /**
-     * 
+    /*
+     *  CASO DE PRUEBA - 010 SE EVALUA EL BLOQUE DE CODIGO
+     *  QUE ESTA ENCARGADO DE REGISTRAR LA INFORMACIÓN DE UN NUEVO
+     *  EQUIPO DE FUTBOL, A CARGO DE LA SECRETARIA.
      */
     @Test
     public void agregarEquipo() {
@@ -30,8 +32,10 @@ public class EquipoTest {
         assertEquals("Equipo registrado correctamente!", mensaje);
     }
 
-    /**
-     * 
+    /*
+     *  CASO DE PRUEBA - 011 SE EVALUA EL BLOQUE DE CODIGO
+     *  QUE ESTA ENCARGADO DE ACTUALIZAR LA INFORMACIÓN DE UN NUEVO
+     *  EQUIPO DE FUTBOL, A CARGO DE LA SECRETARIA.
      */
     @Test
     public void actualizarEquipo() {
@@ -51,9 +55,11 @@ public class EquipoTest {
 
     }
 
-    /**
-     * 
-     */
+  /*
+   *  CASO DE PRUEBA - 012 SE EVALUA EL BLOQUE DE CODIGO
+   *  QUE ESTA ENCARGADO DE REGISTRAR LA INFORMACIÓN DE UN NUEVO
+   *  EQUIPO DE FUTBOL, A CARGO DE LA SECRETARIA.
+   */
     @Test
     public void eliminarEquipo() {
 
@@ -66,9 +72,11 @@ public class EquipoTest {
         }
     }
 
-    /**
-     * 
-     */
+  /*
+   *  CASO DE PRUEBA - 013 SE EVALUA EL BLOQUE DE CODIGO
+   *  QUE ESTA ENCARGADO DE CONSULTAR LA INFORMACIÓN DE UN NUEVO
+   *  EQUIPO DE FUTBOL, A CARGO DE LA SECRETARIA.
+   */
     @Test
     public void ListarEquipos() {
 
