@@ -15,7 +15,7 @@ public class Conexion {
             // Dentro de este objeto de tipo Connection se guardara la ruta de mi base de
             // datos
             java.sql.Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestion_arbitros",
-                    "proyecto", "12345");
+                    "gestor", "12345");
 
             return conexion;
 
