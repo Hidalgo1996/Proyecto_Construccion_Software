@@ -203,6 +203,11 @@ public class JFMenu_Principal extends javax.swing.JFrame {
         usuarioMenu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         usuarioMenu.setMinimumSize(new java.awt.Dimension(180, 30));
         usuarioMenu.setPreferredSize(new java.awt.Dimension(160, 40));
+        usuarioMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                usuarioMenuMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(usuarioMenu);
 
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
@@ -239,6 +244,12 @@ public class JFMenu_Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void usuarioMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuarioMenuMouseClicked
+       Inter_ingreso_usuarios ventanaUsuarios = new Inter_ingreso_usuarios();
+       JFmenu_principal.add(ventanaUsuarios);
+       ventanaUsuarios.setVisible(true);
+    }//GEN-LAST:event_usuarioMenuMouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
         Inter_modulo_actas ventanaActas = new Inter_modulo_actas();
