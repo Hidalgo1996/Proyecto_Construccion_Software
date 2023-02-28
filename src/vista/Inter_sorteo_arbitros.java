@@ -90,8 +90,8 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
         table_sorteo = new JTable(modelo);
         jScrollPane1.setViewportView(table_sorteo);
 
-        table_sorteo.getColumnModel().getColumn(0).setMaxWidth(20);
-        table_sorteo.getColumnModel().getColumn(0).setPreferredWidth(20);
+        table_sorteo.getColumnModel().getColumn(0).setMaxWidth(30);
+        table_sorteo.getColumnModel().getColumn(0).setPreferredWidth(30);
         table_sorteo.removeColumn(table_sorteo.getColumnModel().getColumn(1));
     }
 

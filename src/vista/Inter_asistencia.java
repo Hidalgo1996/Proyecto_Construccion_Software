@@ -94,8 +94,8 @@ public class Inter_asistencia extends javax.swing.JInternalFrame {
         table_asistencia = new JTable(modeloAsistencia);
         jScrollPane1.setViewportView(table_asistencia);
 
-        table_asistencia.getColumnModel().getColumn(0).setMaxWidth(20);
-        table_asistencia.getColumnModel().getColumn(0).setPreferredWidth(20);
+        table_asistencia.getColumnModel().getColumn(0).setMaxWidth(30);
+        table_asistencia.getColumnModel().getColumn(0).setPreferredWidth(30);
         table_asistencia.removeColumn(table_asistencia.getColumnModel().getColumn(1));
         table_asistencia.removeColumn(table_asistencia.getColumnModel().getColumn(5));
         TableColumn col = table_asistencia.getColumnModel().getColumn(5);

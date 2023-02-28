@@ -85,8 +85,8 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
 
         jScrollPane1.setViewportView(table_actas);
 
-        table_actas.getColumnModel().getColumn(0).setMaxWidth(20);
-        table_actas.getColumnModel().getColumn(0).setPreferredWidth(20);
+        table_actas.getColumnModel().getColumn(0).setMaxWidth(30);
+        table_actas.getColumnModel().getColumn(0).setPreferredWidth(30);
         table_actas.removeColumn(table_actas.getColumnModel().getColumn(1));
         table_actas.removeColumn(table_actas.getColumnModel().getColumn(5));
     }

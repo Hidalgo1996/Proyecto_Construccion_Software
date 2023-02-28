@@ -55,8 +55,8 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         // table_arbitro.setModel(modelo);
         jScrollPane1.setViewportView(table_arbitro);
 
-        table_arbitro.getColumnModel().getColumn(0).setMaxWidth(20);
-        table_arbitro.getColumnModel().getColumn(0).setPreferredWidth(20);
+        table_arbitro.getColumnModel().getColumn(0).setMaxWidth(30);
+        table_arbitro.getColumnModel().getColumn(0).setPreferredWidth(30);
         table_arbitro.removeColumn(table_arbitro.getColumnModel().getColumn(1));
         cargarComboCategoria();
         cargarComboBusqueda();

@@ -59,8 +59,8 @@ public class Inter_ingreso_clubs extends javax.swing.JInternalFrame {
         table_club = new JTable(modelo);
         // table_club.setModel(modelo);
         jScrollPane1.setViewportView(table_club);
-        table_club.getColumnModel().getColumn(0).setMaxWidth(20);
-        table_club.getColumnModel().getColumn(0).setPreferredWidth(20);
+        table_club.getColumnModel().getColumn(0).setMaxWidth(30);
+        table_club.getColumnModel().getColumn(0).setPreferredWidth(30);
         table_club.removeColumn(table_club.getColumnModel().getColumn(1));
     }
 

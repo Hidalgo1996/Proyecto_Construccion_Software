@@ -70,8 +70,8 @@ public class Inter_consulta_asistencia_arbitros extends javax.swing.JInternalFra
                 table_arbitrosMousePressed(evt);
             }
         });
-        table_arbitros.getColumnModel().getColumn(0).setMaxWidth(20);
-        table_arbitros.getColumnModel().getColumn(0).setPreferredWidth(20);
+        table_arbitros.getColumnModel().getColumn(0).setMaxWidth(30);
+        table_arbitros.getColumnModel().getColumn(0).setMaxWidth(30);
         table_arbitros.removeColumn(table_arbitros.getColumnModel().getColumn(1));
 
         modeloTablaAsistencias.addColumn("#");
@@ -82,8 +82,8 @@ public class Inter_consulta_asistencia_arbitros extends javax.swing.JInternalFra
         modeloTablaAsistencias.addColumn("Asistencia");
         table_arbitro_asistencia = new JTable(modeloTablaAsistencias);
         jScrollPane2.setViewportView(table_arbitro_asistencia);
-        table_arbitro_asistencia.getColumnModel().getColumn(0).setMaxWidth(20);
-        table_arbitro_asistencia.getColumnModel().getColumn(0).setPreferredWidth(20);
+        table_arbitro_asistencia.getColumnModel().getColumn(0).setMaxWidth(30);
+        table_arbitro_asistencia.getColumnModel().getColumn(0).setPreferredWidth(30);
         table_arbitro_asistencia.removeColumn(table_arbitro_asistencia.getColumnModel().getColumn(1));
     }
 

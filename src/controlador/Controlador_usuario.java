@@ -124,13 +124,14 @@ public class Controlador_usuario {
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
         try {
-            consulta = conector.prepareStatement("call PR_modificar_usuario (?, ?, ?);");
+            consulta = conector.prepareStatement("call PR_modificar_usuario (?, ?, ?, ?, ?, ?, ?);");
             consulta.setInt(1, usuario.getId_usuario());
             consulta.setString(2, usuario.getNombre());
             consulta.setString(3, usuario.getApellido());
             consulta.setString(4, usuario.getNombre_usuario());
             consulta.setString(5, usuario.getEmail());
-            consulta.setInt(6, usuario.getId_rol());
+            consulta.setString(6, usuario.getContrasenia());
+            consulta.setInt(7, usuario.getId_rol());
 
             if (consulta.executeUpdate() > 0) {
                 mensaje = "Usuario actualizado correctamente";

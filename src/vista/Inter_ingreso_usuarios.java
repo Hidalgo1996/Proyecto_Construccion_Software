@@ -64,8 +64,8 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         table_usuarios = new JTable(modelo);
         // table_usuarios.setModel(modelo);
         jScrollPane1.setViewportView(table_usuarios);
-        table_usuarios.getColumnModel().getColumn(0).setMaxWidth(20);
-        table_usuarios.getColumnModel().getColumn(0).setPreferredWidth(20);
+        table_usuarios.getColumnModel().getColumn(0).setMaxWidth(30);
+        table_usuarios.getColumnModel().getColumn(0).setPreferredWidth(30);
         table_usuarios.removeColumn(table_usuarios.getColumnModel().getColumn(1));
         table_usuarios.removeColumn(table_usuarios.getColumnModel().getColumn(5));
         table_usuarios.removeColumn(table_usuarios.getColumnModel().getColumn(5));
@@ -79,7 +79,7 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
 
     private void cargarComboRol() {
         combo_box_rol.addItem("<SELECCIONE>");
-        combo_box_rol.addItem(Rol.ARBITRO_STRING);
+        //combo_box_rol.addItem(Rol.ARBITRO_STRING);
         combo_box_rol.addItem(Rol.SECRETARIO_STRING);
         combo_box_rol.addItem(Rol.PRESIDENTE_STRING);
         combo_box_rol.addItem(Rol.ADMINISTRADOR_STRING);
@@ -100,7 +100,7 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         nuevoUsuario.setNombre_usuario(text_nombre_user.getText().trim());
         nuevoUsuario.setEmail(text_email.getText().trim());
         nuevoUsuario.setContrasenia(text_contrasenia.getPassword().toString());
-        nuevoUsuario.setId_rol(combo_box_rol.getSelectedIndex());
+        nuevoUsuario.setId_rol(combo_box_rol.getSelectedIndex()+1);
         if (id == 0) {
             mensaje = controlador_usuario.guardarUsuario(nuevoUsuario);
 
@@ -162,6 +162,7 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         text_nombre_user.setText(table_usuarios.getModel().getValueAt(fila, 4).toString());
         text_email.setText(table_usuarios.getModel().getValueAt(fila, 5).toString());
         text_contrasenia.setText(table_usuarios.getModel().getValueAt(fila, 6).toString());
+        combo_box_rol.setSelectedIndex((int)table_usuarios.getModel().getValueAt(fila, 7)-1);
 
     }
 

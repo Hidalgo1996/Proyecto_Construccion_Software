@@ -135,6 +135,7 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
             mensaje = controlador_agenda.guardarAgenda(nuevaAgenda);
         } else {
             try {
+                nuevaAgenda.setHora_partido(Time.valueOf(text_box_hora_partido.getValue().toString()));
                 nuevaAgenda.setId_agenda(id);
                 mensaje = controlador_agenda.actualizarAgenda(nuevaAgenda);
                 id = 0;
