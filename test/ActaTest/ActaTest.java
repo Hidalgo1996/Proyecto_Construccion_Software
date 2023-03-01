@@ -17,8 +17,10 @@ public class ActaTest {
 
     Controlador_actas_partido controlador_actas_partido = new Controlador_actas_partido();
 
-    /**
-     * 
+    /*
+     *  CASO DE PRUEBA - 001: SE EVALUA EL BLOQUE DE CODIGO
+     *  QUE ESTA ENCARGADO DE REGISTRAR EL INGRESO DE LAS ACTAS DEL PARTIDO
+     *  POR PARTE DEL ARBITRO
      */
     @Test
     public void agregarActa() {
@@ -48,24 +50,30 @@ public class ActaTest {
 
     }
 
-    /**
-     * 
+    /*
+     *  CASO DE PRUEBA - 002: : SE EVALUA EL BLOQUE DE CODIGO
+     *  QUE ESTA ENCARGADO DE ACTUALIZAR LAS DE LAS ACTAS DEL PARTIDO
+     *  POR PARTE DEL ARBITRO
      */
     @Test
     public void actualizarActa() {
 
     }
 
-    /**
-     * 
+    /*
+     *  CASO DE PRUEBA - 003: SE EVALUA EL BLOQUE DE CODIGO
+     *  QUE ESTA ENCARGADO DE ELIMINAR LAS DE LAS ACTAS DEL PARTIDO
+     *  POR PARTE DEL ARBITRO
      */
     @Test
     public void eliminarActa() {
 
     }
 
-    /**
-     * 
+    /*
+     *  CASO DE PRUEBA - 004: SE EVALUA EL BLOQUE DE CODIGO
+     *  QUE ESTA ENCARGADO DE CONSULTAR LAS DE LAS ACTAS DEL PARTIDO
+     *  POR PARTE DEL ARBITRO
      */
     @Test
     public void listarActas() {

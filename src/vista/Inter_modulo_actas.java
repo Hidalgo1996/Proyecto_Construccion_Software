@@ -76,7 +76,7 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
         modelo.addColumn("Fecha Emision");
         modelo.addColumn("Hora Inicio");
         modelo.addColumn("Hora Fin");
-        modelo.addColumn("Partido");
+        modelo.addColumn("Partido (Local - Rival)");
         modelo.addColumn("Duracion");
         modelo.addColumn("Goles Local");
         modelo.addColumn("Goles Rival");
@@ -87,8 +87,17 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
 
         table_actas.getColumnModel().getColumn(0).setMaxWidth(30);
         table_actas.getColumnModel().getColumn(0).setPreferredWidth(30);
+        table_actas.getColumnModel().getColumn(2).setPreferredWidth(100);
+        table_actas.getColumnModel().getColumn(3).setPreferredWidth(100);
+        table_actas.getColumnModel().getColumn(4).setPreferredWidth(100);
+        table_actas.getColumnModel().getColumn(5).setPreferredWidth(200);
+        table_actas.getColumnModel().getColumn(6).setPreferredWidth(100);
+        table_actas.getColumnModel().getColumn(7).setPreferredWidth(100);
+        table_actas.getColumnModel().getColumn(8).setPreferredWidth(100);
+        table_actas.getColumnModel().getColumn(9).setPreferredWidth(150);
         table_actas.removeColumn(table_actas.getColumnModel().getColumn(1));
         table_actas.removeColumn(table_actas.getColumnModel().getColumn(5));
+        table_actas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     }
 
     /**

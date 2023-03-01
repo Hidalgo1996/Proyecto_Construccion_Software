@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador_rol_arbitro;
 import modelo.Arbitro;
+import modelo.Categoria;
 import modelo.TipoBusquedaCombo;
 
 /**
@@ -51,13 +52,24 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         modelo.addColumn("Edad");
         modelo.addColumn("Total partidos");
         modelo.addColumn("Categoria");
+        modelo.addColumn("Nacionalidad");
         table_arbitro = new JTable(modelo);
         // table_arbitro.setModel(modelo);
         jScrollPane1.setViewportView(table_arbitro);
 
         table_arbitro.getColumnModel().getColumn(0).setMaxWidth(30);
         table_arbitro.getColumnModel().getColumn(0).setPreferredWidth(30);
+        table_arbitro.getColumnModel().getColumn(2).setPreferredWidth(100);
+        table_arbitro.getColumnModel().getColumn(3).setPreferredWidth(100);
+        table_arbitro.getColumnModel().getColumn(4).setPreferredWidth(150);
+        table_arbitro.getColumnModel().getColumn(5).setPreferredWidth(200);
+        table_arbitro.getColumnModel().getColumn(6).setPreferredWidth(100);
+        table_arbitro.getColumnModel().getColumn(7).setPreferredWidth(50);
+        table_arbitro.getColumnModel().getColumn(8).setPreferredWidth(100);
+        table_arbitro.getColumnModel().getColumn(9).setPreferredWidth(100);
+        table_arbitro.getColumnModel().getColumn(10).setPreferredWidth(100);
         table_arbitro.removeColumn(table_arbitro.getColumnModel().getColumn(1));
+        table_arbitro.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         cargarComboCategoria();
         cargarComboBusqueda();
         cargarListadoArbitros();
@@ -85,6 +97,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
             nuevoArbitro.setContrasenia(text_field_contrasena_arbitro.getText().trim());
             nuevoArbitro.setEdad(text_field_edad_arbitro.getText().trim());
             nuevoArbitro.setCantidad_partidos(text_field_partidos_arbitro.getText().trim());
+            nuevoArbitro.setNacionalidad(text_nacionalidad.getText().trim());
             nuevoArbitro.setCategoria(combo_box_categoria_arbitro.getSelectedItem().toString());
             if (id == 0) {
                 mensaje = controlador_arbitro.guardarArbitro(nuevoArbitro);
@@ -116,7 +129,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         text_field_contrasena_arbitro.setText("");
         text_field_edad_arbitro.setText("");
         text_field_usuario_arbitro.setText("");
-        // text_field_dorsal_arbitro.setText("");
+        text_nacionalidad.setText("");
         text_field_partidos_arbitro.setText("");
         combo_box_categoria_arbitro.setSelectedIndex(0);
     }
@@ -141,8 +154,9 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
             text_field_contrasena_arbitro.setText(table_arbitro.getModel().getValueAt(fila, 6).toString());
             text_field_edad_arbitro.setText(table_arbitro.getModel().getValueAt(fila, 7).toString());
             text_field_partidos_arbitro.setText(table_arbitro.getModel().getValueAt(fila, 8).toString());
-            // text_field_dorsal_arbitro.setText(table_arbitro.getModel().getValueAt(fila,
-            // 7).toString());
+            int categoria = obtenerCategoria(table_arbitro.getModel().getValueAt(fila, 9).toString()) ;
+            combo_box_categoria_arbitro.setSelectedIndex(categoria);
+            text_nacionalidad.setText(table_arbitro.getModel().getValueAt(fila, 10).toString());
 
             for (int i = 0; i <= combo_box_categoria_arbitro.getItemCount(); i++) {
                 String item = combo_box_categoria_arbitro.getItemAt(i);
@@ -152,9 +166,13 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
                 }
             }
         }
-
     }
 
+    private int obtenerCategoria(String categoria){
+        System.out.println(Categoria.valueOf(categoria.toUpperCase()).getId());
+        return Categoria.valueOf(categoria.toUpperCase()).getId();
+    }
+    
     /**
      * Borrado logico de un arbitro ingresado en la base de datos Lo pasa de
      * activo a inactivo.
@@ -203,7 +221,8 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{i,
                 e.getId_usuario(), e.getNombre(), e.getApellido(),
                 e.getNombre_usuario(), e.getEmail(), e.getContrasenia(),
-                e.getEdad(), e.getCantidad_partidos(), e.getCategoria()});
+                e.getEdad(), e.getCantidad_partidos(), e.getCategoria(),
+                e.getNacionalidad()});
         }
     }
 
@@ -229,9 +248,9 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
      */
     public void cargarComboCategoria() {
         combo_box_categoria_arbitro.addItem("<Selecione>");
-        combo_box_categoria_arbitro.addItem("Profesional");
-        combo_box_categoria_arbitro.addItem("Junior");
-        combo_box_categoria_arbitro.addItem("Infantil");
+        combo_box_categoria_arbitro.addItem(Categoria.PROFESIONAL.toString());
+        combo_box_categoria_arbitro.addItem(Categoria.JUVENIL.toString());
+        combo_box_categoria_arbitro.addItem(Categoria.INFANTIL.toString());
     }
 
     /**
@@ -288,9 +307,16 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         for (Arbitro e : listaFiltrada) {
             i = i + 1;
             modelo.addRow(new Object[]{i,
-                e.getId_usuario(), e.getNombre(), e.getApellido(),
-                e.getNombre_usuario(), e.getEmail(), e.getContrasenia(),
-                e.getEdad(), e.getCantidad_partidos(), e.getCategoria()});
+                e.getId_usuario(),
+                e.getNombre(),
+                e.getApellido(),
+                e.getNombre_usuario(),
+                e.getEmail(),
+                e.getContrasenia(),
+                e.getEdad(),
+                e.getCantidad_partidos(),
+                e.getCategoria(),
+                e.getNacionalidad()});
         }
     }
 
@@ -326,7 +352,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         boton_guardar_arbitro = new javax.swing.JButton();
-        text_field_dorsal_arbitro = new javax.swing.JTextField();
+        text_nacionalidad = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         text_field_buscar_arbitro = new javax.swing.JTextField();
@@ -372,7 +398,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         jPanel1.add(text_field_apellido_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 192, -1));
 
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Dorsal:");
+        jLabel8.setText("Nacionalidad:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
         text_field_edad_arbitro.setBackground(new java.awt.Color(255, 255, 255));
@@ -438,9 +464,8 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         });
         jPanel1.add(boton_guardar_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 92, -1));
 
-        text_field_dorsal_arbitro.setBackground(new java.awt.Color(255, 255, 255));
-        text_field_dorsal_arbitro.setEnabled(false);
-        jPanel1.add(text_field_dorsal_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 194, -1));
+        text_nacionalidad.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(text_nacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 194, -1));
 
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("*Seleccione un registro para efectuar alguna accion de edicion o borrado* ");
@@ -616,12 +641,12 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
     private javax.swing.JTextField text_field_apellido_arbitro;
     private javax.swing.JTextField text_field_buscar_arbitro;
     private javax.swing.JTextField text_field_contrasena_arbitro;
-    private javax.swing.JTextField text_field_dorsal_arbitro;
     private javax.swing.JTextField text_field_edad_arbitro;
     private javax.swing.JTextField text_field_email_arbitro;
     private javax.swing.JTextField text_field_nombre_arbitro;
     private javax.swing.JTextField text_field_partidos_arbitro;
     private javax.swing.JTextField text_field_usuario_arbitro;
+    private javax.swing.JTextField text_nacionalidad;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -14,7 +14,6 @@ public class Arbitro extends Usuario {
         this.categoria = "";
         this.nacionalidad = "";
         this.cantidad_partidos = "";
-
     }
 
     public Arbitro(Integer id_usuario, String nombre, String apellido,

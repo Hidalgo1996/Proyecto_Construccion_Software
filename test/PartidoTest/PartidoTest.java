@@ -16,9 +16,11 @@ public class PartidoTest {
 
     Controlador_partido controlador_partido = new Controlador_partido();
 
-    /**
-     * 
-     */
+  /*
+   *  CASO DE PRUEBA - 014 SE EVALUA EL BLOQUE DE CODIGO
+   *  QUE ESTA ENCARGADO DE REGISTRAR LA INFORMACIÓN DE UN NUEVO
+   *  EQUIPO DE FUTBOL, A CARGO DE LA SECRETARIA.
+   */
     @Test
     public void agregarPartido() {
 
@@ -31,9 +33,11 @@ public class PartidoTest {
         assertEquals("", mensaje);
     }
 
-    /**
-     * 
-     */
+  /*
+   *  CASO DE PRUEBA - 015 SE EVALUA EL BLOQUE DE CODIGO
+   *  QUE ESTA ENCARGADO DE CARGAR INFORMACION EN UN COMBO BOX
+   *  ESTA INFORMACION, SERA VISUALIZADA POR LA SECRETARIA.
+   */
     @Test
     public void cargarComboPartido() {
 

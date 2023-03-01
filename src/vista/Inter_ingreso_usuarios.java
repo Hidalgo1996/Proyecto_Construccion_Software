@@ -316,6 +316,7 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setClosable(true);
         setTitle("Ingreso secretaria");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
