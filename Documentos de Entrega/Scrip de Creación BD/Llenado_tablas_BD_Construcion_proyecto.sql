@@ -74,7 +74,7 @@ INSERT INTO arbitro
         (id_arbitro, categoria, nombre, apellido, email, nombre_usuario, contrasenia, edad, nacionalidad, cantidad_partidos,
         create_at, delete_at, updated_at, estado, rol_id_rol)
     VALUES
-        (302, 'Amateur', 'Felipe', 'Vidal', 'vidal97@hotmail.com', 'FelipeVidal', '1245', 29, 'Español', 18,
+        (302, 'Juvenil', 'Felipe', 'Vidal', 'vidal97@hotmail.com', 'FelipeVidal', '1245', 29, 'Español', 18,
             curdate(), NULL, NULL, 'A', 1);
             
 -- 2
@@ -90,7 +90,7 @@ INSERT INTO arbitro
         (id_arbitro, categoria, nombre, apellido, email, nombre_usuario, contrasenia, edad, nacionalidad, cantidad_partidos,
         create_at, delete_at, updated_at, estado, rol_id_rol)
     VALUES
-        (304, 'Amateur', 'Daniel', 'Humberto', 'danip12@gmail.com', 'danielhumberto', '1245', 19, 'Uruguayo', 3,
+        (304, 'Juvenil', 'Daniel', 'Humberto', 'danip12@gmail.com', 'danielhumberto', '1245', 19, 'Uruguayo', 3,
             curdate(), NULL, NULL, 'A', 1);
             
 -- 4
@@ -106,7 +106,7 @@ INSERT INTO arbitro
         (id_arbitro, categoria, nombre, apellido, email, nombre_usuario, contrasenia, edad, nacionalidad, cantidad_partidos,
         create_at, delete_at, updated_at, estado, rol_id_rol)
     VALUES
-        (306, 'Amateur', 'Mike', 'Valarezo', 'vidal97@hotmail.com', 'FelipeVidal', '1245', 29, 'Español', 24,
+        (306, 'Juevenil', 'Mike', 'Valarezo', 'vidal97@hotmail.com', 'FelipeVidal', '1245', 29, 'Español', 24,
             curdate(), NULL, NULL, 'A', 1);
             
 -- 6
@@ -123,7 +123,7 @@ INSERT INTO arbitro
         (id_arbitro, categoria, nombre, apellido, email, nombre_usuario, contrasenia, edad, nacionalidad, cantidad_partidos,
         create_at, delete_at, updated_at, estado, rol_id_rol)
     VALUES
-        (308, 'Amateur', 'Raul', 'Perez', 'raul34@gmail.com', 'raulperez', '1245', 19, 'Español', 5,
+        (308, 'Juvenil', 'Raul', 'Perez', 'raul34@gmail.com', 'raulperez', '1245', 19, 'Español', 5,
             curdate(), NULL, NULL, 'A', 1);
             
 -- 8
