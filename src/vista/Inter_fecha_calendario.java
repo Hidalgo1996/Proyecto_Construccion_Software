@@ -254,7 +254,7 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
             int row = table_calendario.getSelectedRow();
             int id = Integer.parseInt(table_calendario.getModel().getValueAt(row, 1).toString());
 
-            int confirmacion = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro?", "Advertencia",
+            int confirmacion = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro?, mire que si lo elimina no podra volver a verlo", "Advertencia",
                     JOptionPane.YES_NO_OPTION);
             if (confirmacion == 0) {
                 try {
@@ -358,6 +358,10 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
                 e.getPartido_id().getClub_rival().getNombre_equipo()
             });
         }
+
+        if (listaFiltrada.size() == 0) {
+            JOptionPane.showMessageDialog(null, "No se encontraron concidencias", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     /**
@@ -413,8 +417,7 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
 
         setClosable(true);
-        setMaximizable(true);
-        setResizable(true);
+        setIconifiable(true);
         setTitle("Ingreso fecha calendario");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -503,6 +506,11 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
                 text_field_buscarActionPerformed(evt);
             }
         });
+        text_field_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                text_field_buscarKeyPressed(evt);
+            }
+        });
         jPanel1.add(text_field_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 157, -1));
 
         boton_buscar_calendario.setBackground(new java.awt.Color(0, 204, 204));
@@ -587,6 +595,15 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void text_field_buscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_field_buscarKeyPressed
+
+        if (evt.getKeyCode() == 10) {
+            String buscarPor = combo_box_buscar.getSelectedItem().toString();
+            String texto = text_field_buscar.getText().trim();
+            flitrarTabla(buscarPor, texto);
+        }
+    }//GEN-LAST:event_text_field_buscarKeyPressed
 
     private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_boton_editarActionPerformed
         editarCalendario();

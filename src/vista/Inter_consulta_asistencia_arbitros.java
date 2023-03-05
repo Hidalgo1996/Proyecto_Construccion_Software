@@ -4,6 +4,7 @@
  */
 package vista;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -198,6 +199,10 @@ public class Inter_consulta_asistencia_arbitros extends javax.swing.JInternalFra
                 e.getNacionalidad(),
                 e.getCategoria()
             });
+        }
+
+        if (listaFiltrada.size() == 0) {
+            JOptionPane.showMessageDialog(null, "No se encontraron concidencias", "Info", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

@@ -124,7 +124,7 @@ public class Controlador_actas_partido {
         try {
             Statement consulta = conector.createStatement();
 
-            ResultSet result = consulta.executeQuery("call listar_actas_partido();");
+            ResultSet result = consulta.executeQuery("call PR_consultar_acta_partido_();");
             // ResultSetMetaData metaData = result.getMetaData();
 
             while (result.next()) {

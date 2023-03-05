@@ -250,6 +250,7 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        setIconifiable(true);
         setTitle("Sorteo arbitros");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

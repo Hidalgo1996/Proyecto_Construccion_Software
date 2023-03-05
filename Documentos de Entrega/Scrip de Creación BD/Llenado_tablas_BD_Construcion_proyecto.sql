@@ -244,7 +244,7 @@ INSERT INTO sorteo
 INSERT INTO sorteo
         (id_sorteo, fecha_sorteo, create_at, delete_at, update_at, estado, arbitro_id_arbitro, partido_id_partido, arbitro_id_sustituto)
     VALUES
-        (602, '2023-01-12', curdate(), NULL, NULL, 'A', 303, 509, 300);
+        (603, '2023-01-12', curdate(), NULL, NULL, 'A', 303, 509, 300);
         
         
 -- 3

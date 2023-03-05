@@ -1276,11 +1276,13 @@ in xContrasenia varchar(50)
 )
 BEGIN
     
-    if not exists (select * from usuario where nombre_usuario = xUsuario and contrasenia = xContrasenia)
+     if not exists (select * from usuario where nombre_usuario = xUsuario and contrasenia = xContrasenia and estado <> 'E')
     then
-		select a.id_arbitro as id, a.nombre_usuario, a.email, a.rol_id_rol as id_rol, r.nombre_rol from arbitro a inner join rol r on r.id_rol = a.rol_id_rol where nombre_usuario = xUsuario and contrasenia = xContrasenia;
+		select a.id_arbitro as id, a.nombre_usuario, a.email, a.rol_id_rol as id_rol, r.nombre_rol from arbitro a inner join rol r on r.id_rol = a.rol_id_rol where nombre_usuario = xUsuario and contrasenia = xContrasenia and 
+        a.estado <> 'E';
     else
-		select u.id_usuario as id, u.nombre_usuario, u.email, u.rol_id_rol as id_rol, r.nombre_rol from usuario u inner join rol r on r.id_rol = u.rol_id_rol where nombre_usuario = xUsuario and contrasenia = xContrasenia;
+		select u.id_usuario as id, u.nombre_usuario, u.email, u.rol_id_rol as id_rol, r.nombre_rol from usuario u inner join rol r on r.id_rol = u.rol_id_rol where nombre_usuario = xUsuario and contrasenia = xContrasenia
+        and u.estado <> 'E';
     end if;
     
 END

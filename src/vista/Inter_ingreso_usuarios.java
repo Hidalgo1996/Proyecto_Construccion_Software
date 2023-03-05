@@ -8,8 +8,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Find.RowLock;
-
 import controlador.Controlador_usuario;
 import excepciones.UsuarioException;
 import java.util.ArrayList;
@@ -28,8 +26,8 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
     Controlador_usuario controlador_usuario = new Controlador_usuario();
     DefaultTableModel modelo;
     Integer id = 0;
-    Boolean mostrar = true;
-    char caracter;
+    Boolean mostrarPass = true;
+    char caracterPass;
 
     /**
      * Creates new form Inter_ingreso_secretarias
@@ -40,7 +38,7 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
         cargarComboRol();
         cargarComboFiltro();
         cargarListadoUsuarios();
-        caracter = text_contrasenia.getEchoChar();
+        caracterPass = text_contrasenia.getEchoChar();
     }
 
     private void setearTabla() {
@@ -226,24 +224,12 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
                 e.getNombre_rol()
             });
         }
+
+        if (listaFiltrada.size() == 0) {
+            JOptionPane.showMessageDialog(null, "No se encontraron concidencias", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
-    /*
-     * private String getRol(int rol) {
-     * switch (rol) {
-     * case Rol.ARBITRO:
-     * return Rol.ARBITRO_STRING;
-     * case Rol.SECRETARIO:
-     * return Rol.SECRETARIO_STRING;
-     * case Rol.PRESIDENTE:
-     * return Rol.PRESIDENTE_STRING;
-     * case Rol.ADMINISTRADOR:
-     * return Rol.ADMINISTRADOR_STRING;
-     * default:
-     * return "";
-     * }
-     * }
-     */
     private void cargarListadoUsuarios() {
         int i = 0;
         modelo.getDataVector().removeAllElements();
@@ -317,6 +303,7 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
+        setIconifiable(true);
         setTitle("Ingreso secretaria");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -507,12 +494,12 @@ public class Inter_ingreso_usuarios extends javax.swing.JInternalFrame {
 
     private void lbl_verMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_verMouseClicked
 
-        if (mostrar) { // a es una variable boolean en true
+        if (mostrarPass) { // a es una variable boolean en true
             text_contrasenia.setEchoChar((char) 0); // este método es el que hace visible el texto del jPasswordField
-            mostrar = false;
+            mostrarPass = false;
         } else {
-            text_contrasenia.setEchoChar(caracter); // i es el char
-            mostrar = true;
+            text_contrasenia.setEchoChar(caracterPass); // i es el char
+            mostrarPass = true;
         }
     }//GEN-LAST:event_lbl_verMouseClicked
 

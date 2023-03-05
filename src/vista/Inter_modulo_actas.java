@@ -376,6 +376,10 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                 e.getDuracion_partido(), e.getGoles_equipo_local(),
                 e.getGoles_equipo_rival(), e.getEquipo_ganador()});
         }
+
+        if (listaFiltrada.size() == 0) {
+            JOptionPane.showMessageDialog(null, "No se encontraron concidencias", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     /**
@@ -448,15 +452,15 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         combo_buscar = new javax.swing.JComboBox<>();
         txt_buscar = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_actas = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        boton_buscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
-        setResizable(true);
+        setIconifiable(true);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -644,13 +648,6 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/search(23).png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         table_actas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -679,6 +676,16 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
             }
         });
 
+        boton_buscar.setBackground(new java.awt.Color(0, 204, 204));
+        boton_buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        boton_buscar.setForeground(new java.awt.Color(0, 0, 0));
+        boton_buscar.setText("Buscar");
+        boton_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_buscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -689,11 +696,11 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jButton4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton5))
+                            .addComponent(jLabel13)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel14)
@@ -702,7 +709,7 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3)))
+                                .addComponent(boton_buscar)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -712,12 +719,11 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(combo_buscar)
-                        .addComponent(jLabel14)
-                        .addComponent(txt_buscar))
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(combo_buscar)
+                    .addComponent(jLabel14)
+                    .addComponent(txt_buscar)
+                    .addComponent(boton_buscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -756,6 +762,10 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
             filtrarTabla(filtro, texto);
         }
     }//GEN-LAST:event_txt_buscarKeyPressed
+
+    private void boton_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_buscarActionPerformed
 
     private void goles_local_text_boxKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_goles_local_text_boxKeyReleased
         setearEquipoGanador();
@@ -856,6 +866,7 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
     }// GEN-LAST:event_jTextField9ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boton_buscar;
     private javax.swing.JComboBox<String> combo_buscar;
     private javax.swing.JLabel duracion_partido_text;
     private javax.swing.JLabel equipo_ganador_text;
@@ -866,7 +877,6 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField hora_inicio_text_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;

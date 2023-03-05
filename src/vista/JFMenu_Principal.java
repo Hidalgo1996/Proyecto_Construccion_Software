@@ -67,6 +67,10 @@ public class JFMenu_Principal extends javax.swing.JFrame {
             presidenteMenu.setVisible(false);
             default:
                 break;
+            case Rol.PRESIDENTE:
+            arbitroMenu.setVisible(false);
+            usuarioMenu.setVisible(false);
+            secretarioMenu.setVisible(false);
         }
     }
 
