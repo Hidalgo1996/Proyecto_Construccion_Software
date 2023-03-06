@@ -1,4 +1,4 @@
-package test.SorteoTest;
+package SorteoTest;
 
 import org.junit.Test;
 

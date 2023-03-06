@@ -971,7 +971,7 @@ CREATE PROCEDURE PR_insertar_acta_partido(
     )
 BEGIN
 	declare xCodigo_acta int;
-    set xCodigo_acta := (select codigo_acta from acta_partido);
+    set xCodigo_acta := (select max(codigo_acta) from acta_partido);
     if xCodigo_acta is null or xCodigo_acta = 0 
     then
 		set xCodigo_acta := 1;
@@ -1169,22 +1169,22 @@ BEGIN
 ## Modificado por Flavio
 ## Se cambia seleccion para que ni incluya partidos que ya tienen acta 
    SELECT 
-    p.id_partido,
+    a.partido_id_partido,
     p.club_id_local,
     p.club_id_rival,
     l.nombre AS equipo_local,
     r.nombre AS equipo_rival
 FROM
-    partido p
+	PARTIDO P
+		INNER JOIN 
+    agenda a 
+		ON
+	A.partido_id_partido = P.ID_PARTIDO
         INNER JOIN
     club l ON p.club_id_local = l.id_club
         INNER JOIN
     club r ON p.club_id_rival = r.id_club
-		INNER JOIN
-	SORTEO S ON S.partido_id_partido = P.ID_PARTIDO
-		left join 
-	acta_partido ac on ac.partido_id_partido = p.id_partido 
-    where ac.id_acta_partido is null and p.estado <> 'E' AND S.PARTIDO_ID_PARTIDO <> P.ID_PARTIDO;
+    where A.sorteado = 'S' AND A.ESTADO <> 'E';
 END
 $$
 DELIMITER ;

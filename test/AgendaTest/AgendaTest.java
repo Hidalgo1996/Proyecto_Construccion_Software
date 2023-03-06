@@ -1,4 +1,4 @@
-package test.AgendaTest;
+package AgendaTest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,7 +27,7 @@ public class AgendaTest {
     @Test
     public void agregarAgenda() {
         Agenda agenda = new Agenda();
-        agenda.setPartido_id(new Partido(505));
+        agenda.setPartido_id(new Partido(509));
         agenda.setFecha_partido(Date.valueOf(LocalDate.now()));
         agenda.setLugar_partido("Machala");
         agenda.setHora_partido(Time.valueOf(LocalTime.now()));
@@ -44,8 +44,8 @@ public class AgendaTest {
     @Test
     public void actualizarAgenda() {
         Agenda agenda = new Agenda();
-        agenda.setId_agenda(712);
-        agenda.setPartido_id(null);
+        agenda.setId_agenda(703);
+        agenda.setPartido_id(new Partido(509));
         agenda.setFecha_partido(Date.valueOf(LocalDate.now()));
         agenda.setLugar_partido("El Cairo");
         agenda.setHora_partido(Time.valueOf(LocalTime.now()));
@@ -70,7 +70,7 @@ public class AgendaTest {
 
         List<Agenda> tmp = controlador_agenda.listarAgendas();
 
-        assertEquals("Machala", tmp.get(4).getLugar_partido());
+        assertEquals("Valencia", tmp.get(4).getLugar_partido());
     }
 
     /*
@@ -83,7 +83,7 @@ public class AgendaTest {
 
         String mensaje;
         try {
-            mensaje = controlador_agenda.eliminarAgenda(712);
+            mensaje = controlador_agenda.eliminarAgenda(710);
             assertEquals("Agenda eliminada correctamente", mensaje);
         } catch (AgendaException e) {
             e.printStackTrace();

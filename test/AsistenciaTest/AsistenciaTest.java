@@ -1,4 +1,4 @@
-package test.AsistenciaTest;
+package AsistenciaTest;
 
 import org.junit.Test;
 

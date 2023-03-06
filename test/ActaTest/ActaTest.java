@@ -1,4 +1,4 @@
-package test.ActaTest;
+package ActaTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -26,12 +26,10 @@ public class ActaTest {
     public void agregarActa() {
 
         Actas_partido acta = new Actas_partido();
-        acta.setPartido(new Partido(505));
+        acta.setPartido(new Partido(509));
         acta.setFecha_emision(Date.valueOf(LocalDate.now()));
         acta.setHora_inicio_partido("12:00:00");
         acta.setHora_fin_partido("14:00:00");
-        acta.setNombre_equipo_local("");
-        acta.setNombre_equipo_rival("");
         acta.setDuracion_partido("2:00:00");
         acta.setGoles_equipo_local(2);
         acta.setGoles_equipo_rival(3);
@@ -41,8 +39,7 @@ public class ActaTest {
         try {
             passed = controlador_actas_partido.guardarActa(acta);
             assertEquals("Acta registrada correctamente!", passed);
-            assertEquals(true, passed);
-            assertEquals("paquitos", acta.getEquipo_ganador());
+            assertEquals("Manchester United", acta.getEquipo_ganador());
         } catch (ActasException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

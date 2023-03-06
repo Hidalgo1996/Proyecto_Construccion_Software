@@ -1,4 +1,4 @@
-package test.EquipoTest;
+package EquipoTest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -41,7 +41,7 @@ public class EquipoTest {
     public void actualizarEquipo() {
         Equipo_futbol equipo_futbol = new Equipo_futbol();
 
-        equipo_futbol.setId_equipo(407);
+        equipo_futbol.setId_equipo(412);
         equipo_futbol.setNombre_equipo("Manchester United");
         equipo_futbol.setDirector("Diego");
 
@@ -65,7 +65,7 @@ public class EquipoTest {
 
         String mensaje;
         try {
-            mensaje = controlador_equipo.eliminarEquipo(407);
+            mensaje = controlador_equipo.eliminarEquipo(412);
             assertEquals("Equipo eliminado correctamente", mensaje);
         } catch (EquipoException e) {
             e.printStackTrace();
@@ -82,7 +82,7 @@ public class EquipoTest {
 
         List<Equipo_futbol> tmp = controlador_equipo.listarEquipos();
 
-        assertEquals("Manchester United", tmp.get(7).getNombre_equipo());
-        assertEquals("Diego", tmp.get(7).getDirector());
+        assertEquals("Valencia FC", tmp.get(7).getNombre_equipo());
+        assertEquals("Hidalgo", tmp.get(7).getDirector());
     }
 }
