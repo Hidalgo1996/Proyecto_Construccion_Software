@@ -337,11 +337,10 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
     public void filtrarTabla(String buscarPor, String texto) {
 
         List<Actas_partido> listaFiltrada = new ArrayList<Actas_partido>();
-        /*
-         * System.out.println("Filtro" + "\n");
-         * System.out.println(buscarPor + "\n");
-         * System.out.println(texto + "\n");
-         */
+
+        System.out.println("Filtro" + "\n");
+        System.out.println(buscarPor + "\n");
+        System.out.println(texto + "\n");
 
         switch (buscarPor) {
             case TipoBusquedaCombo.PARTIDO:
@@ -678,7 +677,6 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
 
         boton_buscar.setBackground(new java.awt.Color(0, 204, 204));
         boton_buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        boton_buscar.setForeground(new java.awt.Color(0, 0, 0));
         boton_buscar.setText("Buscar");
         boton_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -764,7 +762,14 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_buscarKeyPressed
 
     private void boton_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_buscarActionPerformed
-        // TODO add your handling code here:
+        if (txt_buscar.getText().isEmpty()) {
+            cargarListadoActas();
+        } else {
+            String filtro = combo_buscar.getSelectedItem().toString();
+            String texto = txt_buscar.getText().trim();
+
+            filtrarTabla(filtro, texto);
+        }
     }//GEN-LAST:event_boton_buscarActionPerformed
 
     private void goles_local_text_boxKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_goles_local_text_boxKeyReleased
@@ -839,14 +844,7 @@ public class Inter_modulo_actas extends javax.swing.JInternalFrame {
     }// GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
-        if (txt_buscar.getText().isEmpty()) {
-            cargarListadoActas();
-        } else {
-            String filtro = combo_buscar.getSelectedItem().toString();
-            String texto = txt_buscar.getText().trim();
 
-            filtrarTabla(filtro, texto);
-        }
     }// GEN-LAST:event_jButton3ActionPerformed
 
     private void equipo_ganador_text_boxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_equipo_ganador_text_boxActionPerformed
