@@ -20,6 +20,8 @@ public class Actas_partido {
 
     //Constructor vacio
     public Actas_partido() {
+        this.nombre_equipo_local = "";
+        this.nombre_equipo_rival = "";
     }
 
     public Actas_partido(int id_acta_partido, Date fecha_emision, String hora_inicio_partido, String hora_fin_partido,

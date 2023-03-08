@@ -38,6 +38,7 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
     DefaultTableModel modelo;
     Controlador_sorteo controladorSorteo = new Controlador_sorteo();
     List<Usuario> arbitrosSorteo = new ArrayList<Usuario>();
+    boolean estadoCheck = false;
 
     /**
      * Creates new form Inter_sorteo_arbitros
@@ -66,6 +67,8 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
         text_arbitro_principal.setText("");
         text_arbitro_sustituto.setText("");
         partido_combo.setSelectedIndex(0);
+        seleccionarArbitrosTodos(false);
+        arbitrosSorteo.clear();
     }
     
     private void setearTabla() {
@@ -95,6 +98,12 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
         table_sorteo.removeColumn(table_sorteo.getColumnModel().getColumn(1));
     }
 
+    private void seleccionarArbitrosTodos(boolean estado){
+        for(int i = 0; i < table_sorteo.getRowCount(); i++){
+            table_sorteo.setValueAt(estado, i, 5);
+        }
+    }
+
     private void cargarTablaSorteo() {
         int i = 0;
         modelo.getDataVector().removeAllElements();
@@ -111,12 +120,14 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
                 e.getNombre(), 
                 e.getApellido(),
                 e.getNacionalidad(),
-                e.getCategoria() });
+                e.getCategoria(),
+                false
+            });
         }
     }
 
     private boolean esFilaSeleccionada(int fila) {
-        return table_sorteo.getValueAt(fila, 5) != null;
+        return (boolean)(table_sorteo.getValueAt(fila, 5)) != false;
     }
 
     private void agregarArbitrosAlSorteo() {
@@ -217,7 +228,7 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
 
     private boolean camposNoValidos() {
         return (text_arbitro_principal.getText().isEmpty()
-                || text_arbitro_sustituto.getText().isEmpty() && partido_combo.getSelectedIndex() > 0);
+                || text_arbitro_sustituto.getText().isEmpty() || partido_combo.getSelectedIndex() == 0);
     }
 
     /**
@@ -233,6 +244,7 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
+        checkTodos = new javax.swing.JButton();
         text_arbitro_principal = new javax.swing.JTextField();
         text_arbitro_sustituto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -257,6 +269,14 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Arbitro principal:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        checkTodos.setText("Seleccionar Todos");
+        checkTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkTodosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(checkTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(825, 30, 140, -1));
 
         text_arbitro_principal.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         text_arbitro_principal.setEnabled(false);
@@ -298,7 +318,7 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
                 boton_sorteo_arbitroActionPerformed(evt);
             }
         });
-        getContentPane().add(boton_sorteo_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 30, 150, -1));
+        getContentPane().add(boton_sorteo_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 150, -1));
 
         btnGuardarSorteo.setText("Guardar Sorteo");
         btnGuardarSorteo.addActionListener(new java.awt.event.ActionListener() {
@@ -343,6 +363,11 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void checkTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkTodosActionPerformed
+        estadoCheck = !estadoCheck;
+        seleccionarArbitrosTodos(estadoCheck);
+    }//GEN-LAST:event_checkTodosActionPerformed
+
     private void btnGuardarSorteoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnGuardarSorteoActionPerformed
         guardarSorteo();
     }// GEN-LAST:event_btnGuardarSorteoActionPerformed
@@ -359,6 +384,7 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boton_sorteo_arbitro;
     private javax.swing.JButton btnGuardarSorteo;
+    private javax.swing.JButton checkTodos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;

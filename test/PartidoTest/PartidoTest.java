@@ -1,4 +1,4 @@
-package test.PartidoTest;
+package PartidoTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -26,11 +26,11 @@ public class PartidoTest {
 
         Partido partido = new Partido();
         partido.setClub_local(new Equipo_futbol(408));
-        partido.setClub_local(new Equipo_futbol(407));
+        partido.setClub_rival(new Equipo_futbol(410));
 
         String mensaje = controlador_partido.guardarPartido(partido);
 
-        assertEquals("", mensaje);
+        assertEquals("516", mensaje);
     }
 
   /*
