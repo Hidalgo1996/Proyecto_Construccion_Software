@@ -175,9 +175,8 @@ public class Controlador_actas_partido {
         Connection conector = Conexion.conectar();
         PreparedStatement consulta;
         try {
-            consulta = conector.prepareStatement("call eliminar_acta_partido (?, ?);");
+            consulta = conector.prepareStatement("call PR_eliminar_acta_partido (?);");
             consulta.setInt(1, id);
-            consulta.setString(2, "E");
 
             if (consulta.executeUpdate() > 0) {
                 mensaje = "Acta eliminada correctamente";
