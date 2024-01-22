@@ -92,7 +92,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
     private void guardarArbitro() {
 
         String mensaje = "";
-        if (text_field_nombre_arbitro.getText().isEmpty() || text_field_contrasena_arbitro.getText().isEmpty()) {
+        if (text_field_nombre_arbitro.getText().isEmpty() || text_field_contrasena_arbitro.getText().isEmpty() || text_field_usuario_arbitro.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor ingrese llene los datos", "Info",
                     JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -109,16 +109,15 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
             nuevoArbitro.setCategoria(combo_box_categoria_arbitro.getSelectedItem().toString());
             if (id == 0) {
                 mensaje = controlador_arbitro.guardarArbitro(nuevoArbitro);
-                limpiarTexts();
             } else {
                 nuevoArbitro.setId_usuario(id);
                 mensaje = controlador_arbitro.actualizarArbitro(nuevoArbitro);
                 id = 0;
-                limpiarTexts();
             }
-
+            
             JOptionPane.showMessageDialog(null, mensaje, "Info", JOptionPane.INFORMATION_MESSAGE);
             cargarListadoArbitros();
+            limpiarTexts();
         }
 
     }
@@ -405,9 +404,11 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         text_field_usuario_arbitro.setBackground(new java.awt.Color(255, 255, 255));
+        text_field_usuario_arbitro.setNextFocusableComponent(text_nacionalidad);
         jPanel1.add(text_field_usuario_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 194, -1));
 
         text_field_apellido_arbitro.setBackground(new java.awt.Color(255, 255, 255));
+        text_field_apellido_arbitro.setNextFocusableComponent(text_field_nombre_arbitro);
         jPanel1.add(text_field_apellido_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 192, -1));
 
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -415,6 +416,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
         text_field_edad_arbitro.setBackground(new java.awt.Color(255, 255, 255));
+        text_field_edad_arbitro.setNextFocusableComponent(text_field_usuario_arbitro);
         text_field_edad_arbitro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 text_field_edad_arbitroKeyTyped(evt);
@@ -431,6 +433,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
         text_field_nombre_arbitro.setBackground(new java.awt.Color(255, 255, 255));
+        text_field_nombre_arbitro.setNextFocusableComponent(text_field_email_arbitro);
         text_field_nombre_arbitro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 text_field_nombre_arbitroActionPerformed(evt);
@@ -443,10 +446,12 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         text_field_email_arbitro.setBackground(new java.awt.Color(255, 255, 255));
+        text_field_email_arbitro.setNextFocusableComponent(text_field_contrasena_arbitro);
         jPanel1.add(text_field_email_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 194, -1));
 
         combo_box_categoria_arbitro.setBackground(new java.awt.Color(255, 255, 255));
         combo_box_categoria_arbitro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+        combo_box_categoria_arbitro.setNextFocusableComponent(combo_box_buscar_arbitro);
         jPanel1.add(combo_box_categoria_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, 194, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -459,6 +464,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         text_field_partidos_arbitro.setBackground(new java.awt.Color(255, 255, 255));
+        text_field_partidos_arbitro.setNextFocusableComponent(combo_box_categoria_arbitro);
         text_field_partidos_arbitro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 text_field_partidos_arbitroKeyTyped(evt);
@@ -473,7 +479,9 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Categoria:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, -1, -1));
-        jPanel1.add(text_field_contrasena_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 170, -1));
+
+        text_field_contrasena_arbitro.setNextFocusableComponent(text_field_edad_arbitro);
+        jPanel1.add(text_field_contrasena_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 160, -1));
 
         boton_guardar_arbitro.setBackground(new java.awt.Color(0, 204, 204));
         boton_guardar_arbitro.setForeground(new java.awt.Color(0, 0, 0));
@@ -486,6 +494,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         jPanel1.add(boton_guardar_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 92, -1));
 
         text_nacionalidad.setBackground(new java.awt.Color(255, 255, 255));
+        text_nacionalidad.setNextFocusableComponent(text_field_partidos_arbitro);
         jPanel1.add(text_nacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 194, -1));
 
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
@@ -496,6 +505,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
 
         text_field_buscar_arbitro.setBackground(new java.awt.Color(255, 255, 255));
+        text_field_buscar_arbitro.setNextFocusableComponent(table_arbitro);
         text_field_buscar_arbitro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 text_field_buscar_arbitroActionPerformed(evt);
@@ -511,12 +521,13 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         lbl_Mostrar.setForeground(new java.awt.Color(0, 0, 0));
         lbl_Mostrar.setText("Ver");
         lbl_Mostrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_Mostrar.setName(""); // NOI18N
         lbl_Mostrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_MostrarMouseClicked(evt);
             }
         });
-        jPanel1.add(lbl_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 20, -1));
+        jPanel1.add(lbl_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 50, -1));
 
         boton_buscar_arbitro.setBackground(new java.awt.Color(0, 204, 204));
         boton_buscar_arbitro.setForeground(new java.awt.Color(0, 0, 0));
@@ -551,6 +562,7 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         combo_box_buscar_arbitro.setBackground(new java.awt.Color(255, 255, 255));
         combo_box_buscar_arbitro.setForeground(new java.awt.Color(0, 0, 0));
         combo_box_buscar_arbitro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+        combo_box_buscar_arbitro.setNextFocusableComponent(text_field_buscar_arbitro);
         jPanel1.add(combo_box_buscar_arbitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 145, -1));
 
         table_arbitro.setBackground(new java.awt.Color(255, 255, 255));
@@ -639,9 +651,11 @@ public class Inter_edicion_arbitro extends javax.swing.JInternalFrame {
         if (mostrarPass) { // a es una variable boolean en true
             text_field_contrasena_arbitro.setEchoChar((char) 0); // este método es el que hace visible el texto del jPasswordField
             mostrarPass = false;
+            lbl_Mostrar.setText("Ocultar");
         } else {
             text_field_contrasena_arbitro.setEchoChar(caracterPass); // i es el char
             mostrarPass = true;
+            lbl_Mostrar.setText("Ver");
         }
     }//GEN-LAST:event_lbl_MostrarMouseClicked
 

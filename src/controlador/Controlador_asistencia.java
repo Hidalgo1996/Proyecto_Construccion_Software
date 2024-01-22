@@ -11,14 +11,20 @@ import conexion.Conexion;
 import excepciones.AsistenciaException;
 import modelo.Asistencia;
 
+/**
+ * Clase controladora de asistencia.
+ * Encargada de gestionar las transacciones
+ * entre los SP de la BD y la Vista.
+ * @author Frael
+ */
 public class Controlador_asistencia {
 
     /**
-     * 
+     * Guarda la asistencia.
      * @param asistencia
      * @return Mensaje
      */
-    public String guardarAsistencia(Asistencia asistencia) {
+    public final String guardarAsistencia(final Asistencia asistencia) {
         String message = "";
 
         Connection conexion = Conexion.conectar();
@@ -49,11 +55,11 @@ public class Controlador_asistencia {
     }
 
     /**
-     * 
+     * Guarda una lista de asistencias.
      * @param asistencias
-     * @return
+     * @return mensaje.
      */
-    public String guardarAsistencias(List<Asistencia> asistencias) {
+    public final String guardarAsistencias(final List<Asistencia> asistencias) {
         String message = "";
         try {
             for (Asistencia asistencia : asistencias) {
@@ -69,12 +75,12 @@ public class Controlador_asistencia {
     }
 
     /**
-     * Actualizacion de registro Asistencia
-     * 
+     * Actualizacion de registro Asistencia.
      * @param asistencia
      * @return Mensaje
+     * @throws excepciones.AsistenciaException
      */
-    public String actualizarAsistencia(Asistencia asistencia) throws AsistenciaException{
+    public final String actualizarAsistencia(final Asistencia asistencia) throws AsistenciaException{
 
         String mensaje = "";
 
@@ -105,14 +111,16 @@ public class Controlador_asistencia {
         }
     }
 
-    public List<Asistencia> listarAsistencias() {
-        List<Asistencia> listaAsistencia = new ArrayList<Asistencia>();
+    /**
+     * Lista las asistencias.
+     * @return Lista de asistencia.
+     */
+    public final List<Asistencia> listarAsistencias() {
+        List<Asistencia> listaAsistencia = new ArrayList<>();
         Connection conector = Conexion.conectar();
         try {
             Statement consulta = conector.createStatement();
             ResultSet result = consulta.executeQuery("call PR_consultar_asistencia_();");
-            // ResultSetMetaData metaData = result.getMetaData();
-
             while (result.next()) {
                 Asistencia tmp = new Asistencia();
 
@@ -129,12 +137,12 @@ public class Controlador_asistencia {
     }
 
     /**
-     * Eliminacion de asistencia
-     * 
+     * Eliminacion de asistencia.
      * @param id
-     * @return
+     * @return Mensaje
+     * @throws excepciones.AsistenciaException
      */
-    public String eliminarAsistencia(Integer id) throws AsistenciaException {
+    public final String eliminarAsistencia(final Integer id) throws AsistenciaException {
         String mensaje = "";
 
         if (id <= 0) {
@@ -163,18 +171,12 @@ public class Controlador_asistencia {
 
     /**
      * 
+     * @param id_arbitro
      * @return Listado de fechas a los que los arbitros fueron seleccionados
-     * @throws UsuarioException
      */
-    public static List<Asistencia> listarAsistencias(Integer id_arbitro) {
+    public static List<Asistencia> listarAsistencias(final Integer id_arbitro) {
 
-        /*
-         * if (id_arbitro == null) {
-         * throw new UsuarioException("Id del usuario es nulo");
-         * }
-         */
-
-        List<Asistencia> listadoFechasAsistir = new ArrayList<Asistencia>();
+        List<Asistencia> listadoFechasAsistir = new ArrayList<>();
         Connection conector = Conexion.conectar();
         try {
             PreparedStatement consulta = conector.prepareStatement("call pr_consultar_asistencia_arbitro(?);");

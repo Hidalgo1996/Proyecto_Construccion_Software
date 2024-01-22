@@ -1,4 +1,3 @@
-
 package controlador;
 
 import conexion.Conexion;
@@ -9,9 +8,10 @@ import java.util.List;
 import java.sql.*;
 
 public class Controlador_rol_arbitro {
-    
+
     /**
      * Guarda arbitro/club futbol
+     *
      * @param
      * @return Mensaje
      */
@@ -34,9 +34,14 @@ public class Controlador_rol_arbitro {
             consulta.setString(8, arbitro.getNacionalidad());
             consulta.setString(9, arbitro.getCantidad_partidos());
             consulta.setString(10, "A");
-            if (consulta.executeUpdate() > 0) {
-                message = "arbitro registrado";
-            }
+
+            ResultSet resultado = consulta.executeQuery();
+
+            if (resultado.next()) {
+                // Obtener los valores devueltos por la consulta SELECT
+                message = resultado.getString("MESSAGE");
+            
+            } 
             conexion.close();
 
             return message;
@@ -50,7 +55,7 @@ public class Controlador_rol_arbitro {
 
     /**
      * Actualizacion de registro arbitro
-     * 
+     *
      * @param arbitro
      * @return Mensaje
      */
@@ -62,7 +67,7 @@ public class Controlador_rol_arbitro {
         PreparedStatement consulta;
         try {
             consulta = conector.prepareStatement("call PR_modificar_arbitro (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-            consulta.setInt(1,arbitro.getId_usuario());
+            consulta.setInt(1, arbitro.getId_usuario());
             consulta.setString(2, arbitro.getCategoria());
             consulta.setString(3, arbitro.getNombre());
             consulta.setString(4, arbitro.getApellido());
@@ -86,7 +91,7 @@ public class Controlador_rol_arbitro {
     }
 
     /**
-     * 
+     *
      * @return Listado de arbitros
      */
     public static List<Arbitro> listarArbitros() {
@@ -111,9 +116,9 @@ public class Controlador_rol_arbitro {
                         result.getString("categoria"),
                         result.getString("nacionalidad"),
                         result.getString("cantidad_partidos")
-                       );
+                );
 
-                        listaArbitros.add(tmp);
+                listaArbitros.add(tmp);
             }
 
             conector.close();
@@ -126,7 +131,7 @@ public class Controlador_rol_arbitro {
 
     /**
      * Eliminacion de arbitro
-     * 
+     *
      * @param id
      * @return
      */
@@ -156,5 +161,5 @@ public class Controlador_rol_arbitro {
             return mensaje;
         }
     }
-    
+
 }

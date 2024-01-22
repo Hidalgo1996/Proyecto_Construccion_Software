@@ -280,6 +280,11 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
 
         text_arbitro_principal.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         text_arbitro_principal.setEnabled(false);
+        text_arbitro_principal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_arbitro_principalActionPerformed(evt);
+            }
+        });
         getContentPane().add(text_arbitro_principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 170, -1));
 
         text_arbitro_sustituto.setBackground(new java.awt.Color(255, 255, 255));
@@ -367,6 +372,10 @@ public class Inter_sorteo_arbitros extends javax.swing.JInternalFrame {
         estadoCheck = !estadoCheck;
         seleccionarArbitrosTodos(estadoCheck);
     }//GEN-LAST:event_checkTodosActionPerformed
+
+    private void text_arbitro_principalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_arbitro_principalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text_arbitro_principalActionPerformed
 
     private void btnGuardarSorteoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnGuardarSorteoActionPerformed
         guardarSorteo();

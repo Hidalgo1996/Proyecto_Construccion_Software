@@ -1,0 +1,16 @@
+src\controlador\Controlador_asistencia.java:20:	ClassNamingConventions:	The class name 'Controlador_asistencia' doesn't match '[A-Z][a-zA-Z0-9]*'
+src\controlador\Controlador_asistencia.java:30:	CloseResource:	Ensure that resources like this Connection object are closed after use
+src\controlador\Controlador_asistencia.java:31:	CloseResource:	Ensure that resources like this PreparedStatement object are closed after use
+src\controlador\Controlador_asistencia.java:91:	CloseResource:	Ensure that resources like this Connection object are closed after use
+src\controlador\Controlador_asistencia.java:92:	CloseResource:	Ensure that resources like this PreparedStatement object are closed after use
+src\controlador\Controlador_asistencia.java:120:	CloseResource:	Ensure that resources like this Connection object are closed after use
+src\controlador\Controlador_asistencia.java:122:	CloseResource:	Ensure that resources like this Statement object are closed after use
+src\controlador\Controlador_asistencia.java:123:	CloseResource:	Ensure that resources like this ResultSet object are closed after use
+src\controlador\Controlador_asistencia.java:135:	ReturnEmptyCollectionRatherThanNull:	Return an empty collection rather than null.
+src\controlador\Controlador_asistencia.java:152:	CloseResource:	Ensure that resources like this Connection object are closed after use
+src\controlador\Controlador_asistencia.java:153:	CloseResource:	Ensure that resources like this PreparedStatement object are closed after use
+src\controlador\Controlador_asistencia.java:177:	FormalParameterNamingConventions:	The final method parameter name 'id_arbitro' doesn't match '[a-z][a-zA-Z0-9]*'
+src\controlador\Controlador_asistencia.java:180:	CloseResource:	Ensure that resources like this Connection object are closed after use
+src\controlador\Controlador_asistencia.java:182:	CloseResource:	Ensure that resources like this PreparedStatement object are closed after use
+src\controlador\Controlador_asistencia.java:184:	CloseResource:	Ensure that resources like this ResultSet object are closed after use
+src\controlador\Controlador_asistencia.java:202:	ReturnEmptyCollectionRatherThanNull:	Return an empty collection rather than null.

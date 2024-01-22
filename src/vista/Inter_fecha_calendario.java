@@ -83,7 +83,8 @@ public class Inter_fecha_calendario extends javax.swing.JInternalFrame {
     }
 
     private boolean camposNoValidos() {
-        return (text_box_lugar_partido.getText().isEmpty() || text_box_hora_partido.getText().isEmpty());
+        return (text_box_lugar_partido.getText().isEmpty() || text_box_hora_partido.getText().isEmpty() || fecha_partido.getDate() == null
+                || text_box_hora_partido.getValue() == null);
     }
 
     /**

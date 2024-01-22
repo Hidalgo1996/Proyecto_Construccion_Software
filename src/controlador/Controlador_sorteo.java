@@ -15,22 +15,33 @@ import modelo.Agenda;
 import modelo.Partido;
 import modelo.Sorteo;
 
+/**
+ * Clase controlador de sorteo.
+ * Encargada de gestionar las transacciones
+ * entre la BD y la Vista.
+ * @author Frael
+ */
 public class Controlador_sorteo {
 
-    List<Sorteo> listaSorteo = new ArrayList<Sorteo>();
+    /**
+     * Listado de sorteos
+     */
+    List<Sorteo> listaSorteo = new ArrayList<>();
 
     /**
-     * 
-     * @param Sorteo
-     * @return Mensaje
+     * Guarda el sorteo generado.
+     * @param sorteo
+     * @return Mensaje.
+     * @throws excepciones.SorteoException
      */
-    public String guardarSorteo(Sorteo sorteo) throws SorteoException {
+    public final String guardarSorteo(final Sorteo sorteo) throws SorteoException {
         String message = "";
 
         Connection conexion = Conexion.conectar();
         PreparedStatement consulta;
 
-        if (sorteo.getArbitro_id() == null || sorteo.getArbitro_id_sustituto() == null) {
+        if (sorteo.getArbitro_id() == null
+                || sorteo.getArbitro_id_sustituto() == null) {
             throw new SorteoException("Error id de arbitros no pueden ser nulos");
         }
 
@@ -58,12 +69,11 @@ public class Controlador_sorteo {
     }
 
     /**
-     * Actualizacion de registro Sorteo
-     * 
-     * @param Sorteo
+     * Actualizacion de registro Sorteo.
+     * @param sorteo
      * @return Mensaje
      */
-    public String actualizarSorteo(Sorteo sorteo) {
+    public final String actualizarSorteo(final Sorteo sorteo) {
 
         String mensaje = "";
 
@@ -90,10 +100,10 @@ public class Controlador_sorteo {
     }
 
     /**
-     * 
+     * Devuelve listado de sorteos.
      * @return Listado de Sorteos
      */
-    public List<Sorteo> listarSorteos() {
+    public final List<Sorteo> listarSorteos() {
 
         Connection conector = Conexion.conectar();
         try {
@@ -123,12 +133,12 @@ public class Controlador_sorteo {
     }
 
     /**
-     * Eliminacion de Sorteo
-     * 
+     * Eliminacion de Sorteo.
      * @param id
-     * @return
+     * @return Mensaje.
+     * @throws excepciones.SorteoException
      */
-    public String eliminarSorteo(Integer id) throws SorteoException{
+    public final String eliminarSorteo(final Integer id) throws SorteoException{
         String mensaje = "";
 
         if (id <= 0) {
@@ -156,17 +166,19 @@ public class Controlador_sorteo {
     }
 
     /**
-     * 
-     * @return Listado de fechas a los que los arbitros fueron seleccionados
+     * Devuelve el listado a los que los
+     * arbitros fueron seleccionados.
+     * @param id_arbitro
+     * @return Listado de fechas.
      * @throws UsuarioException
      */
     public static List<Sorteo> listarAsistenciasPartidos(Integer id_arbitro) throws UsuarioException {
 
-        if(id_arbitro == null){
+        if (id_arbitro == null){
             throw new UsuarioException("Id del usuario es nulo");
         }
         
-        List<Sorteo> listadoFechasAsistir = new ArrayList<Sorteo>();
+        List<Sorteo> listadoFechasAsistir = new ArrayList<>();
         Connection conector = Conexion.conectar();
         try {
             PreparedStatement consulta = conector.prepareStatement("call pr_consultar_arbitros_partidos(?);");
@@ -177,8 +189,11 @@ public class Controlador_sorteo {
             while (result.next()) {
                 Sorteo tmp = new Sorteo(
                         result.getInt("id_sorteo"),
-                        new Agenda(new Partido(result.getInt("id_partido"), result.getString("partido")), result.getDate("fecha_partido"),
-                                result.getString("lugar_partido"), result.getTime("hora_partido")),
+                        new Agenda(new Partido(result.getInt("id_partido"), 
+                                result.getString("partido")), 
+                                result.getDate("fecha_partido"),
+                                result.getString("lugar_partido"), 
+                                result.getTime("hora_partido")),
                         result.getInt("id_arbitro"),
                         result.getInt("id_arbitro_sustituto")
 
